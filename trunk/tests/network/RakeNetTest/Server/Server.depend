@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1188252170 d:\projekte\trinitas\netzwerk\neu\server\main.cpp
+	<PacketEnumerations.h>
+	<RakNetworkFactory.h>
+	<NetworkTypes.h>
+	<RakServerInterface.h>
+	<Bitstream.h>
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<string>
+	<conio.h>
+	<vector>
+
