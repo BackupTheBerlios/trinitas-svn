@@ -9,15 +9,22 @@
 		<Option compiler="0"/>
 		<Build>
 			<Target title="default">
-				<Option output="D:\Projekte\trinitas\grafik\grafik test.exe"/>
+				<Option output="grafik test.exe"/>
 				<Option working_dir="."/>
 				<Option object_output=".objs"/>
 				<Option deps_output=".deps"/>
-				<Option type="1"/>
+				<Option type="0"/>
 				<Option compiler="0"/>
-				<Option projectResourceIncludeDirsRelation="1"/>
+				<Option projectResourceIncludeDirsRelation="0"/>
 			</Target>
 		</Build>
+		<Compiler>
+			<Add directory="..\..\libs\irrlicht\include"/>
+		</Compiler>
+		<Linker>
+			<Add library="..\..\libs\irrlicht\bin\Win32-gcc\Irrlicht.dll"/>
+			<Add directory="..\..\libs\irrlicht\include"/>
+		</Linker>
 		<Unit filename="main.cpp">
 			<Option compilerVar="CPP"/>
 			<Option target="default"/>
