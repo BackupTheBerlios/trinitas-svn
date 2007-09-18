@@ -16,12 +16,28 @@
 				<Option type="0"/>
 				<Option compiler="0"/>
 				<Option projectResourceIncludeDirsRelation="0"/>
+				<Compiler>
+					<Add option="-march=pentium-m"/>
+					<Add option="-O3"/>
+					<Add option="-O2"/>
+					<Add option="-O1"/>
+					<Add option="-O"/>
+				</Compiler>
+				<Linker>
+					<Add option="-s"/>
+				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-march=pentium4"/>
+			<Add option="-O3"/>
+			<Add option="-O2"/>
+			<Add option="-O1"/>
+			<Add option="-O"/>
 			<Add directory="..\..\libs\irrlicht\include"/>
 		</Compiler>
 		<Linker>
+			<Add option="-s"/>
 			<Add library="..\..\libs\irrlicht\bin\Win32-gcc\Irrlicht.dll"/>
 			<Add directory="..\..\libs\irrlicht\include"/>
 		</Linker>
