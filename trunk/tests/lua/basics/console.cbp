@@ -25,6 +25,7 @@
 		<Linker>
 			<Add library="..\..\..\libs\lua\bin\Win32\lua5.1.dll"/>
 			<Add directory="..\..\..\libs\lua\bin\Win32"/>
+			<Add directory="..\..\..\libs\lua\src"/>
 		</Linker>
 		<Unit filename="main.cpp">
 			<Option compilerVar="CPP"/>
