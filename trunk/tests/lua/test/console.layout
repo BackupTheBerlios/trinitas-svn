@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!DOCTYPE CodeBlocks_layout_file>
+<CodeBlocks_layout_file>
+	<File name="main.cpp" open="1" top="0">
+		<Cursor position="143" topLine="0"/>
+	</File>
+	<File name="main.h" open="1" top="0">
+		<Cursor position="139" topLine="0"/>
+	</File>
+	<Expand folder="/Sources"/>
+</CodeBlocks_layout_file>
