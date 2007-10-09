@@ -5,20 +5,18 @@ extern "C"
    #include <lauxlib.h>
 }
 
+#include "main.h"
+
 int main()
 {
-      //initalise a lua state
-      lua_State *L = lua_open();
-      luaopen_base(L);
-      //luaopen_string(L);
-      //luaopen_table(L);
-      //luaopen_math(L);
-      //luaopen_debug(L);
-//      luaopen_io(L);
-      luaL_loadfile(L,"main.lua");
-      //close this current lua state
-      lua_close(L);
-      return 1;
+   luac_interface* lua;
+   lua_State* L=lua->State();
+   //lua_State* L=lua_open();
+   //luaL_openlibs(L);
+   luaL_dofile(L,"main.lua");
+   //int result = get_lua_iVar(L,"result");
+   //printf("Value of result is %d\n",result);
+   return 1;
 }
 
 

@@ -1,3 +1,5 @@
--- the first program in every language
-
-print("Hello world, from ",_VERSION,"!\n")
+    i = 5
+    while i  <= 11 do
+         print (i)
+         i = i + 0.5
+    end
