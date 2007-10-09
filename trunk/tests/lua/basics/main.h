@@ -1,4 +1,4 @@
-//int get_int_var(lua_State *L, char * myvar);
+int get_int_var(lua_State *L, char * myvar);
 
 class luac_interface
 {
@@ -6,7 +6,6 @@ public:
     lua_State* lState;
 
     lua_State* State();
-    lua_State* Start();
     int luac_interface::get_lua_iVar(char * myvar);
     luac_interface();
     ~luac_interface();
@@ -33,4 +32,11 @@ luac_interface::luac_interface()
 luac_interface::~luac_interface()
 {
     lua_close(lState);
+}
+int get_lua_iVar(lua_State* lState, char * myvar)
+{
+    lua_pushstring(lState, myvar);
+    lua_gettable(lState,LUA_GLOBALSINDEX);
+    int result = (int)lua_tonumber(lState,-1);
+    return result;
 }
