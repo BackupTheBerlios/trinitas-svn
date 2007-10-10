@@ -1,11 +1,5 @@
-extern "C"
-{
-   #include <lua.h>
-   #include <lualib.h>
-   #include <lauxlib.h>
-}
-#include <stdarg.h>
-#include "main.h"
+
+#include "includes/main.h"
 
 int cAddiere(lua_State* L);
 

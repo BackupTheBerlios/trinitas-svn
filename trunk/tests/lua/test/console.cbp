@@ -27,14 +27,20 @@
 			<Add directory="..\..\..\libs\lua\bin\Win32"/>
 			<Add directory="..\..\..\libs\lua\src"/>
 		</Linker>
-		<Unit filename="main.cpp">
-			<Option compilerVar="CPP"/>
-			<Option target="default"/>
-		</Unit>
-		<Unit filename="main.h">
+		<Unit filename="includes\luac_interface.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
 			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="includes\main.h">
+			<Option compilerVar=""/>
+			<Option compile="0"/>
+			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="main.cpp">
+			<Option compilerVar="CPP"/>
 			<Option target="default"/>
 		</Unit>
 	</Project>
