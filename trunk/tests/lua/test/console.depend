@@ -33,3 +33,12 @@
 
 1191948052 c:\dokumente und einstellungen\david\desktop\trinitas\tests\lua\basics\main.h
 
+1192031988 c:\dokumente und einstellungen\david\desktop\trinitas\tests\lua\test\main.cpp
+	<lua.h>
+	<lualib.h>
+	<lauxlib.h>
+	<stdarg.h>
+	"main.h"
+
+1192032022 c:\dokumente und einstellungen\david\desktop\trinitas\tests\lua\test\main.h
+
