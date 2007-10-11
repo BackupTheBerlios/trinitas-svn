@@ -6,7 +6,6 @@ int cAddiere(lua_State* L);
 int main()
 {
    //luac_interface* lua;
-   void *pVoid;
    lua_State* L=lua_open();
    luaL_openlibs(L);
    lua_register(L,"addiere",cAddiere);
