@@ -1,5 +1,6 @@
 ergebnis = addiere(100,200)
+print "Hallo Du!"
 
-Function add2(a,b)
-    return a+b
-End
+function add2(a,b,c)
+    return a+b+c
+end
