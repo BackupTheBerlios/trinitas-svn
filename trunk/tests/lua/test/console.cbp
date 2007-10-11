@@ -42,11 +42,16 @@
 		<Unit filename="main.cpp">
 			<Option compilerVar="CPP"/>
 			<Option target="default"/>
+			<Breakpoint line="12" enabled="1" pass="0" />
 		</Unit>
 		<Unit filename="main.lua">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
 			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="src\luac_interface.cpp">
+			<Option compilerVar="CPP"/>
 			<Option target="default"/>
 		</Unit>
 	</Project>
