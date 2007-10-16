@@ -38,7 +38,7 @@
 		</Compiler>
 		<Linker>
 			<Add option="-s"/>
-			<Add library="..\..\libs\irrlicht\bin\Win32-gcc\Irrlicht.dll"/>
+			<Add library="..\..\libs\irrlicht\lib\Win32-gcc\libIrrlicht.a"/>
 			<Add directory="..\..\libs\irrlicht\include"/>
 		</Linker>
 		<Unit filename="main.cpp">
