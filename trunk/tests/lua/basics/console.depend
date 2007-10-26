@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1191945322 d:\projekte\trinitas\svn\tests\lua\basics\main.cpp
+	<lua.h>
+	<lualib.h>
+	<lauxlib.h>
+	"main.h"
+
+1191930521 d:\projekte\trinitas\svn\libs\lua\includes\lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1191930521 d:\projekte\trinitas\svn\libs\lua\includes\luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1191930521 d:\projekte\trinitas\svn\libs\lua\includes\lualib.h
+	"lua.h"
+
+1191930521 d:\projekte\trinitas\svn\libs\lua\includes\lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1191945407 d:\projekte\trinitas\svn\tests\lua\basics\main.h
+
