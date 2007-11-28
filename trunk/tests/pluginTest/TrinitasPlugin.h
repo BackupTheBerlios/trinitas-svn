@@ -11,6 +11,6 @@
         virtual long    GetID(void);
         virtual void    Do(void);
     protected:
-        long    id;
+                long    mId;
  };
 #endif
