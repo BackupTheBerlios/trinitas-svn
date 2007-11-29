@@ -11,8 +11,7 @@
 #include "PluginLoader.h"
 #include "TrinitasPlugin.h"
 
-int main()
-{
+int main() {
     PluginLoader*   pluginTest  = new PluginLoader;
     TrinitasPlugin* tmpPlugin   = NULL;
     /*load all Plugins in the directory where
@@ -22,6 +21,5 @@ int main()
     //
     tmpPlugin = pluginTest->GetByName("FirstPlugin");
     tmpPlugin->Do();
-	std::cout << "Hello world!" << std::endl;
 	return 0;
 }

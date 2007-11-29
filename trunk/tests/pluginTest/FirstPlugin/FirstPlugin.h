@@ -13,12 +13,13 @@
  * in our TrinitasDefs
  */
 #if defined (__GNUC__) && defined(__unix__)
-  #define PRINT_API __attribute__ ((__visibility__("default")))
+    #define PRINT_API __attribute__ ((__visibility__("default")))
 #elif defined (WIN32)
-  #ifdef BUILDING_DLL
-    #define PRINT_API __declspec(dllexport)
-  #else
-    #define PRINT_API __declspec(dllimport)
+    #ifdef BUILDING_DLL
+        #define PRINT_API __declspec(dllexport)
+    #else
+        #define PRINT_API __declspec(dllimport)
+    #endif
 #endif
 
 #include "TrinitasPlugin.h"
@@ -35,6 +36,7 @@
  };
 
 //using exptern to give an "entrypoint" for the PluginLoader
-extern "C" PRINT_API TrinitasPlugin getPlugin();
+extern "C" PRINT_API TrinitasPlugin* getPlugin(long id);
+
 
 #endif

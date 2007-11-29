@@ -17,5 +17,7 @@
          */
     protected:
     private:
+        TrinitasPlugin* LoadPlugin(char *file);
+        long            mLastPluginID;
  };
 #endif

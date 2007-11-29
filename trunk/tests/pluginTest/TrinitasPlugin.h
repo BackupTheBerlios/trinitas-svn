@@ -6,11 +6,11 @@
 #define TRINITAS_PLUGIN_H
  class TrinitasPlugin {
      public:
-                        TrinitasPlugin(long _id){id=_id;};
+                        TrinitasPlugin(long _id){mID = _id;};
         virtual char*   GetName(void);
         virtual long    GetID(void);
         virtual void    Do(void);
     protected:
-                long    mId;
+                long    mID;
  };
 #endif

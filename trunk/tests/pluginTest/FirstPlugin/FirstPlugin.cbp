@@ -10,7 +10,7 @@
 		<Build>
 			<Target title="default">
 				<Option output="FirstPlugin.dll"/>
-				<Option working_dir=""/>
+				<Option working_dir="."/>
 				<Option object_output=".objs"/>
 				<Option deps_output=".deps"/>
 				<Option type="3"/>

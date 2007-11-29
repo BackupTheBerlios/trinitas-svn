@@ -11,30 +11,26 @@
 #include "TrinitasPlugin.h"
 #include "FirstPlugin.h"
  //export so that our programm can load it
- extern "C" TrinitasPlugin* load(long id) {
+/*extern "C" PRINT_API TrinitasPlugin* getPlugin(long id) {
+    return new TrinitasPlugin(id);
+}*/
+
+extern "C" TrinitasPlugin* getPlugin(long id) {
     return new TrinitasPlugin(id);
 }
 
- //export so that our programm delete it
-extern "C" void unload(TrinitasPlugin* p) {
-    delete p;
+FirstPlugin::FirstPlugin(long _id):TrinitasPlugin(_id){
 }
 
-
-FirstPlugin::FirstPlugin(long _id):TrinitasPlugin(_id)
-{}
-
-char* FirstPlugin::GetName()
-{
+char* FirstPlugin::GetName(){
     return "FirstPlugin";
 }
-long FirstPlugin::GetID()
-{
-    return id;
+
+long FirstPlugin::GetID(){
+    return mID;
 }
 
-void FirstPlugin::Do()
-{
+void FirstPlugin::Do() {
     std::cout << "Jo ich hab was im Plugin gemacht" << '\n';
 }
 
