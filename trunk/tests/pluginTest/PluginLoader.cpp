@@ -7,9 +7,9 @@
  * @version 0.1
  */
 
-#ifdef UNIX
+#ifndef WIN32
     #include <dlfcn.h>
-#elif defined (WIN32)
+#else
     #include <Windows.h>
 #endif
 
@@ -26,7 +26,7 @@ PluginLoader::PluginLoader(void) {
     //neet todo init the vector wich hold all loaded Plugins
     //for now we just use a simple Integer to hold the last ID
     // in the future we shall use the Vector Count for generating a ID
-    mlastPluginID = 1;
+    mLastPluginID = 1;
 }
 
 
@@ -48,20 +48,20 @@ TrinitasPlugin* PluginLoader::GetByID(long pluginId) {
 
  TrinitasPlugin* PluginLoader::LoadPlugin(char *file) {
     TrinitasPlugin* loadedPlugin = NULL;
-    #ifdef UNIX
+    #ifndef WIN32
         void (*voidfnc)();
         void* libraryHandle = dlopen(file, RTLD_LAZY);
         if (libraryHandle != NULL)
             voidfnc = (void (*)())dlsym(libraryHandle, "getPlugin");
             //call getPlugin with the actual ID
-            loadedPlugin = (*voidfnc)(mlastPluginID);
+            loadedPlugin = (*voidfnc)(mLastPluginID);
         }
         dlclose(libraryHandle);
     #else // Windwos stuff
         HINSTANCE__* libraryHandle = LoadLibraryA(file);
         if (libraryHandle != NULL)
             //call getPlugin with the actual ID
-            loadedPlugin = (TrinitasPlugin*) (GetProcAddress(libraryHandle, "getPlugin"))(mlastPluginID);
+            loadedPlugin = (TrinitasPlugin*) (GetProcAddress(libraryHandle, "getPlugin"))(mLastPluginID);
         FreeLibrary(libraryHandle);
     #endif
      return loadedPlugin;
