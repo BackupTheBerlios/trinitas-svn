@@ -47,14 +47,17 @@ TrinitasPlugin* PluginLoader::GetByID(long pluginId) {
  }
 
  TrinitasPlugin* PluginLoader::LoadPlugin(char *file) {
-    TrinitasPlugin* loadedPlugin = NULL;
+    TrinitasPlugin  *loadedPlugin;
     #ifndef WIN32
-        void (*voidfnc)();
         void* libraryHandle = dlopen(file, RTLD_LAZY);
-        if (libraryHandle != NULL)
-            voidfnc = (void (*)())dlsym(libraryHandle, "getPlugin");
+        if (libraryHandle != NULL) {
+            //using typedef to define a Functiontemplate for the loaded symbols
+            typedef TrinitasPlugin* (*pluginFunction)(long id);
+            //using the functionvar the Plugin as referrence
+            pluginFunction thePlugin;
+            thePlugin = (pluginFunction) dlsym(libraryHandle, "getPlugin");
             //call getPlugin with the actual ID
-            loadedPlugin = (*voidfnc)(mLastPluginID);
+            loadedPlugin = (TrinitasPlugin *) thePlugin(mLastPluginID);
         }
         dlclose(libraryHandle);
     #else // Windwos stuff
