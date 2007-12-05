@@ -28,8 +28,8 @@
 
 
  class FirstPlugin : TrinitasPlugin {
-                        FirstPlugin(long _id);
      public:
+                        FirstPlugin(long _id);
         virtual char*   GetName(void);
         virtual long    GetID(void);
         virtual void    Do(void);
@@ -38,7 +38,7 @@
  };
 
 //using exptern to give an "entrypoint" for the PluginLoader
-extern "C" PRINT_API TrinitasPlugin* getPlugin(long id);
+//extern "C" PRINT_API TrinitasPlugin* getPlugin(long id);
 
 
 #endif

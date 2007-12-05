@@ -11,13 +11,13 @@
 #include "TrinitasPlugin.h"
 #include "FirstPlugin.h"
  //export so that our programm can load it
-extern "C" PRINT_API TrinitasPlugin* getPlugin(long id) {
-    return new TrinitasPlugin(id);
-}
-
-/*extern "C" TrinitasPlugin* getPlugin(long id) {
+/*extern "C" PRINT_API TrinitasPlugin* getPlugin(long id) {
     return new TrinitasPlugin(id);
 }*/
+
+extern "C" TrinitasPlugin* getPlugin(long id) {
+    return (TrinitasPlugin *)new FirstPlugin(id);
+}
 
 FirstPlugin::FirstPlugin(long _id):TrinitasPlugin(_id){
 }

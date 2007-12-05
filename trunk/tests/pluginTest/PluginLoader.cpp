@@ -108,7 +108,7 @@ TrinitasPlugin* PluginLoader::GetByID(long pluginId) {
             pluginFunction thePlugin;
             thePlugin = (pluginFunction) dlsym(libraryHandle, "getPlugin");
             //call getPlugin with the actual ID
-            loadedPlugin = (TrinitasPlugin *) thePlugin(mPlugins->size());
+            loadedPlugin = (TrinitasPlugin *) thePlugin(mPlugins->size()+1);
         }
         dlclose(libraryHandle);
     #else // Windwos stuff
@@ -122,7 +122,13 @@ TrinitasPlugin* PluginLoader::GetByID(long pluginId) {
             //call getPlugin with the actual ID
             thePlugin = (pluginFunction) GetProcAddress(libraryHandle, "getPlugin");
             if (thePlugin!=NULL)
+            {
                 loadedPlugin = thePlugin(mPlugins->size());
+                cout << loadedPlugin->GetName() << " Calling Do() ";
+                loadedPlugin->Do();
+                cout << std::endl;
+
+            }
             FreeLibrary(libraryHandle);
         }
     #endif

@@ -7,9 +7,9 @@
  class TrinitasPlugin {
      public:
                         TrinitasPlugin(long _id){mID = _id;};
-        virtual char*   GetName(void);
-        virtual long    GetID(void);
-        virtual void    Do(void);
+        virtual char*   GetName(void)   = 0;
+        virtual long    GetID(void)     = 0;
+        virtual void    Do(void)        = 0;
     protected:
                 long    mID;
  };

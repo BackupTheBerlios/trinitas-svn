@@ -18,6 +18,10 @@
 				<Option projectResourceIncludeDirsRelation="1"/>
 			</Target>
 		</Build>
+		<Compiler>
+			<Add option="-Wall"/>
+			<Add option="-g"/>
+		</Compiler>
 		<Unit filename="PluginLoader.cpp">
 			<Option compilerVar="CPP"/>
 			<Option target="default"/>
