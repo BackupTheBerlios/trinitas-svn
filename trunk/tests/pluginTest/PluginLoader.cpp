@@ -66,7 +66,9 @@ void PluginLoader::Load(char *path) {
                 sprintf(filePath,"%s\\%s",path,fileInfos.cFileName);
                 loadedPlugin = LoadPlugin(filePath);
                 if (loadedPlugin)
+                {
                     mPlugins->push_back(loadedPlugin);
+                }
                 delete filePath;
             }
         }
@@ -74,9 +76,9 @@ void PluginLoader::Load(char *path) {
     #endif
 }
 
-TrinitasPlugin* PluginLoader::GetByID(long pluginId) {
+TrinitasPlugin* PluginLoader::GetByID(long pluginID) {
     //need to implement
-    return NULL;
+    return mPlugins->at(pluginID-1);
 }
 
  TrinitasPlugin* PluginLoader::GetByName(char* pluginName) {
@@ -87,7 +89,8 @@ TrinitasPlugin* PluginLoader::GetByID(long pluginId) {
      iter = mPlugins->begin();
 //     while ((iter != mPlugins->end()) && (!found)) {
      while (iter != mPlugins->end()) {
-        found = strcmp((*iter)->GetName(),pluginName);
+        tmpPlugin = (*iter);
+        found = strcmp(tmpPlugin->GetName(),pluginName);
         if (!found)
             iter++;
      }
@@ -127,9 +130,8 @@ TrinitasPlugin* PluginLoader::GetByID(long pluginId) {
                 cout << loadedPlugin->GetName() << " Calling Do() ";
                 loadedPlugin->Do();
                 cout << std::endl;
-
             }
-            FreeLibrary(libraryHandle);
+//            FreeLibrary(libraryHandle);
         }
     #endif
      return loadedPlugin;

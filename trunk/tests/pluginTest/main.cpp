@@ -18,9 +18,16 @@ int main() {
      *where this programm is located
      */
     pluginTest->Load("Plugins");
-    //
+    // this dont work for now dont know why
     tmpPlugin = pluginTest->GetByName("FirstPlugin");
-    if (tmpPlugin)
+    if (tmpPlugin) {
+        cout << "GetPluginByName: ";
         tmpPlugin->Do();
+    }
+    tmpPlugin = pluginTest->GetByID(1);
+    if (tmpPlugin) {
+        cout << "GetPluginByID: ";
+        tmpPlugin->Do();
+    }
 	return 0;
 }
