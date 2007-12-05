@@ -17,9 +17,10 @@ int main() {
     /*load all Plugins in the directory where
      *where this programm is located
      */
-    pluginTest->Load(".");
+    pluginTest->Load("Plugins");
     //
     tmpPlugin = pluginTest->GetByName("FirstPlugin");
-    tmpPlugin->Do();
+    if (tmpPlugin)
+        tmpPlugin->Do();
 	return 0;
 }
