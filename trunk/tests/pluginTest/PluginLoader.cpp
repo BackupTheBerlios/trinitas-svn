@@ -8,8 +8,8 @@
  */
 
 #ifndef WIN32
-    #include <dlfcn>
-    #include <dirent>
+    #include <dlfcn.h>
+    #include <dirent.h>
 #else
     #include <Windows.h>
 #endif
@@ -39,7 +39,8 @@ void PluginLoader::Load(char *path) {
         DIR             *dp;
         struct dirent   *dirp;
         //test if we could open the path
-        if((dp  = opendir(path) != NULL) {
+        dp  = opendir(path);
+        if (dp != NULL) {
             //run through all files
             while ((dirp = readdir(dp)) != NULL) {
                 loadedPlugin = LoadPlugin(dirp->d_name);
