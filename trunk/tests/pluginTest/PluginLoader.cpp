@@ -36,18 +36,27 @@ void PluginLoader::Load(char *path) {
     // maby use a protected tool method...
     TrinitasPlugin  *loadedPlugin = NULL;
     #ifndef WIN32
-        DIR             *dp;
-        struct dirent   *dirp;
+        DIR             *pluginDirectory;
+        struct dirent   *entry;
         //test if we could open the path
-        dp  = opendir(path);
-        if (dp != NULL) {
+        cout << "Searching Plugin in: \t" << path << std::endl;
+        pluginDirectory  = opendir(path);
+        //pluginDirectory  = opendir(".");
+        if (pluginDirectory != NULL) {
             //run through all files
-            while ((dirp = readdir(dp)) != NULL) {
-                loadedPlugin = LoadPlugin(dirp->d_name);
+            void *pluginHandel;
+            cout << "hier!" << std::endl;
+            entry = readdir(pluginDirectory);
+            while (entry != NULL)  {
+                cout << "try to load: \t" << entry->d_name << std::endl;
+                char *filePath      = new char[4098];
+                sprintf(filePath,"%s/%s",path,entry->d_name);
+                loadedPlugin = LoadPlugin(filePath);
                 if (loadedPlugin)
                     mPlugins->push_back(loadedPlugin);
+                entry = readdir(pluginDirectory);
             }
-            closedir(dp);
+            closedir(pluginDirectory);
         }
     #else // Windwos stuff
         HANDLE          fileHandle;
@@ -66,7 +75,7 @@ void PluginLoader::Load(char *path) {
                 char *filePath      = new char[4098];
                 sprintf(filePath,"%s\\%s",path,fileInfos.cFileName);
                 loadedPlugin = LoadPlugin(filePath);
-                if (loadedPlugin)
+                if (loadedPlugin != NULL)
                 {
                     mPlugins->push_back(loadedPlugin);
                 }
@@ -104,17 +113,26 @@ TrinitasPlugin* PluginLoader::GetByID(long pluginID) {
  TrinitasPlugin* PluginLoader::LoadPlugin(char *file) {
     TrinitasPlugin  *loadedPlugin = NULL;
     #ifndef WIN32
+        cout << "loading: ... " << file <<std::endl;
         void* libraryHandle = dlopen(file, RTLD_LAZY);
         if (libraryHandle != NULL) {
+            cout << "Libhandle found" << std::endl;
             //using typedef to define a Functiontemplate for the loaded symbols
-            typedef TrinitasPlugin* (*pluginFunction)(long id);
+            typedef TrinitasPlugin* (*pluginFunction)(long);
             //using the functionvar the Plugin as referrence
             pluginFunction thePlugin;
-            thePlugin = (pluginFunction) dlsym(libraryHandle, "getPlugin");
-            //call getPlugin with the actual ID
-            loadedPlugin = (TrinitasPlugin *) thePlugin(mPlugins->size()+1);
+            thePlugin = (pluginFunction) dlsym(libraryHandle, "s");
+            if (thePlugin != NULL) {
+                cout << "symbol loaded" << file <<std::endl;
+                //call getPlugin with the actual ID
+                loadedPlugin = thePlugin(mPlugins->size()+1);
+                cout << loadedPlugin->GetName() << " Calling Do() ";
+                loadedPlugin->Do();
+                cout << std::endl;
+            }
+
         }
-        dlclose(libraryHandle);
+       // dlclose(libraryHandle);
     #else // Windwos stuff
         //using typedef to define a Functiontemplate for the loaded symbols
         typedef TrinitasPlugin* ( *pluginFunction)(long);
@@ -127,7 +145,7 @@ TrinitasPlugin* PluginLoader::GetByID(long pluginID) {
             thePlugin = (pluginFunction) GetProcAddress(libraryHandle, "getPlugin");
             if (thePlugin!=NULL)
             {
-                loadedPlugin = thePlugin(mPlugins->size());
+                loadedPlugin = thePlugin(mPlugins->size()+1);
                 cout << loadedPlugin->GetName() << " Calling Do() ";
                 loadedPlugin->Do();
                 cout << std::endl;

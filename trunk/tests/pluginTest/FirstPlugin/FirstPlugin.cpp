@@ -19,6 +19,10 @@ extern "C" TrinitasPlugin* getPlugin(long id) {
     return (TrinitasPlugin *)new FirstPlugin(id);
 }
 
+
+int main() {
+}
+
 FirstPlugin::FirstPlugin(long _id):TrinitasPlugin(_id){
 }
 
