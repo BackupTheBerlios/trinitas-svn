@@ -24,7 +24,7 @@ int main() {
         cout << "GetPluginByName: ";
         tmpPlugin->Do();
     }
-    tmpPlugin = pluginTest->GetByID(1);
+    tmpPlugin = pluginTest->GetAt(1);
     if (tmpPlugin) {
         cout << "GetPluginByID: ";
         tmpPlugin->Do();

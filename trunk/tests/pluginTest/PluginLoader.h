@@ -12,7 +12,7 @@
      public:
                             PluginLoader(void);
         void                Load(char *path);
-        TrinitasPlugin*     GetByID(long pluginID);
+        TrinitasPlugin*     GetAt(long index);
         TrinitasPlugin*     GetByName(char *name);
          /*later we add also a Method wich returns
          *of course the List of loaded Plugins

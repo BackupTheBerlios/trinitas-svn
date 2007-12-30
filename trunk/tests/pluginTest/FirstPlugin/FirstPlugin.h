@@ -40,5 +40,4 @@
 //using exptern to give an "entrypoint" for the PluginLoader
 //extern "C" PRINT_API TrinitasPlugin* getPlugin(long id);
 
-
 #endif

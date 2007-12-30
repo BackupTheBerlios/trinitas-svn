@@ -12,7 +12,7 @@
 #include "FirstPlugin.h"
  //export so that our programm can load it
 /*extern "C" PRINT_API TrinitasPlugin* getPlugin(long id) {
-    return new TrinitasPlugin(id);
+    return (TrinitasPlugin *)new FirstPlugin(id);
 }*/
 
 extern "C" TrinitasPlugin* getPlugin(long id) {
