@@ -34,6 +34,12 @@
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
+		<Unit filename="includes\lua_engine.h">
+			<Option compilerVar=""/>
+			<Option compile="0"/>
+			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
 		<Unit filename="includes\luac_interface.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
@@ -63,6 +69,10 @@
 			<Option target="default"/>
 		</Unit>
 		<Unit filename="src\lc_functions.cpp">
+			<Option compilerVar="CPP"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="src\lua_engine.cpp">
 			<Option compilerVar="CPP"/>
 			<Option target="default"/>
 		</Unit>
