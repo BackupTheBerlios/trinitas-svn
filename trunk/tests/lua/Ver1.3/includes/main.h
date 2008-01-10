@@ -1,3 +1,5 @@
+#include <iostream>
+
 extern "C"
 {
    #include <lua.h>
@@ -6,6 +8,7 @@ extern "C"
 }
 #include "luac_interface.h"
 #include "lc_functions.h"
-#include <stdio.h>
+#include "lua_engine.h"
+
 
 
