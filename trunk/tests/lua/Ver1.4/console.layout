@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE CodeBlocks_layout_file>
+<CodeBlocks_layout_file>
+	<File name="includes\lc_functions.h" open="1" top="0">
+		<Cursor position="861" topLine="0"/>
+	</File>
+	<File name="includes\lua_engine.h" open="1" top="0">
+		<Cursor position="21" topLine="0"/>
+	</File>
+	<File name="includes\luac_interface.h" open="1" top="0">
+		<Cursor position="654" topLine="0"/>
+	</File>
+	<File name="includes\main.h" open="1" top="0">
+		<Cursor position="21" topLine="0"/>
+	</File>
+	<File name="main.cpp" open="1" top="1">
+		<Cursor position="334" topLine="0"/>
+	</File>
+	<File name="scripts\_1001_axt.lua" open="1" top="0">
+		<Cursor position="44" topLine="0"/>
+	</File>
+	<File name="scripts\main.lua" open="0" top="0">
+		<Cursor position="230" topLine="0"/>
+	</File>
+	<File name="src\lua_engine.cpp" open="1" top="0">
+		<Cursor position="44" topLine="0"/>
+	</File>
+	<Expand folder="/Sources/src"/>
+	<Expand folder="/Sources"/>
+	<Expand folder="/Headers/includes"/>
+	<Expand folder="/Headers"/>
+</CodeBlocks_layout_file>
