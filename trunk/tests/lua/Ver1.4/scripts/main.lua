@@ -1,3 +1,4 @@
+print("Hallo")
 obj = {}
 obj[1001] =
 {

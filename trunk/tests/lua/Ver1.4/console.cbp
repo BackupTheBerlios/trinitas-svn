@@ -28,6 +28,12 @@
 			<Add directory="libs\lua\bin\Win32"/>
 			<Add directory="src"/>
 		</Linker>
+		<Unit filename="includes\ctvar.h">
+			<Option compilerVar=""/>
+			<Option compile="0"/>
+			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
 		<Unit filename="includes\lc_functions.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
@@ -40,13 +46,13 @@
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
-		<Unit filename="includes\luac_interface.h">
+		<Unit filename="includes\main.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
-		<Unit filename="includes\main.h">
+		<Unit filename="includes\singletons.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
 			<Option link="0"/>
@@ -70,10 +76,12 @@
 		</Unit>
 		<Unit filename="src\lc_functions.cpp">
 			<Option compilerVar="CPP"/>
+			<Option compile="0"/>
 			<Option target="default"/>
 		</Unit>
 		<Unit filename="src\lua_engine.cpp">
 			<Option compilerVar="CPP"/>
+			<Option compile="0"/>
 			<Option target="default"/>
 		</Unit>
 	</Project>
