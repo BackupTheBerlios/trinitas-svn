@@ -34,7 +34,7 @@
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
-		<Unit filename="includes\lc_functions.h">
+		<Unit filename="includes\lua_cfunctions.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
 			<Option link="0"/>
@@ -46,13 +46,37 @@
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
-		<Unit filename="includes\main.h">
+		<Unit filename="includes\lua_obj.h">
+			<Option compilerVar=""/>
+			<Option compile="0"/>
+			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="includes\lua_obj_type.h">
+			<Option compilerVar=""/>
+			<Option compile="0"/>
+			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="includes\lua_script.h">
+			<Option compilerVar=""/>
+			<Option compile="0"/>
+			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="includes\lua_table.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
 		<Unit filename="includes\singletons.h">
+			<Option compilerVar=""/>
+			<Option compile="0"/>
+			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="includes\stdafx.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
 			<Option link="0"/>
@@ -74,14 +98,21 @@
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
-		<Unit filename="src\lc_functions.cpp">
+		<Unit filename="src\lua_cfunctions.cpp">
 			<Option compilerVar="CPP"/>
-			<Option compile="0"/>
 			<Option target="default"/>
 		</Unit>
 		<Unit filename="src\lua_engine.cpp">
 			<Option compilerVar="CPP"/>
-			<Option compile="0"/>
+			<Option weight="45"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="src\lua_obj.cpp">
+			<Option compilerVar="CPP"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="src\lua_table.cpp">
+			<Option compilerVar="CPP"/>
 			<Option target="default"/>
 		</Unit>
 	</Project>

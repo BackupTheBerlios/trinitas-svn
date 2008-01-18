@@ -8,6 +8,8 @@ int main()
    printf("%s\n",myVar.Get());
    lua_engine* luaEngine = new lua_engine();
    luaEngine->Start();
+   lua_obj_type lotBaum = luaEngine->AddLuaObjType("Baum");
+   lua_obj_type lotAxt = luaEngine->AddLuaObjType("Axt");
    luaEngine->ParseFile("scripts/main.lua");
    //lua_Obj* eineAxt = new lua_Obj(1001);
    //lua_Obj* einBaum = new lua_Obj(1002);

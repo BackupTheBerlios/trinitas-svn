@@ -1,15 +1,14 @@
 #ifndef LUA_OBJ
 #define LUA_OBJ
 #include "stdafx.h"
-class lua_Obj
+class lua_obj
 {
 public:
-   lua_Table* tTab;
-   lua_obj_type* lType;
-   void DoFile();
-   void UseWith(lua_Obj* targObj);
+   lua_Table* m_lptData;
+   lua_obj_type* m_lpotType;
+   lua_obj() {}
+   lua_obj(lua_obj_type* m_lpotType);
+   void AssignObjType(lua_obj_type* m_lpotType);
    const char* TableName();
-   void ScriptUpdate();
-   void TableUpdate();
 };
 #endif

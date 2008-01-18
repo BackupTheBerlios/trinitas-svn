@@ -1,29 +1,29 @@
 #include "stdafx.h"
-int lua_Table::iIndex=0;
+int lua_Table::s_iIndex=0;
 
 lua_Table::lua_Table()
 {
-   lua_Table::iIndex++;
-   tName = new char(20);
-   sprintf(tName,"tab%i",lua_Table::iIndex);
+   lua_Table::s_iIndex++;
+   m_sName = new char(20);
+   sprintf(m_sName,"tab%i",lua_Table::s_iIndex);
    lua_newtable(g_lState);
 }
-void lua_Table::NewNumberEntry(const char* sName, int iValue)
+void lua_Table::NewNumberEntry(const char* sVar, int iValue)
 {
-   lua_pushstring(g_lState,sName);
+   lua_pushstring(g_lState,sVar);
    lua_pushnumber(g_lState, iValue);
    lua_rawset(g_lState,-3);
 }
-void lua_Table::NewStringEntry(const char* sName, const char* sValue)
+void lua_Table::NewStringEntry(const char* sVar, const char* sValue)
 {
-   lua_pushstring(g_lState,sName);
+   lua_pushstring(g_lState,sVar);
    lua_pushstring(g_lState,sValue);
    lua_rawset(g_lState,-3);
 }
-void lua_Table::NewTableEntry(const char* sName, lua_Table* tTab)
+void lua_Table::NewTableEntry(const char* sVar, lua_Table* lptData)
 {
-   lua_pushstring(g_lState,sName);
-   lua_getglobal(g_lState,tTab->tName);
+   lua_pushstring(g_lState,sVar);
+   lua_getglobal(g_lState,lptData->m_sName);
    lua_rawset(g_lState,-3);
 
 }
@@ -35,15 +35,16 @@ void lua_Table::NewNilEntry(const char* sName)
 }
 void lua_Table::InsertValues()
 {
-   lua_getglobal(g_lState,tName);
+   lua_getglobal(g_lState,m_sName);
 }
 void lua_Table::Update()
 {
-   lua_setglobal(g_lState,tName);
+   lua_setglobal(g_lState,m_sName);
 }
-void lua_Table::GetTableEntry(const char* sName)
+void lua_Table::GetTableEntry(const char* sVar)
 {
-   lua_getglobal(g_lState,tName);
-   lua_getfield(g_lState,-1,sName);
+   lua_getglobal(g_lState,m_sName);
+   lua_getfield(g_lState,-1,sVar);
    lua_remove(g_lState,-2);
 }
+
