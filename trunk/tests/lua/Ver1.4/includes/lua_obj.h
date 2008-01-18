@@ -5,11 +5,7 @@ class lua_Obj
 {
 public:
    lua_Table* tTab;
-   int id;
-   lua_Obj()
-   {
-   }
-   lua_Obj(int nId);
+   lua_obj_type* lType;
    void DoFile();
    void UseWith(lua_Obj* targObj);
    const char* TableName();
