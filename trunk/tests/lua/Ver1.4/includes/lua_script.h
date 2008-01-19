@@ -4,8 +4,8 @@
 class lua_script
 {
 public:
-   const char* sFunction;
-   lua_obj_type* lpotSource;
-   lua_obj_type* lpotTarget;
+   const char* m_sFunction;
+   lua_obj_type* m_lpotSource;
+   lua_obj_type* m_lpotTarget;
 };
 #endif

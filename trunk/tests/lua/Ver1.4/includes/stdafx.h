@@ -2,6 +2,7 @@
 #define STDAFX
 #include <iostream>
 #include <list.h>
+int sizeofchar(const char* String);
 extern "C"
 {
    #include <lua.h>
@@ -14,4 +15,5 @@ extern "C"
 #include "lua_obj.h"
 #include "lua_engine.h"
 #include "ctvar.h"
+
 #endif

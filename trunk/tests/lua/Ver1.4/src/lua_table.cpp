@@ -25,11 +25,10 @@ void lua_Table::NewTableEntry(const char* sVar, lua_Table* lptData)
    lua_pushstring(g_lState,sVar);
    lua_getglobal(g_lState,lptData->m_sName);
    lua_rawset(g_lState,-3);
-
 }
-void lua_Table::NewNilEntry(const char* sName)
+void lua_Table::NewNilEntry(const char* sVar)
 {
-   lua_pushstring(g_lState,sName);
+   lua_pushstring(g_lState,sVar);
    lua_pushnil(g_lState);
    lua_rawset(g_lState,-3);
 }

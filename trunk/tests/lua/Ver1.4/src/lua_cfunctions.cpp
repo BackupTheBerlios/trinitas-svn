@@ -1,5 +1,9 @@
 #include "stdafx.h"
 
+int IsType(lua_State* lState)
+{
+
+}
 int cAddiere(lua_State* L)
 {
     double a,b;

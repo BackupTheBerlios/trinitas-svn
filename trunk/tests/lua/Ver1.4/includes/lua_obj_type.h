@@ -3,6 +3,10 @@
 class lua_obj_type
 {
 public:
-   const char* sName;
+   const char* m_sName;
+   lua_obj_type()
+   {
+      printf("new lot: %i\n",this);
+   }
 };
 #endif

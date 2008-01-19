@@ -9,6 +9,7 @@ public:
    lua_obj() {}
    lua_obj(lua_obj_type* m_lpotType);
    void AssignObjType(lua_obj_type* m_lpotType);
+   void CheckType();
    const char* TableName();
 };
 #endif

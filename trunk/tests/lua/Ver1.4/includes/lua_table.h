@@ -7,11 +7,11 @@ public:
    static int s_iIndex;
    char* m_sName;
    lua_Table();
-   void NewNumberEntry(const char* sName, int iValue);
-   void NewStringEntry(const char* sName, const char* sValue);
-   void NewTableEntry(const char* sName, lua_Table* lptData);
-   void NewNilEntry(const char* sName);
-   void GetTableEntry(const char* sName);
+   void NewNumberEntry(const char* sVar, int iValue);
+   void NewStringEntry(const char* sVar, const char* sValue);
+   void NewTableEntry(const char* sVar, lua_Table* lptData);
+   void NewNilEntry(const char* sVar);
+   void GetTableEntry(const char* sVar);
    void InsertValues();
    void Update();
 };
