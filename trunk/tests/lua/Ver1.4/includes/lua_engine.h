@@ -12,8 +12,8 @@ public:
    list<lua_script>::iterator m_listlscr_i;
    list<lua_obj_type*> m_listlpot;
    list<lua_obj_type*>::iterator m_listlpot_i;
-   list<lua_event*> m_listlev;
-   list<lua_event*>::iterator m_listlev_i;
+   //list<lua_event*> m_listlev;
+   //list<lua_event*>::iterator m_listlev_i;
    void RegisterCppFunction(const char* sFunction, lua_CFunction fn);
    void CallScript(lua_obj* loSource, lua_obj* loTarget);
    lua_obj_type* AddLuaObjType(const char* sName);
