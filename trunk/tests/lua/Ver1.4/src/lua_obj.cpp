@@ -21,9 +21,7 @@ void lua_obj::CheckType()
    lpotTemp = m_lpotType;
    m_lptData->GetTableEntry("type");
    const char* sType = lua_tostring(g_lState,-1);
-   printf("The new type is %s\n",sType);
    m_lpotType = g_lEngine->GetLuaObjType(sType);
-   printf("his ID:%i \n", m_lpotType);
    if (m_lpotType==NULL)
       m_lpotType = lpotTemp;
 }

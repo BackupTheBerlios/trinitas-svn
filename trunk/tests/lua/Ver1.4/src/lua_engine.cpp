@@ -26,16 +26,12 @@ lua_obj_type* lua_engine::AddLuaObjType(const char* sName)
 }
 lua_obj_type* lua_engine::GetLuaObjType(const char* sName)
 {
-   printf("---------Get Lua Obj Type-------------\n");
-   printf("Search for %s with %i chars\n",sName,sizeofchar(sName));
    if (m_listlpot.empty()==false)
    {
       for(m_listlpot_i=m_listlpot.begin(); m_listlpot_i!=m_listlpot.end(); ++m_listlpot_i)
       {
-         printf("Compare %s with %s \n",(*m_listlpot_i)->m_sName,sName);
-         if((*m_listlpot_i)->m_sName==sName)
+         if(strcmp((*m_listlpot_i)->m_sName,sName)==0)
          {
-            printf("You found it!!\n");
             return *m_listlpot_i;
          }
       }
