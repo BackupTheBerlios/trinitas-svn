@@ -34,6 +34,12 @@
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
+		<Unit filename="includes\lua_character.h">
+			<Option compilerVar=""/>
+			<Option compile="0"/>
+			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
 		<Unit filename="includes\lua_engine.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
@@ -53,12 +59,6 @@
 			<Option target="default"/>
 		</Unit>
 		<Unit filename="includes\lua_obj_type.h">
-			<Option compilerVar=""/>
-			<Option compile="0"/>
-			<Option link="0"/>
-			<Option target="default"/>
-		</Unit>
-		<Unit filename="includes\lua_script.h">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
 			<Option link="0"/>

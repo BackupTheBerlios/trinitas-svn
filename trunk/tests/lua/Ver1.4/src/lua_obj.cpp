@@ -1,5 +1,10 @@
-#include "stdafx.h"
+#include "lua_engine.h"
 
+lua_obj::lua_obj()
+{
+   m_lptData = new lua_Table;
+   m_lptData->Update();
+}
 lua_obj::lua_obj(lua_obj_type* lpotType)
 {
    m_lptData = new lua_Table;
@@ -14,6 +19,10 @@ void lua_obj::AssignObjType(lua_obj_type* lpotType)
 {
    m_lpotType = lpotType;
    m_lptData->NewStringEntry("type",lpotType->m_sName);
+}
+lua_Table* lua_obj::GetTable()
+{
+   return m_lptData;
 }
 void lua_obj::CheckType()
 {

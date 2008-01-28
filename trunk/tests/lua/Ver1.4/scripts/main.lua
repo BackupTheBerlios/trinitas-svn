@@ -1,16 +1,16 @@
-function UseHatchetWithTree(SourceItem,TargetItem)
+
+
+function UseHatchetWithTree(User,SourceItem,TargetItem)
    print("Du schlägst mit der Axt heftig auf den Baum ein!");
    TargetItem.type="Chopped Tree";
+   LooseEnergy(User, 100)
+   print("Du wirst leicht erschoepft (energy:"..User:data().energy..")")
 end
-function TestIt(String1,String2,String3)
-   print("-----------------------")
-   for variable = 0, -15, -1 do
-      CheckStack(variable);
-   end
+
+function CreateCharacter(CharT)
+   CharT.energy = 1000
 end
-function TestIt2(String1,String2)
-   print("-----------------------")
-   for variable = 0, -15, -1 do
-      CheckStack(variable);
-   end
+
+function LooseEnergy(Char, EnergyLoss)
+   Char:data().energy = Char:data().energy - EnergyLoss
 end

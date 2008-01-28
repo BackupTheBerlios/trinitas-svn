@@ -1,10 +1,11 @@
-#include "stdafx.h"
+#include "lua_table.h"
+#include "lua_engine.h"
 int lua_Table::s_iIndex=0;
 
 lua_Table::lua_Table()
 {
    lua_Table::s_iIndex++;
-   m_sName = new char(20);
+   m_sName = new char[20];
    sprintf(m_sName,"tab%i",lua_Table::s_iIndex);
    lua_newtable(g_lState);
 }
