@@ -212,6 +212,12 @@
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
+		<Unit filename="scripts\hatchet.lua">
+			<Option compilerVar=""/>
+			<Option compile="0"/>
+			<Option link="0"/>
+			<Option target="default"/>
+		</Unit>
 		<Unit filename="scripts\main.lua">
 			<Option compilerVar=""/>
 			<Option compile="0"/>

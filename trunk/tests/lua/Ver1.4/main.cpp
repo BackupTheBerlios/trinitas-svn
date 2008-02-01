@@ -3,22 +3,15 @@
 #include <time.h>
 #include "includes/stdafx.h"
 #include "includes/lua_engine.h"
-#include "includes/lua_cfunctions.h"
 
 using namespace std;
 
 int main()
 {
 
-   __time_64_t mytime;
-   time_t mytime2;
-   gmtime(&mytime);
-   // Initializes the lua engine
    lua_engine* luaEngine;
    luaEngine = new lua_engine();
    luaEngine->Start();
-   gmtime(&mytime2);
-   printf("%d\n",difftime((time_t)mytime,(time_t)mytime2));
 
    // Parses necessary lua functions
    luaEngine->ParseFile("scripts/base_common.lua");
