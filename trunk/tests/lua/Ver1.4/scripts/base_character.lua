@@ -1,6 +1,11 @@
 character = { }
-function character:new(race)
-   newchar = { energy = 10000, health = 10000, type = race }
+function character:new(race, lng)
+   newchar = {
+      energy = 10000,
+      health = 10000,
+      type = race,
+      language = language:get(lng)
+   }
    setmetatable(newchar, { __index = character } )
    RegisterObject(newchar)
    return newchar

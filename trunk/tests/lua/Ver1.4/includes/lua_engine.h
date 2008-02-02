@@ -22,9 +22,9 @@ public:
    lua_obj* lua_engine::RegisterObject();
 
    void CallLuaMethod(const char* sLuaClass, const char* sMethod, char* format, ... );
-   lua_obj* CreateCharacter(const char* sRace);
+   lua_obj* CreateCharacter(const char* sRace,const char* sLanguage);
    lua_obj* CreateItem(const char* sType);
-   void CreateItemType(const char* sName,int nId);
+   void CreateItemType(const char* sName);
    void Use(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget);
 
    // Obj->Stack Access Functions
@@ -33,6 +33,11 @@ public:
    int            getobjectnumber(lua_obj* loObj, const char* sVar);
    const char*    getobjectstring(lua_obj* loObj, const char* sVar);
    void           getluavar(const char* sVar);
+
+   // Language functions
+   void lua_engine::GetLanguage(const char* sShort);
+   void lua_engine::AddWords(const char* sVar, const char* sWords, const char* sShort);
+   const char* lua_engine::GetWords(const char* sVar, const char* sShort);
 
 
    void Start();

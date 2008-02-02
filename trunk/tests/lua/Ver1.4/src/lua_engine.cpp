@@ -26,7 +26,8 @@ void lua_engine::OpenLibrary(void (*fp)(lua_State*))
 // Parses a file
 void lua_engine::ParseFile(const char* sFile)
 {
-   luaL_dofile(m_lState,sFile);
+   luaL_loadfile(m_lState,sFile);
+   lua_call(m_lState, 0, LUA_MULTRET);
 }
 
 // Registers a function which is then accessable from Lua
@@ -66,10 +67,9 @@ void lua_engine::CallLuaMethod(const char* sLuaClass, const char* sMethod, char*
    lua_call(m_lState, n+1, LUA_MULTRET);
 
 }
-
-lua_obj* lua_engine::CreateCharacter(const char* sRace)
+lua_obj* lua_engine::CreateCharacter(const char* sRace, const char* sLanguage)
 {
-   CallLuaMethod("character","new","s",sRace);
+   CallLuaMethod("character","new","ss",sRace,sLanguage);
    lua_obj* myObj = (lua_obj*)lua_topointer(m_lState, -1);
    lua_remove(m_lState, -1);
    return myObj;
@@ -81,57 +81,26 @@ lua_obj* lua_engine::CreateItem(const char* sType)
    lua_remove(m_lState, -1);
    return myObj;
 }
-/*template <class T>
 
-T toluavar(lua_State* m_lState,int index)
-{
-   switch(lua_type(m_lState,-1))
-   {
-      case LUA_TNIL:
-         return NULL;
-      case LUA_TBOOLEAN:
-         return lua_toboolean(m_lState, -1);
-      case LUA_TLIGHTUSERDATA:
-         return lua_topointer(m_lState, -1);
-      case LUA_TNUMBER:
-         return lua_tonumber(m_lState, -1);
-      case LUA_TSTRING:
-         return lua_tostring(m_lState, -1);
-      case LUA_TTABLE:
-         return lua_topointer(m_lState, -1);
-      case LUA_TFUNCTION:
-         return lua_topointer(m_lState, -1);
-      case LUA_TUSERDATA:
-         return lua_topointer(m_lState, -1);
-      case LUA_TTHREAD:
-         return lua_topointer(m_lState, -1);
-   }
-}*/
 // Calls the Lua function with two objects
 void lua_engine::Use(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget)
 {
-   char* sFunctionName = new char[60];
-
-   // Gets the name of the lua function:
-   // Use[pSource.type]With[pTarget.type]
    lua_pushobject(m_lState, pSource);
    lua_getfield(m_lState, -1, "type");
-   lua_getfield(m_lState, -1, "name");
-   lua_remove(m_lState, -2);
-   sprintf(sFunctionName,"Use%s",lua_tostring(m_lState, -1));
-   lua_pushobject(m_lState, pTarget);
-   lua_getfield(m_lState, -1, "type");
-   lua_getfield(m_lState, -1, "name");
-   lua_remove(m_lState, -2);
-   sprintf(sFunctionName,"%sWith%s",sFunctionName,lua_tostring(m_lState,-1));
-   lua_pop(m_lState, 4);
-   lua_getglobal(m_lState,sFunctionName); // obj1  obj2  func
-   // Pushes a character and two items
+   lua_getfield(m_lState, -1, "usewith");
+   lua_remove(m_lState,-2);
+   lua_pushnumber(m_lState, pTarget->GetTypeId());
+   lua_gettable(m_lState, -2);
+   if ( lua_isnil(m_lState,-1)==true)
+   {
+      lua_pop(m_lState,3);
+      return;
+   }
+   lua_remove(m_lState,-2);
    lua_pushobject(m_lState, pUser);
-   lua_pushobject(m_lState, pSource);
+   lua_pushvalue(m_lState, -3);
+   lua_remove(m_lState, -4);
    lua_pushobject(m_lState, pTarget);
-
-   // Calls the lua function
    lua_call(m_lState,3,0);
 }
 int lua_pushvarg(lua_State*L, char* format,va_list* argptr)
@@ -185,6 +154,7 @@ void lua_engine::getluavar(const char* sVar)
       else
       {
           lua_getfield(m_lState, -1, buffer);
+          lua_remove(m_lState, -2);
           sprintf(buffer,"");
           bI=0;
           if(sVar[i]=='\0')
@@ -192,27 +162,37 @@ void lua_engine::getluavar(const char* sVar)
       }
    }
 }
+
+
 int lua_engine::getobjectnumber(lua_obj* loObj, const char* sVar)
 {
    lua_pushobject(m_lState, loObj);
    getluavar(sVar);
-   return lua_tonumber(m_lState, -1);
+   int i = lua_tonumber(m_lState, -1);
+   lua_remove(m_lState, -1);
+   return i;
 }
+
+
 int lua_engine::getobjectboolean(lua_obj* loObj, const char* sVar)
 {
    lua_pushobject(m_lState, loObj);
    getluavar(sVar);
    return lua_toboolean(m_lState, -1);
 }
+
+
 void* lua_engine::getobjectpointer(lua_obj* loObj, const char* sVar)
 {
    lua_pushobject(m_lState, loObj);
    getluavar(sVar);
    return (void*)lua_topointer(m_lState, -1);
 }
-void lua_engine::CreateItemType(const char* sName, int nId)
+
+
+void lua_engine::CreateItemType(const char* sName)
 {
-   CallLuaMethod("itemtype","new","sd",sName,nId);
+   CallLuaMethod("itemtype","new","sd",sName);
 }
 
 
@@ -227,6 +207,27 @@ void lua_pushobject(lua_State* L, lua_obj* loObj)
    lua_pushlightuserdata(L, &loObj->key);
    lua_gettable(L, LUA_REGISTRYINDEX);
 }
+
+// Language functions
+void lua_engine::AddWords(const char* sVar, const char* sWords, const char* sShort)
+{
+   CallLuaMethod("language","get","s",sShort);
+   lua_pushstring(m_lState,sVar);
+   lua_pushstring(m_lState,sWords);
+   lua_settable(m_lState,-3);
+   lua_remove(m_lState,-1);
+}
+const char* lua_engine::GetWords(const char* sVar, const char* sShort)
+{
+   CallLuaMethod("language","get","s",sShort);
+   getluavar(sVar);
+   lua_remove(m_lState,-2);
+   const char* sWords = lua_tostring(m_lState,-1);
+   lua_remove(m_lState,-1);
+   return sWords;
+}
+
+
 int checkmystack(lua_State* L)
 {
    int i;
@@ -253,3 +254,6 @@ int checkmystack(lua_State* L)
    }
    return 0;
 }
+
+
+
