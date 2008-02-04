@@ -176,12 +176,6 @@
 			<Option compilerVar="CPP"/>
 			<Option target="default"/>
 		</Unit>
-		<Unit filename="scripts\_1001_axt.lua">
-			<Option compilerVar=""/>
-			<Option compile="0"/>
-			<Option link="0"/>
-			<Option target="default"/>
-		</Unit>
 		<Unit filename="scripts\base_character.lua">
 			<Option compilerVar=""/>
 			<Option compile="0"/>
@@ -224,15 +218,13 @@
 			<Option link="0"/>
 			<Option target="default"/>
 		</Unit>
-		<Unit filename="scripts\main.lua">
-			<Option compilerVar=""/>
-			<Option compile="0"/>
-			<Option link="0"/>
-			<Option target="default"/>
-		</Unit>
 		<Unit filename="src\lua_engine.cpp">
 			<Option compilerVar="CPP"/>
 			<Option weight="45"/>
+			<Option target="default"/>
+		</Unit>
+		<Unit filename="src\lua_event.cpp">
+			<Option compilerVar="CPP"/>
 			<Option target="default"/>
 		</Unit>
 		<Unit filename="src\lua_obj.cpp">

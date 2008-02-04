@@ -20,9 +20,14 @@ int main()
    lua_obj* lpoInventar[32];
    lpoInventar[0] = luaEngine->CreateItem("Hatchet");
    lpoInventar[1] = luaEngine->CreateItem("Tree");
-   luaEngine->Use(david, lpoInventar[0],lpoInventar[1]);
-
-   printf("inv[1] ist nun: %s \n",lpoInventar[1]->GetTypeName("de"));
+   printf("Start Event...\n");
+   luaEngine->StartEvent_UseWith(david, lpoInventar[0],lpoInventar[1],150);
+   //luaEngine->Use(david, lpoInventar[0],lpoInventar[1]);
+   while(strcmp(lpoInventar[1]->GetTypeName("de"),"gefällter Baum")!=0)
+   {
+      luaEngine->CheckEvents();
+   }
+   printf("Ready\n");
    luaEngine->Release();
    return 1;
 }

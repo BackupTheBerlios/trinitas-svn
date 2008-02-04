@@ -18,6 +18,8 @@ public:
    list<lua_event*> m_listlev;
    list<lua_event*>::iterator m_listlev_i;
 
+   clock_t m_curTime;
+
    void OpenLibrary(void (*fp)(lua_State*));
    void RegisterFunction(const char* sFunction, lua_CFunction fn);
    void SetPanicFunction(lua_CFunction panicf);
@@ -37,9 +39,13 @@ public:
    void           getluavar(const char* sVar);
 
    // Language functions
-   void lua_engine::GetLanguage(const char* sShort);
-   void lua_engine::AddWords(const char* sVar, const char* sWords, const char* sShort);
-   const char* lua_engine::GetWords(const char* sVar, const char* sShort);
+   void GetLanguage(const char* sShort);
+   void AddWords(const char* sVar, const char* sWords, const char* sShort);
+   const char* GetWords(const char* sVar, const char* sShort);
+
+   // Event functions
+   void CheckEvents();
+   void StartEvent_UseWith(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget, int difTime);
 
 
    void Start();
@@ -52,6 +58,8 @@ int checkmystack(lua_State* L);
 int lib_RegisterObject(lua_State* L);
 int lua_pushvarg(lua_State*L, char* format, va_list* varg);
 void lua_pushobject(lua_State* L, lua_obj* loObj);
+va_list* tovarg(char* format, ...);
+
 
 
 #endif

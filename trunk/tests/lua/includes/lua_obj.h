@@ -7,7 +7,7 @@ class lua_obj
 public:
    //int key2;
    int key;
-
+   lua_State* L;
    const char* GetTypeName(const char* sShort);
    int GetTypeId();
 };

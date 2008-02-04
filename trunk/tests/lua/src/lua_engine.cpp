@@ -91,12 +91,12 @@ void lua_engine::Use(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget)
    lua_remove(m_lState,-2);
    lua_pushnumber(m_lState, pTarget->GetTypeId());
    lua_gettable(m_lState, -2);
+   lua_remove(m_lState,-2);
    if ( lua_isnil(m_lState,-1)==true)
    {
-      lua_pop(m_lState,3);
+      lua_pop(m_lState,2);
       return;
    }
-   lua_remove(m_lState,-2);
    lua_pushobject(m_lState, pUser);
    lua_pushvalue(m_lState, -3);
    lua_remove(m_lState, -4);
@@ -139,7 +139,7 @@ int lua_engine::getobjectnumber(lua_obj* loObj, const char* sVar)
 {
    lua_pushobject(m_lState, loObj);
    getluavar(sVar);
-   int i = lua_tonumber(m_lState, -1);
+   int i = (int)lua_tonumber(m_lState, -1);
    lua_remove(m_lState, -1);
    return i;
 }
@@ -187,6 +187,43 @@ const char* lua_engine::GetWords(const char* sVar, const char* sShort)
 }
 
 
+// Event functions
+void lua_engine::CheckEvents()
+{
+   m_curTime = clock();
+   for(m_listlev_i = m_listlev.begin();m_listlev_i!=m_listlev.end();m_listlev_i++)
+   {
+      lua_event* myEvent = *m_listlev_i;
+      if(difftime(m_curTime,myEvent->m_timeStamp)>=myEvent->m_Time)
+      {
+         execute_lua_event(m_lState, myEvent);
+         delete(myEvent);
+      }
+   }
+}
+void lua_engine::StartEvent_UseWith(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget, int difTime)
+{
+   lua_event* newEvent = new lua_event;
+   lua_pushlightuserdata(m_lState, &newEvent->m_timeStamp);
+   lua_pushobject(m_lState, pSource);
+   lua_getfield(m_lState, -1, "type");
+   lua_getfield(m_lState, -1, "usewith");
+   lua_remove(m_lState,-2);
+   lua_pushnumber(m_lState, pTarget->GetTypeId());
+   lua_gettable(m_lState, -2);
+   lua_remove(m_lState,-2);
+   lua_remove(m_lState,-2);
+   lua_settable(m_lState, LUA_REGISTRYINDEX);
+   lua_event_usewith* EventData = new lua_event_usewith;
+   EventData->pUser = pUser;
+   EventData->pSource = pSource;
+   EventData->pTarget = pTarget;
+   newEvent->type = lua_event_usewith::type;
+   newEvent->m_pData = EventData;
+   newEvent->m_Time = difTime;
+   newEvent->m_timeStamp = clock();
+   m_listlev.push_back(newEvent);
+}
 
 int lib_RegisterObject(lua_State* L)
 {
@@ -199,6 +236,12 @@ void lua_pushobject(lua_State* L, lua_obj* loObj)
    lua_gettable(L, LUA_REGISTRYINDEX);
 }
 
+va_list* tovarg(char* format, ...)
+{
+   va_list* argptr = new va_list;
+   va_start(*argptr, format );
+   return argptr;
+}
 int lua_pushvarg(lua_State*L, char* format,va_list* argptr)
 {
    int n = 0;
@@ -219,6 +262,9 @@ int lua_pushvarg(lua_State*L, char* format,va_list* argptr)
             break;
          case 's':
             lua_pushstring(L, va_arg(*argptr, char*));
+            break;
+         case 'O':
+            lua_pushobject(L, va_arg(*argptr, lua_obj*));
             break;
          default:
             lua_pushlightuserdata(L, va_arg(*argptr, void*) );

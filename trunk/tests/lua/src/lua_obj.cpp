@@ -9,7 +9,7 @@ const char* lua_obj::GetTypeName(const char* sShort)
    lua_gettable(g_lState, -2);
    lua_getfield(g_lState,-1,"name");
    const char* sTypeName = lua_tostring(g_lState, -1);
-   lua_pop(g_lState, 7);
+   lua_pop(g_lState, 4);
    return sTypeName;
 }
 int lua_obj::GetTypeId()
