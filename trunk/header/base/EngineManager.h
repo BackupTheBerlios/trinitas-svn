@@ -1,9 +1,26 @@
 /*
- * Copyright 2007 by Trinitas. All rights reserved.
+ * Copyright 2008 by Trinitas. All rights reserved.
  * Distributed under the terms of the BSD License.
  *
  */
 #ifndef ENGINE_MANAGER_H
 #define ENGINE_MANAGER_H
-class EngineManager {public:					EngineManager(void);	IrrlichEngine*	GetIrrlichEngine(void);	RakNet*			GetRakNetEngine(void);	Physik*			GetPhysikEngine(void);	TrinitasLogik*	GetLogikEngine(void);	IrrKlang*		GetSoundEngine(void)protected:	status_t		InitIrrlich(void);	status_t		RakNet(void);	status_t		PhysikEngine(void);	status_t		PhysikEngine(void);	status_t		GetSoundEngine(void);};
-#endif
+
+class EngineManager {
+public:
+					EngineManager(void);
+	IrrlichtEngine*	GetGraphicsEngine(void);
+	RakNet*			GetNetworkEngine(void);
+	Physic*			GetPhysicsEngine(void);
+	TrinitasLogic*	GetLogicEngine(void);
+	IrrKlang*		GetSoundEngine(void)
+                    ~EngineManager(void);
+protected:
+	status_t		InitIrrlicht(void);
+	status_t		InitRakNet(void);
+	status_t		InitBulletPhysicsEngine(void);
+	status_t		InitLogicEngine(void);
+	status_t		InitIrrKlang(void);
+
+};
+#endif
