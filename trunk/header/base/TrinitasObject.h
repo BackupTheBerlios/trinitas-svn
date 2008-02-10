@@ -15,9 +15,9 @@ public:
     unsigned char   GetStatus();
     bool            SetStatus(unsigned char status);
 private:
-	IAnimatedMesh*           mesh;
-    IAnimatedMeshSceneNode*  node;
-    btCollisionShape*        physic;
+	vector<IAnimatedMesh*>           mesh;
+    vector<IAnimatedMeshSceneNode*>  node;
+    vector<btCollisionShape*>        physic;
 
     unsigned char            status;
     unsigned short           typ;
