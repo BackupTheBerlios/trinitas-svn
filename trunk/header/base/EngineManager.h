@@ -22,5 +22,11 @@ protected:
 	status_t		InitLogicEngine(void);
 	status_t		InitIrrKlang(void);
 
+	IrrlichtEngine* Irrlicht;
+	Raknet*         RakNet;
+	Physic*         Physic;
+	TrinitasLogic*  TrinitasLogic;
+	IrrKlang*       IrrKlang;
+
 };
 #endif
