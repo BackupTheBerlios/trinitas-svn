@@ -7,6 +7,7 @@ void lua_engine::Start()
    luaL_openlibs(m_lState);
    lua_register(m_lState, "RegisterObject", lib_RegisterObject);
    lua_register(m_lState, "Check", checkmystack);
+   lua_register(m_lState, "StartEventUsewith", start_lua_event_usewith);
    m_pSingleton = this;
 }
 
@@ -190,6 +191,8 @@ const char* lua_engine::GetWords(const char* sVar, const char* sShort)
 // Event functions
 void lua_engine::CheckEvents()
 {
+   if(m_listlev.size()==0)
+      return;
    m_curTime = clock();
    for(m_listlev_i = m_listlev.begin();m_listlev_i!=m_listlev.end();m_listlev_i++)
    {
@@ -197,7 +200,9 @@ void lua_engine::CheckEvents()
       if(difftime(m_curTime,myEvent->m_timeStamp)>=myEvent->m_Time)
       {
          execute_lua_event(m_lState, myEvent);
-         delete(myEvent);
+         m_listlev.erase(m_listlev_i);
+         CheckEvents();
+         return;
       }
    }
 }
@@ -302,6 +307,3 @@ int checkmystack(lua_State* L)
    }
    return 0;
 }
-
-
-

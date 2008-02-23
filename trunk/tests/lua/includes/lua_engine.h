@@ -60,6 +60,7 @@ int lua_pushvarg(lua_State*L, char* format, va_list* varg);
 void lua_pushobject(lua_State* L, lua_obj* loObj);
 va_list* tovarg(char* format, ...);
 
+void showvlist(list<lua_event*> m_listlev);
 
 
 #endif

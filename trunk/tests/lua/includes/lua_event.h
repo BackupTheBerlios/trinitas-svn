@@ -17,3 +17,4 @@ public:
 };
 
 void execute_lua_event(lua_State* L, lua_event* myEvent);
+int start_lua_event_usewith(lua_State* L);
