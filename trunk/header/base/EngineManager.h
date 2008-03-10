@@ -9,6 +9,15 @@
 class EngineManager {
 public:
 					EngineManager(void);
+					  //*gleicher Effekt wie Enginemanager(false)
+					EngineManager(bool init);
+					  //*bei true werden alle Engines bei initialisiert
+					EngineManager(bool irrlicht, bool raknet, bool bullet, bool logic, bool irrklang);
+					  //*wie vorheriges, nur für jede Engine einzeln
+
+                    /** falls Engine noch nicht gestartet, jeweilige Engine starten
+                    *   außerdem Pointer zurückgeben
+                    */
 	IrrlichtEngine*	GetGraphicsEngine(void);
 	RakNet*			GetNetworkEngine(void);
 	Physic*			GetPhysicsEngine(void);
