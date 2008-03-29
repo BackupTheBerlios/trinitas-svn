@@ -5,19 +5,37 @@
  */
 #ifndef Trinitas_Object_H
 #define Trinitas_Object_H
+
+#include "../TrinitasDefs.h"
+
 class TrinitasObject {
 public:
     void            TrinitasObject(void);
+    void            TrinitasObject(TrinitasObject& obj);
+        //copy constructor
     void            TrinitasObject(unsigned short typ);
-    bool            UseWith(TrinitasObject &obj);
+
+
+    bool            UseWith(TrinitasObject& obj);
         //bool shows whether it was successfull or not
+    TrinitasObject  operator+ (TrinitasObject& obj);
+        //it is called if you add two objects and it calls UseWith
+
+
     unsigned short  GetTyp();
     unsigned char   GetStatus();
     bool            SetStatus(unsigned char status);
+
+    void            update();
+        //sync. the data of all engines
+
+    void            move(vector3d force);
+
+
 private:
-	vector<IAnimatedMesh*>           mesh;
     vector<IAnimatedMeshSceneNode*>  node;
     vector<btCollisionShape*>        physic;
+    vector<soundData>                sound;
 
     unsigned char            status;
     unsigned short           typ;
