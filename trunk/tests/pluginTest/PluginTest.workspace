@@ -2,6 +2,8 @@
 <CodeBlocks_workspace_file>
 	<Workspace title="PluginTestworkspace">
 		<Project filename="PluginLoader.cbp" />
-		<Project filename="FirstPlugin/FirstPlugin.cbp" active="1" />
+		<Project filename="FirstPlugin/FirstPlugin.cbp" active="1">
+			<Depends filename="PluginLoader.cbp" />
+		</Project>
 	</Workspace>
 </CodeBlocks_workspace_file>

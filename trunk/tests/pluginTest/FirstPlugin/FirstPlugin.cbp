@@ -16,9 +16,11 @@
 					<Add option="-W" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add option="-fPIC -fno-common -no-cpp-precomp -flat_namespace" />
 					<Add directory="../../pluginTest" />
 				</Compiler>
 				<Linker>
+					<Add option="-bundle -flat_namespace -undefined suppress" />
 					<Add directory="../../pluginTest" />
 				</Linker>
 			</Target>
