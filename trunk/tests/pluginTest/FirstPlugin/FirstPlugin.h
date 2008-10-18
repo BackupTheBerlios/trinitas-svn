@@ -12,6 +12,7 @@
  * maby later we should include this as a makro
  * in our TrinitasDefs
  */
+
 #if defined (__GNUC__) && defined(__unix__)
     #define PRINT_API __attribute__ ((__visibility__("default")))
 #elif defined (WIN32)
@@ -21,11 +22,13 @@
         #define PRINT_API __declspec(dllimport)
     #endif
 #else
-    #define PRINT_API
+    #define PRINT_API __attribute__((visibility("default")))
 #endif
 
 #include "TrinitasPlugin.h"
 
+#include "TrinitasPlugin.h"
+#pragma GCC visibility push(default)
 
  class FirstPlugin : TrinitasPlugin {
      public:
@@ -37,7 +40,16 @@
     private:
  };
 
-//using exptern to give an "entrypoint" for the PluginLoader
-//extern "C" PRINT_API TrinitasPlugin* getPlugin(long id);
 
+/*extern "C" TrinitasPlugin* getPlugin(long id) {
+    return (TrinitasPlugin *)new FirstPlugin(id);
+}*/
+
+//using exptern to give an "entrypoint" for the PluginLoader
+
+extern "C" { PRINT_API TrinitasPlugin* getPlugin(long id){
+        return (TrinitasPlugin *)new FirstPlugin(id);
+    }
+}
+#pragma GCC visibility pop
 #endif

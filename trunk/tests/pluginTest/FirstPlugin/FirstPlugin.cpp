@@ -8,19 +8,16 @@
  */
 
 #include <iostream>
-#include "TrinitasPlugin.h"
 #include "FirstPlugin.h"
  //export so that our programm can load it
-/*extern "C" PRINT_API TrinitasPlugin* getPlugin(long id) {
-    return (TrinitasPlugin *)new FirstPlugin(id);
+/*extern "C"{
+    PRINT_API TrinitasPlugin* getPlugin(long id) {
+        return (TrinitasPlugin*) new FirstPlugin(id);
+    }
 }*/
 
-extern "C" TrinitasPlugin* getPlugin(long id) {
-    return (TrinitasPlugin *)new FirstPlugin(id);
-}
 
-
-int main() {
+int  main(long id) {
 }
 
 FirstPlugin::FirstPlugin(long _id):TrinitasPlugin(_id){
