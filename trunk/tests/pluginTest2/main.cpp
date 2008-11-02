@@ -1,9 +1,9 @@
 /**
- * Copyright 2007 by Trinitas. All rights reserved.
+ * Copyright 2008 by Trinitas. All rights reserved.
  * Distributed under the terms of the BSD License.
  *
  * @autor   Paradoxon
- * @date    26.11.2007
+ * @date    02.11.2008
  * @version 0.1
  */
 
@@ -19,11 +19,15 @@ int main() {
      */
     pluginTest->Load("Plugins");
     // this dont work for now dont know why
-    tmpPlugin = pluginTest->GetByName("FirstPlugin");
+    cout << "GetPluginByName:\n";
+
+    tmpPlugin = pluginTest->GetByName("Client");
     if (tmpPlugin) {
         cout << "GetPluginByName: ";
         tmpPlugin->Do();
     }
+    cout << "GetPluginByID:\n ";
+
     tmpPlugin = pluginTest->GetAt(1);
     if (tmpPlugin) {
         cout << "GetPluginByID: ";

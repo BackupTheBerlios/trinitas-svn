@@ -1,9 +1,9 @@
 /** A Class to load and manage loaded Plugins
- * Copyright 2007 by Trinitas. All rights reserved.
+ * Copyright 2008 by Trinitas. All rights reserved.
  * Distributed under the terms of the BSD License.
  *
  * @autor   Paradoxon
- * @date    26.11.2007
+ * @date    02.11.2008
  * @version 0.1
  */
 
@@ -100,9 +100,10 @@ TrinitasPlugin* PluginLoader::GetAt(long index) {
      //use an iterator wich "runs through the Vector
      iter = mPlugins->begin();
 //     while ((iter != mPlugins->end()) && (!found)) {
-     while (iter != mPlugins->end()) {
+     while ( (iter != mPlugins->end()) && (found == false) ) {
         tmpPlugin = (*iter);
-        found = strcmp(tmpPlugin->GetName(),pluginName);
+        if (strcmp(tmpPlugin->GetName(),pluginName) == 0)
+            found = true;
         if (!found)
             iter++;
      }
@@ -130,13 +131,13 @@ TrinitasPlugin* PluginLoader::GetAt(long index) {
                 cout << "!!!!!!!!! SYMBOL LOADED !!!!!!!" << file <<std::endl;
                 //call getPlugin with the actual ID
                 loadedPlugin = thePlugin(mPlugins->size()+1);
-                cout << loadedPlugin->GetName() << " Calling Do() ";
-                loadedPlugin->Do();
+               /* cout << loadedPlugin->GetName() << " Calling Do() ";
+                loadedPlugin->Do();*/
                 cout << std::endl;
             }
             else
                 cout << "Fehler dlsym:\t" << dlerror()  <<std::endl;
-            dlclose(libraryHandle);
+       //     dlclose(libraryHandle);
         }
         else
                 cout << "Fehler dlopen:\t" << dlerror()  <<std::endl;
