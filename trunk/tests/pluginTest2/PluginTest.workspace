@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="PluginTestworkspace">
+		<Project filename="PluginLoader.cbp" active="1" />
+		<Project filename="FirstPlugin/FirstPlugin.cbp">
+			<Depends filename="PluginLoader.cbp" />
+		</Project>
+	</Workspace>
+</CodeBlocks_workspace_file>
