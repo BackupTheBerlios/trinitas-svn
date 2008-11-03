@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2007 Nikolaus Gebhardt
+// Copyright (C) 2002-2008 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -25,9 +25,6 @@ namespace gui
 		IGUIImage(IGUIEnvironment* environment, IGUIElement* parent, s32 id, core::rect<s32> rectangle)
 			: IGUIElement(EGUIET_IMAGE, environment, parent, id, rectangle) {}
 
-		//! destructor
-		~IGUIImage() {};
-
 		//! Sets an image
 		virtual void setImage(video::ITexture* image) = 0;
 
@@ -45,7 +42,6 @@ namespace gui
 
 		//! Returns true if the image is using the alpha channel, false if not
 		virtual bool isAlphaChannelUsed() const = 0;
-
 	};
 
 

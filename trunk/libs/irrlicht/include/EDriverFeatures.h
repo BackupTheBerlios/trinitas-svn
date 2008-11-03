@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2007 Nikolaus Gebhardt
+// Copyright (C) 2002-2008 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -7,7 +7,7 @@
 
 namespace irr
 {
-namespace video  
+namespace video
 {
 
 	//! enumeration for querying features of the video driver.
@@ -77,7 +77,10 @@ namespace video
 		EVDF_TEXTURE_NPOT,
 
 		//! Are framebuffer objects supported?
-		EVDF_FRAMEBUFFER_OBJECT
+		EVDF_FRAMEBUFFER_OBJECT,
+
+		//! Only used for counting the elements of this enum
+		EVDF_COUNT
 	};
 
 } // end namespace video

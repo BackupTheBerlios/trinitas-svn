@@ -1,11 +1,11 @@
-// Copyright (C) 2002-2007 Nikolaus Gebhardt
+// Copyright (C) 2002-2008 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 #ifndef __I_SCENE_NODE_ANIMATOR_H_INCLUDED__
 #define __I_SCENE_NODE_ANIMATOR_H_INCLUDED__
 
-#include "IUnknown.h"
+#include "IReferenceCounted.h"
 #include "vector3d.h"
 #include "ESceneNodeAnimatorTypes.h"
 #include "IAttributeExchangingObject.h"
@@ -30,18 +30,19 @@ namespace scene
 	{
 	public:
 
-		//! destructor
+		//! Destructor
 		virtual ~ISceneNodeAnimator() {}
 
 		//! Animates a scene node.
-		//! \param node: Node to animate.
-		//! \param timeMs: Current time in milli seconds.
+		/** \param node Node to animate.
+		\param timeMs Current time in milli seconds. */
 		virtual void animateNode(ISceneNode* node, u32 timeMs) = 0;
 
-		//! Creates a clone of this animator. 
-		/** Please note that you will have to drop (IUnknown::drop()) 
-		the returned pointer after calling this. */
-		virtual ISceneNodeAnimator* createClone(ISceneNode* node, ISceneManager* newManager=0) 
+		//! Creates a clone of this animator.
+		/** Please note that you will have to drop
+		(IReferenceCounted::drop()) the returned pointer after calling
+		this. */
+		virtual ISceneNodeAnimator* createClone(ISceneNode* node, ISceneManager* newManager=0)
 		{
 			return 0; // to be implemented by derived classes.
 		}
@@ -52,6 +53,8 @@ namespace scene
 			return ESNAT_UNKNOWN;
 		}
 	};
+
+
 } // end namespace scene
 } // end namespace irr
 

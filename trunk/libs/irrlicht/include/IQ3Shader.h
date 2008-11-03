@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2007 Nikolaus Gebhardt / Thomas Alten
+// Copyright (C) 2006-2008 Nikolaus Gebhardt / Thomas Alten
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -17,6 +17,8 @@ namespace scene
 {
 namespace quake3
 {
+
+	static const core::stringc irrEmptyStringc("");
 
 	//! Hold the different Mesh Types used for getMesh
 	enum eQ3MeshIndex
@@ -44,8 +46,8 @@ namespace quake3
 
 		void clear ()
 		{
-			name = core::irrEmtpyStringc;
-			content = core::irrEmtpyStringc;
+			name = "";
+			content = "";
 		}
 
 		s32 isValid () const
@@ -53,9 +55,9 @@ namespace quake3
 			return name.size();
 		}
 
-		bool operator < ( const SVariable &other ) const
+		bool operator == ( const SVariable &other ) const
 		{
-			return name < other.name;
+			return name == other.name;
 		}
 	};
 
@@ -130,6 +132,7 @@ namespace quake3
 
 	}
 
+	//! A blend function for a q3 shader.
 	struct SBlendFunc
 	{
 		SBlendFunc () : type ( video::EMT_SOLID ), param ( 0.f ) {}
@@ -166,7 +169,7 @@ namespace quake3
 			return 1;
 
 		u32 ret = 1;
-		static const c8 * funclist[] = { "lequal","equal"  };
+		static const c8 * funclist[] = { "lequal","equal" };
 
 		u32 pos = 0;
 		switch ( isEqual ( string, pos, funclist, 2 ) )
@@ -409,7 +412,7 @@ namespace quake3
 		{
 			s32 index = getIndex ( name );
 			if ( index < 0 )
-				return core::irrEmtpyStringc;
+				return irrEmptyStringc;
 
 			return Variable [ index ].content;
 		}
@@ -432,7 +435,7 @@ namespace quake3
 		core::array < SVariable > Variable;
 	};
 
-	struct SVarGroupList: public IUnknown
+	struct SVarGroupList: public IReferenceCounted
 	{
 		SVarGroupList () {}
 		virtual ~SVarGroupList () {}
@@ -440,13 +443,19 @@ namespace quake3
 		core::array < SVarGroup > VariableGroup;
 	};
 
+
 	//! A Parsed Shader Holding Variables ordered in Groups
 	class SShader
 	{
 		public:
+			bool operator == (const SShader &other ) const
+			{
+				return name == other.name;
+			}
+
 			bool operator < (const SShader &other ) const
 			{
-				return	name < other.name;
+				return name < other.name;
 			}
 
 			const SVarGroup * getGroup ( u32 stage ) const
@@ -463,7 +472,7 @@ namespace quake3
 			// Shader: shader name ( also first variable in first Vargroup )
 			// Entity: classname ( variable in Group(1) )
 			core::stringc name;
-			SVarGroupList *VarGroup;	// reference
+			SVarGroupList *VarGroup; // reference
 	};
 
 	typedef SShader SEntity;
@@ -547,13 +556,12 @@ namespace quake3
 		load one or multiple files stored in name started at startPos to the texture array textures
 		if texture is not loaded 0 will be added ( to find missing textures easier)
 	*/
-	inline void getTextures (	tTexArray &textures ,
-						const core::stringc &name, u32 &startPos,
-						io::IFileSystem *fileSystem,
-						video::IVideoDriver* driver
-					)
+	inline void getTextures(tTexArray &textures,
+				const core::stringc &name, u32 &startPos,
+				io::IFileSystem *fileSystem,
+				video::IVideoDriver* driver)
 	{
-		static const char * extension[2] = 
+		static const char * extension[2] =
 		{
 			".jpg",
 			".tga"
@@ -570,7 +578,7 @@ namespace quake3
 			video::ITexture* texture = 0;
 			for ( u32 g = 0; g != 2 ; ++g )
 			{
-				irr::core::cutFilenameExtension ( loadFile, stringList[i] ).append ( extension[g] );
+				core::cutFilenameExtension ( loadFile, stringList[i] ).append ( extension[g] );
 
 				if ( fileSystem->existFile ( loadFile.c_str() ) )
 				{
@@ -587,10 +595,8 @@ namespace quake3
 	}
 
 
-	/*!
-		Manages various Quake3 Shader Styles
-	*/
-	class IShaderManager : public irr::IUnknown
+	//! Manages various Quake3 Shader Styles
+	class IShaderManager : public IReferenceCounted
 	{
 	};
 
