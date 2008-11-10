@@ -25,7 +25,7 @@ MasterServer::MasterServer(){
     //use port 7000 just becaus my router can open this port ;-) using pass empty string for using INADDR_ANY
     SocketDescriptor socketDescriptor(7000,0);
     if (rakPeer->Startup(32, 10, &socketDescriptor, 1 )){
-        printf("--== MasterServer started ==--\nlistening on %s:%i port",socketDescriptor.hostAddress,socketDescriptor.port);
+        printf("--== MasterServer started ==--\nlistening on  port %d\n",socketDescriptor.port);
         //yes we are up and running so the reciver loop shoudl also run
         running = true;
     }
@@ -34,6 +34,7 @@ MasterServer::MasterServer(){
         printf("COUlD NOT START SERVER");
     //we use this insatnace for a Lightwight databaseServer
     rakPeer->AttachPlugin(&databaseServer);
+    printf("attachedPlugin\n");
 
     DataStructures::Table *table;
     //Allow remote row updates?
@@ -59,6 +60,8 @@ MasterServer::MasterServer(){
     //Autogenerate row ids?
     bool autogenerateRowIDs     = true;
 	table=databaseServer.AddTable("TrinitasServer", allowRemoteUpdate, allowRemoteQuery, allowRemoteRemove, queryPassword, updatePassword, removePassword, oneRowPerSystemAddress, onlyUpdateOwnRows, removeRowOnPingFailure, removeRowOnDisconnect, autogenerateRowIDs);
+    printf("AddTable\n");
+
 	if (table){
 
     }
@@ -86,8 +89,9 @@ MasterServer::~MasterServer(){
 
 void MasterServer::Run(){
     Packet *p;
+    printf("Run\n");
 	while (running){
-		p=rakPeer->Receive();
+        p=rakPeer->Receive();
 		while (p) {
 			if (p->data[0]==ID_DISCONNECTION_NOTIFICATION)
 				printf("ID_DISCONNECTION_NOTIFICATION\n");
@@ -155,6 +159,7 @@ void MasterServer::Run(){
 
 
 void MasterServer::BasicConsole(){
+
     #ifdef WIN32
     if (iskeypressed( 500 ))
     #endif
