@@ -26,12 +26,13 @@
 #include <poll.h>
 #endif
 
-
+/** @todo Init the MasterServer just with ip and port*/
 class MasterServer
 {
 public:
 	MasterServer();
 	~MasterServer();
+
     void Run();
 
 protected:
@@ -48,11 +49,10 @@ protected:
 #endif
 
 
-
 private:
 #ifndef WIN32
-	static bool initialized = false;
-    static struct termios initial_settings;
+    bool initialized;
+    struct termios initial_settings;
 #endif
 	LightweightDatabaseServer   databaseServer;
     RakPeerInterface            *rakPeer;
