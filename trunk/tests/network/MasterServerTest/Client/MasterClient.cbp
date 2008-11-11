@@ -69,9 +69,6 @@
 		</Compiler>
 		<Unit filename="MasterClient.cpp" />
 		<Unit filename="MasterClient.h" />
-		<Unit filename="MasterClientMain.cpp" />
-		<Unit filename="../MasterCommon.cpp" />
-		<Unit filename="../MasterCommon.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
