@@ -147,10 +147,10 @@ void MasterServer::Run(){
 				}
 				else
 					printf("Deserialization of table failed.\n");
+                rakPeer->DeallocatePacket(p);
+                p=rakPeer->Receive();
 			}
 			BasicConsole();
-			rakPeer->DeallocatePacket(p);
-			p=rakPeer->Receive();
 		}
         RakSleep(30);
 	}
@@ -159,7 +159,7 @@ void MasterServer::Run(){
 
 
 void MasterServer::BasicConsole(){
-
+    printf("BasicConsole\n");
     #ifdef WIN32
     if (iskeypressed( 500 ))
     #endif
