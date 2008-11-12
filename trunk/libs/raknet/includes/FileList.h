@@ -5,6 +5,7 @@
 #include "DS_List.h"
 #include "RakMemoryOverride.h"
 #include "RakNetTypes.h"
+#include "FileListNodeContext.h"
 
 #ifdef _MSC_VER
 #pragma warning( push )
@@ -16,7 +17,7 @@ namespace RakNet
 }
 
 /// Represents once instance of a file
-struct FileListNode : public RakNet::RakMemoryOverride
+struct FileListNode
 {
 	/// Name of the file
 	char *filename;
@@ -31,7 +32,10 @@ struct FileListNode : public RakNet::RakMemoryOverride
 	unsigned fileLengthBytes;
 
 	/// User specific data for whatever, describing this file.
-	unsigned char context; 
+	FileListNodeContext context; 
+
+	/// If true, data and dataLengthBytes should be empty. This is just storing the filename
+	bool isAReference;
 };
 
 //int RAK_DLL_EXPORT FileListNodeComp( char * const &key, const FileListNode &data );
@@ -68,7 +72,7 @@ public:
 	}
 };
 
-/// Implementation of FileListProgress to use printf
+/// Implementation of FileListProgress to use RAKNET_DEBUG_PRINTF
 class RAK_DLL_EXPORT FLP_Printf : public FileListProgress
 {
 public:
@@ -82,7 +86,7 @@ public:
 	virtual void OnDirectory(FileList *fileList, char *dir, unsigned int directoriesRemaining);
 };
 
-class RAK_DLL_EXPORT FileList : public RakNet::RakMemoryOverride
+class RAK_DLL_EXPORT FileList
 {
 public:
 	FileList();
@@ -94,7 +98,7 @@ public:
 	/// \param[in] writeData Write the contents of each file
 	/// \param[in] recursive Whether or not to visit subdirectories
 	/// \param[in] context User defined byte to store with each file. Use for whatever you want.
-	void AddFilesFromDirectory(const char *applicationDirectory, const char *subDirectory, bool writeHash, bool writeData, bool recursive, unsigned char context);
+	void AddFilesFromDirectory(const char *applicationDirectory, const char *subDirectory, bool writeHash, bool writeData, bool recursive, FileListNodeContext context);
 
 	/// Deallocate all memory
 	void Clear(void);
@@ -140,13 +144,14 @@ public:
 	/// \param[in] dataLength length of the data, which may be greater than fileLength should you prefix extra data, such as the hash
 	/// \param[in] fileLength Length of the file
 	/// \param[in] context User defined byte to store with each file. Use for whatever you want.
-	void AddFile(const char *filename, const char *data, const unsigned dataLength, const unsigned fileLength, unsigned char context);
+	/// \param[in] isAReference Means that this is just a reference to a file elsewhere - does not actually have any data
+	void AddFile(const char *filename, const char *data, const unsigned dataLength, const unsigned fileLength, FileListNodeContext context, bool isAReference=false);
 
 	/// Add a file, reading it from disk
 	/// \param[in] filepath Complete path to the file, including the filename itself
 	/// \param[in] filename filename to store internally, anything you want, but usually either the complete path or a subset of the complete path.
 	/// \param[in] context User defined byte to store with each file. Use for whatever you want.
-	void AddFile(const char *filepath, const char *filename, unsigned char context);
+	void AddFile(const char *filepath, const char *filename, FileListNodeContext context);
 
 	/// Delete all files stored in the file list
 	/// \param[in] applicationDirectory Prefixed to the path to each filename.  Use \ as the path delineator.
@@ -158,6 +163,8 @@ public:
 
 	// Here so you can read it, but don't modify it
 	DataStructures::List<FileListNode> fileList;
+
+	static bool FixEndingSlash(char *str);
 protected:
 	FileListProgress *callback;
 };

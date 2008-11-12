@@ -12,7 +12,7 @@
 #include "RakString.h"
 
 #define _TABLE_BPLUS_TREE_ORDER 16
-#define _TABLE_MAX_COLUMN_NAME_LENGTH 32
+#define _TABLE_MAX_COLUMN_NAME_LENGTH 64
 
 /// The namespace DataStructures was only added to avoid compiler errors for commonly named data structures
 /// As these data structures are stand-alone, you can use them outside of RakNet for your own projects if you wish.
@@ -24,7 +24,7 @@ namespace DataStructures
 	/// This is a relatively simple and fast implementation of the types of tables commonly used in databases
 	/// See TableSerializer to serialize data members of the table
 	/// See LightweightDatabaseClient and LightweightDatabaseServer to transmit the table over the network.
-	class RAK_DLL_EXPORT Table : public RakNet::RakMemoryOverride
+	class RAK_DLL_EXPORT Table
 	{
 	public:
 			
@@ -78,6 +78,8 @@ namespace DataStructures
 			// assignment operator and copy constructor
 			Cell& operator = ( const Cell& input );
 			Cell( const Cell & input);
+
+			ColumnType EstimateColumnType(void) const;
 
 			bool isEmpty;
 			int i;
@@ -209,10 +211,12 @@ namespace DataStructures
 		/// \return The newly added row
 		Table::Row* AddRow(unsigned rowId);
 		Table::Row* AddRow(unsigned rowId, DataStructures::List<Cell> &initialCellValues);
+		Table::Row* AddRow(unsigned rowId, DataStructures::List<Cell*> &initialCellValues, bool copyCells=false);
 
 		/// Removes a row specified by rowId
 		/// \param[in] rowId The ID of the row
-		void RemoveRow(unsigned rowId);
+		/// \return true if the row was deleted. False if not.
+		bool RemoveRow(unsigned rowId);
 
 		/// Removes all the rows with IDs that the specified table also has
 		/// \param[in] tableContainingRowIDs The IDs of the rows

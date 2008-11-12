@@ -5,14 +5,23 @@
 #include <stdio.h>
 #include <string.h> // memcpy
 #include <typeinfo>
-#ifdef _WIN32
+#if defined(_XBOX) || defined(X360)
+#include <XBOX360Includes.h>
+#elif defined (_WIN32)
 #include <windows.h>
 #endif
 #include <stddef.h>
 //#define ASSEMBLY_BLOCK asm
-#include "Types.h"
+//#include "Types.h"
 #include "BitStream.h"
-// #define NO_ASM
+// #define AUTO_RPC_NO_ASM
+
+#ifdef _WIN64
+#define AUTO_RPC_NO_ASM
+#endif
+
+namespace GenRPC
+{
 
 //#define __BITSTREAM_NATIVE_END 1
 
@@ -166,7 +175,7 @@ typedef double        HardwareReal;
 typedef unsigned long long NaturalWord;
 typedef double         HardwareReal;  // could be changed to __float128 on AMD64/nonwin
 
-#elif defined ( _PS3 )
+#elif defined(_PS3) || defined(__PS3__)
 typedef double HardwareReal;
 typedef unsigned long long NaturalWord;
 #define AUTO_RPC_AUTORPC_WORD 64
@@ -180,6 +189,8 @@ typedef unsigned long long NaturalWord;
 
 #elif defined(_M_PPC) || defined( __POWERPC__ )
 
+#include <limits.h>
+
 /// PPC Mac doesn't support sizeof( long ) in an #if statement
 #if defined (LONG_BIT)
 	#if LONG_BIT == 64
@@ -192,14 +203,20 @@ typedef unsigned long long NaturalWord;
 		typedef unsigned int NaturalWord;
 	#endif
 #else
-	#if sizeof( long ) == 8
-		#define AUTORPC_WORD 64
-		typedef double HardwareReal;
-		typedef unsigned long long NaturalWord;
-	#else
+	#if defined(_XBOX) || defined(X360)
 		#define AUTORPC_WORD 32
 		typedef double HardwareReal;
 		typedef unsigned int NaturalWord;
+	#else
+		#if sizeof( long ) == 8
+			#define AUTORPC_WORD 64
+			typedef double HardwareReal;
+			typedef unsigned long long NaturalWord;
+		#else
+			#define AUTORPC_WORD 32
+			typedef double HardwareReal;
+			typedef unsigned int NaturalWord;
+		#endif
 	#endif
 #endif
 
@@ -264,73 +281,6 @@ typedef unsigned long long NaturalWord;
 // stack simialrly must be aligned
 #define AUTO_RPC_STACK_PADDING  ( sizeof(  NaturalWord ) / AUTO_RPC_REF_ALIGN )
 
-/*
-struct AutoRPC {
-
-	// if stdint.h is universal and can be relied on, remove all these definitions, and use the global
-	// ones.
-#ifdef _STDINT_H
-	// top tip: these types are mandated to be two's a compliment, so bitops work on them
-	typedef ::uint8_t             uint8_t;
-	typedef ::uint16_t            uint16_t;
-	typedef ::uint32_t            uint32_t;
-	typedef ::uint64_t            uint64_t;
-#else
-	typedef unsigned char         uint8_t;
-	typedef unsigned short        uint16_t;
-	typedef unsigned int          uint32_t;
-	typedef unsigned long long    uint64_t;
-#endif
-
-	enum {
-		DO_ENDIAN_SWAP = 1,
-
-		// always useful to define "shift count" (SC) or "Bit index" for bit parameters
-		REAL_PARAM_SC = 1,    REAL_PARAM  = 1 << REAL_PARAM_SC,
-		REF_PARAM_SC  = 2,    REF_PARAM   = 1 << REF_PARAM_SC,
-	};
-
-	// THIS STRUCTURE LAYOUT IS HARDCODED INTO THE ASSEMBLY.  Unfortunately, that appears to be the
-	// only way to do it.
-	struct CallParams {
-#if ABI
-#if AUTO_RPC_FLOAT_REG_PARAMS
-		// on most platforms, just a bool telling us whether we need any floats.
-		unsigned       numRealParams;
-
-#if AUTO_RPC_CREATE_FLOAT_MAP
-		//
-		// bitmask: bit(n) set indicate parameter n is a float, not an int.
-		//
-		unsigned       realMap;
-#endif
-
-		// N.B. these may not have type HardwareReal - they're not promoted or converted.
-#if AUTO_RPC_ALLOC_SEPARATE_FLOATS
-		HardwareReal   realParams[ AUTO_RPC_FLOAT_REG_PARAMS ];
-#endif
-
-#endif // AUTO_RPC_FLOAT_REG_PARAMS
-
-		unsigned       numIntParams;
-#if !AUTO_RPC_ALLOC_SEPARATE_FLOATS && AUTO_RPC_FLOAT_REG_PARAMS && AUTO_RPC_CREATE_FLOAT_MAP
-		union {
-			HardwareReal realParams[ AUTO_RPC_FLOAT_REG_PARAMS ];
-#endif
-			NaturalWord  intParams[ ( AUTO_RPC_MAX_PARAMS > AUTO_RPC_INT_REG_PARAMS ? AUTO_RPC_MAX_PARAMS : AUTO_RPC_INT_REG_PARAMS ) + STACK_PADDING ];
-
-#if !AUTO_RPC_ALLOC_SEPARATE_FLOATS && AUTO_RPC_FLOAT_REG_PARAMS && AUTO_RPC_CREATE_FLOAT_MAP
-		};
-#endif
-
-		char      refParams[ AUTO_RPC_MAX_PARAMS * REF_ALIGN ];
-#endif // ABI
-	};
-
-	static bool DeserializeParametersAndBuildCall( AutoRPC::CallParams &call, char *in, unsigned int inLength, void *lastParam, void *thisPtr );
-	static bool CallWithStack( AutoRPC::CallParams &callParams, void *functionPtr );
-};
-*/
 
 // defining these externally makes the code a hell of a lot more readable.
 #ifdef USE_VARADIC_CALL
@@ -493,5 +443,325 @@ struct AutoRPC {
 
 
 #endif // AUTO_RPC_ALLOC_SEPARATE_FLOATS
+
+/// \internal 
+/// Writes number of parameters to push on the stack
+void SerializeHeader(char *&out, unsigned int numParams);
+
+/// Builds up a function call and all parameters onto a stack
+/// \param[out] Destination stack, which must be big enough to hold all parameters
+unsigned int BuildStack(char *stack);
+
+/// Builds up a function call and all parameters onto a stack
+/// \param[out] Destination stack, which must be big enough to hold all parameters
+template <class P1>
+unsigned int BuildStack(char *stack, P1 p1,
+	bool es1=true)
+{
+	char *stackPtr = (char*) stack;
+	SerializeHeader(stackPtr, 1);
+	PushHeader(stackPtr, p1, es1);
+	Push( stackPtr, p1, es1 );
+	return (unsigned int)(stackPtr-stack);
+}
+
+/// Builds up a function call and all parameters onto a stack
+/// \param[out] Destination stack, which must be big enough to hold all parameters
+template <class P1, class P2>
+unsigned int BuildStack(char *stack, P1 p1, P2 p2,
+	bool es1=true, bool es2=true)
+{
+	char *stackPtr = (char*) stack;
+	SerializeHeader(stackPtr, 2);
+	PushHeader(stackPtr, p1, es1);
+	PushHeader(stackPtr, p2, es2);
+	Push( stackPtr, p1, es1 );
+	Push( stackPtr, p2, es2 );
+	return (unsigned int)(stackPtr-stack);
+}
+
+/// Builds up a function call and all parameters onto a stack
+/// \param[out] Destination stack, which must be big enough to hold all parameters
+template <class P1, class P2, class P3>
+unsigned int BuildStack(char *stack, P1 p1, P2 p2, P3 p3,
+	bool es1=true, bool es2=true, bool es3=true )
+{
+	char *stackPtr = (char*) stack;
+	SerializeHeader(stackPtr, 3);
+	PushHeader(stackPtr, p1, es1);
+	PushHeader(stackPtr, p2, es2);
+	PushHeader(stackPtr, p3, es3);
+	Push( stackPtr, p1, es1 );
+	Push( stackPtr, p2, es2 );
+	Push( stackPtr, p3, es3 );
+	return (unsigned int)(stackPtr-stack);
+}
+
+/// Builds up a function call and all parameters onto a stack
+/// \param[out] Destination stack, which must be big enough to hold all parameters
+template <class P1, class P2, class P3, class P4>
+unsigned int BuildStack(char *stack, P1 p1, P2 p2, P3 p3, P4 p4,
+	bool es1=true, bool es2=true, bool es3=true, bool es4=true )
+{
+	char *stackPtr = (char*) stack;
+	SerializeHeader(stackPtr, 4);
+	PushHeader(stackPtr, p1, es1);
+	PushHeader(stackPtr, p2, es2);
+	PushHeader(stackPtr, p3, es3);
+	PushHeader(stackPtr, p4, es4);
+	Push( stackPtr, p1, es1 );
+	Push( stackPtr, p2, es2 );
+	Push( stackPtr, p3, es3 );
+	Push( stackPtr, p4, es4 );
+	return (unsigned int)(stackPtr-stack);
+}
+
+/// Builds up a function call and all parameters onto a stack
+/// \param[out] Destination stack, which must be big enough to hold all parameters
+template <class P1, class P2, class P3, class P4, class P5>
+unsigned int BuildStack(char *stack, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5,
+	bool es1=true, bool es2=true, bool es3=true, bool es4=true, bool es5=true )
+{
+	char *stackPtr = (char*) stack;
+	SerializeHeader(stackPtr, 5);
+	PushHeader(stackPtr, p1, es1);
+	PushHeader(stackPtr, p2, es2);
+	PushHeader(stackPtr, p3, es3);
+	PushHeader(stackPtr, p4, es4);
+	PushHeader(stackPtr, p5, es5);
+	Push( stackPtr, p1, es1 );
+	Push( stackPtr, p2, es2 );
+	Push( stackPtr, p3, es3 );
+	Push( stackPtr, p4, es4 );
+	Push( stackPtr, p5, es5 );
+	return (unsigned int)(stackPtr-stack);
+}
+
+/// Builds up a function call and all parameters onto a stack
+/// \param[out] Destination stack, which must be big enough to hold all parameters
+template <class P1, class P2, class P3, class P4, class P5, class P6>
+unsigned int BuildStack(char *stack, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6,
+	bool es1=true, bool es2=true, bool es3=true, bool es4=true, bool es5=true, bool es6=true )
+{
+	char *stackPtr = (char*) stack;
+	SerializeHeader(stackPtr, 6);
+	PushHeader(stackPtr, p1, es1);
+	PushHeader(stackPtr, p2, es2);
+	PushHeader(stackPtr, p3, es3);
+	PushHeader(stackPtr, p4, es4);
+	PushHeader(stackPtr, p5, es5);
+	PushHeader(stackPtr, p6, es6);
+	Push( stackPtr, p1, es1 );
+	Push( stackPtr, p2, es2 );
+	Push( stackPtr, p3, es3 );
+	Push( stackPtr, p4, es4 );
+	Push( stackPtr, p5, es5 );
+	Push( stackPtr, p6, es6 );
+	return (unsigned int)(stackPtr-stack);
+}
+
+/// Builds up a function call and all parameters onto a stack
+/// \param[out] Destination stack, which must be big enough to hold all parameters
+template <class P1, class P2, class P3, class P4, class P5, class P6, class P7>
+unsigned int BuildStack(char *stack, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7,
+	bool es1=true, bool es2=true, bool es3=true, bool es4=true, bool es5=true, bool es6=true, bool es7=true )
+{
+	char *stackPtr = (char*) stack;
+	SerializeHeader(stackPtr, 7);
+	PushHeader(stackPtr, p1, es1);
+	PushHeader(stackPtr, p2, es2);
+	PushHeader(stackPtr, p3, es3);
+	PushHeader(stackPtr, p4, es4);
+	PushHeader(stackPtr, p5, es5);
+	PushHeader(stackPtr, p6, es6);
+	PushHeader(stackPtr, p7, es7);
+	Push( stackPtr, p1, es1 );
+	Push( stackPtr, p2, es2 );
+	Push( stackPtr, p3, es3 );
+	Push( stackPtr, p4, es4 );
+	Push( stackPtr, p5, es5 );
+	Push( stackPtr, p6, es6 );
+	Push( stackPtr, p7, es7 );
+	return (unsigned int)(stackPtr-stack);
+}
+
+/// Builds up a function call and all parameters onto a stack
+/// \param[out] Destination stack, which must be big enough to hold all parameters
+template <class P1, class P2, class P3, class P4, class P5, class P6, class P7, class P8>
+unsigned int BuildStack(char *stack, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8,
+	bool es1=true, bool es2=true, bool es3=true, bool es4=true, bool es5=true, bool es6=true, bool es7=true, bool es8=true )
+{
+	char *stackPtr = (char*) stack;
+	SerializeHeader(stackPtr, 8);
+	PushHeader(stackPtr, p1, es1);
+	PushHeader(stackPtr, p2, es2);
+	PushHeader(stackPtr, p3, es3);
+	PushHeader(stackPtr, p4, es4);
+	PushHeader(stackPtr, p5, es5);
+	PushHeader(stackPtr, p6, es6);
+	PushHeader(stackPtr, p7, es7);
+	PushHeader(stackPtr, p8, es8);
+	Push( stackPtr, p1, es1 );
+	Push( stackPtr, p2, es2 );
+	Push( stackPtr, p3, es3 );
+	Push( stackPtr, p4, es4 );
+	Push( stackPtr, p5, es5 );
+	Push( stackPtr, p6, es6 );
+	Push( stackPtr, p7, es7 );
+	Push( stackPtr, p8, es8 );
+	return (unsigned int)(stackPtr-stack);
+}
+
+/// \internal
+template <class item>
+void Push( char*& p, item const i, bool doEndianSwap ) {
+	memcpy( (void*)p, (void*)&i, sizeof( i ) );
+	if (doEndianSwap && RakNet::BitStream::DoEndianSwap())
+		RakNet::BitStream::ReverseBytesInPlace((unsigned char*) p,sizeof( i ));
+	p += sizeof( i );
+}
+
+/// \internal
+template <class item>
+void Push( char*& p, item*const i, bool doEndianSwap) {
+	memcpy( (void*)p, (void*)i, sizeof( *i ) );
+	if (doEndianSwap && RakNet::BitStream::DoEndianSwap())
+		RakNet::BitStream::ReverseBytesInPlace((unsigned char*) p,sizeof( i ));
+	p += sizeof( *i );
+}
+
+/// \internal
+template <class item>
+void Push( char*& p, item const*const i, bool doEndianSwap) {
+	memcpy( (void*)p, (void*)i, sizeof( *i ) );
+	if (doEndianSwap && RakNet::BitStream::DoEndianSwap())
+		RakNet::BitStream::ReverseBytesInPlace((unsigned char*) p,sizeof( i ));
+	p += sizeof( *i );
+}
+
+/// \internal
+void Push( char*& p, char*const i, bool doEndianSwap);
+
+/// \internal
+void Push( char*& p, const char*const i, bool doEndianSwap );
+
+// THIS STRUCTURE LAYOUT IS HARDCODED INTO THE ASSEMBLY.  Unfortunately, that appears to be the
+// only way to do it.
+struct CallParams {
+#if AUTO_RPC_ABI
+#if AUTO_RPC_FLOAT_REG_PARAMS
+	// on most platforms, just a bool telling us whether we need any floats.
+	unsigned       numRealParams;
+
+#if AUTO_RPC_CREATE_FLOAT_MAP
+	//
+	// bitmask: bit(n) set indicate parameter n is a float, not an int.
+	//
+	unsigned       realMap;
+#endif
+
+	// N.B. these may not have type HardwareReal - they're not promoted or converted.
+#if AUTO_RPC_ALLOC_SEPARATE_FLOATS
+	HardwareReal   realParams[ AUTO_RPC_FLOAT_REG_PARAMS ];
+#endif
+
+#endif // AUTO_RPC_FLOAT_REG_PARAMS
+
+	unsigned       numIntParams;
+#if !AUTO_RPC_ALLOC_SEPARATE_FLOATS && AUTO_RPC_FLOAT_REG_PARAMS && AUTO_RPC_CREATE_FLOAT_MAP
+	union {
+		HardwareReal realParams[ AUTO_RPC_FLOAT_REG_PARAMS ];
+#endif
+		NaturalWord  intParams[ ( AUTO_RPC_MAX_PARAMS > AUTO_RPC_INT_REG_PARAMS ? AUTO_RPC_MAX_PARAMS : AUTO_RPC_INT_REG_PARAMS ) + AUTO_RPC_STACK_PADDING ];
+
+#if !AUTO_RPC_ALLOC_SEPARATE_FLOATS && AUTO_RPC_FLOAT_REG_PARAMS && AUTO_RPC_CREATE_FLOAT_MAP
+	};
+#endif
+
+	char      refParams[ AUTO_RPC_MAX_PARAMS * AUTO_RPC_REF_ALIGN ];
+#endif // AUTO_RPC_ABI
+};
+
+/// Given a stack, the length of the stack, a possible last parameter, and a possible this pointer, build a call to a C or C++ function
+bool DeserializeParametersAndBuildCall(
+	CallParams &call,
+	char *in, unsigned int inLength,
+	void *lastParam, void *thisPtr);
+
+// Given the output of DeserializeParametersAndBuildCall, actually call a function
+bool CallWithStack( CallParams& call, void *functionPtr );
+
+/// \internal
+/// functions to return the size of the item.
+template <class item>
+size_t D_size( item const ) { return sizeof( item ); }
+
+/// \internal
+/// functions to return the size of the item.
+template <class item>
+size_t D_size( item const*const ) { return sizeof( item ); }
+
+/// \internal
+/// functions to return the size of the item.
+template <class item>
+size_t D_size( item*const ) { return sizeof( item ); }
+
+/// \internal
+size_t D_size( char*const str );
+/// \internal
+size_t D_size( char const*const str );
+
+/// \internal
+enum {
+	// to maintain binary compatibility with a historical decision, bit 1 is not used
+	// in defining the "well known param" types
+	PARAM_TYPE_MASK = 0x5,
+	INT_PARAM   = 0,  // pass by value an integer or structure composed of integers.
+	REAL_PARAM  = 1,  // pass by value a SINGLE floating point parameter.
+	REF_PARAM   = 4,  // pass a pointer or reference to data which must be aligned.
+	STR_PARAM   = 5,  // pass a pointer to this data, which need not be unaligned;
+	// but MUST be null terminated.
+	// OBJECT_PARAM = 8, // TODO: pass by value an object, object id as first uint32_t of serialized data?
+	// OBJECT_REF_PARAM = 9, // TODO: pass by reference an object, object id as first uint32_t of serialized data?
+	// SC == "Shift count" (Bit index); which is always useful.
+	ENDIAN_SWAP_SC = 1,   DO_ENDIAN_SWAP = 1 << ENDIAN_SWAP_SC,
+
+	RESERVED_BITS = 0xf8,
+};
+
+/// \internal
+template <class item>
+unsigned D_type( item const )         { return INT_PARAM; }
+
+/// \internal
+template <class item>
+unsigned D_type( item const*const )   { return REF_PARAM; }
+
+/// \internal
+template <class item>
+unsigned D_type( item*const )         { return REF_PARAM; }
+
+/// \internal
+unsigned D_type( const char*const );
+/// \internal
+unsigned D_type( char*const );
+
+/// \internal
+unsigned D_type( float );
+/// \internal
+unsigned D_type( double );
+/// \internal
+unsigned D_type( long double );
+
+/// \internal
+template <class item>
+void PushHeader( char*& p, item const i, bool endianSwap ) {
+	unsigned int   s = (unsigned int) D_size( i );
+	unsigned char  f = D_type( i ) | ( ((int) endianSwap) << ENDIAN_SWAP_SC );
+	Push( p, s, endianSwap );
+	Push( p, f, false );
+}
+
+}
 
 #endif

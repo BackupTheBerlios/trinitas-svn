@@ -2,6 +2,7 @@
 #define __FILE_LIST_TRANSFER_CALLBACK_INTERFACE_H
 
 #include "RakMemoryOverride.h"
+#include "FileListNodeContext.h"
 
 #ifdef _MSC_VER
 #pragma warning( push )
@@ -10,7 +11,7 @@
 /// \brief Used by FileListTransfer plugin as a callback for when we get a file.
 /// You get the last file when fileIndex==setCount
 /// \sa FileListTransfer
-class FileListTransferCBInterface : public RakNet::RakMemoryOverride
+class FileListTransferCBInterface
 {
 public:
 	struct OnFileStruct
@@ -45,7 +46,7 @@ public:
 
 		/// User data passed to one of the functions in the FileList class.
 		/// However, on error, this is instead changed to one of the enumerations in the PatchContext structure.
-		unsigned char context;
+		FileListNodeContext context;
 	};
 
 	FileListTransferCBInterface() {}
@@ -59,11 +60,17 @@ public:
 	/// Got part of a big file.
 	/// You can get these notifications by calling RakPeer::SetSplitMessageProgressInterval
 	/// Otherwise you will only get complete files.
-	virtual void OnFileProgress(OnFileStruct *onFileStruct,unsigned int partCount,unsigned int partTotal,unsigned int partLength) {
+	/// \param[in] onFileStruct General information about this file, such as the filename and the first \a partLength bytes. You do NOT need to save this data yourself. The complete file will arrive normally.
+	/// \param[in] partCount The zero based index into partTotal. The percentage complete done of this file is 100 * (partCount+1)/partTotal
+	/// \param[in] partTotal The total number of parts this file was split into. Each part will be roughly the MTU size, minus the UDP header and RakNet headers
+	/// \param[in] partLength How many bytes long firstDataChunk is
+	/// \param[in] firstDataChunk The first \a partLength of the final file. If you store identifying information about the file in the first \a partLength bytes, you can read them while the download is taking place. If this hasn't arrived yet, firstDataChunk will be 0
+	virtual void OnFileProgress(OnFileStruct *onFileStruct,unsigned int partCount,unsigned int partTotal,unsigned int partLength, char *firstDataChunk) {
 		(void) onFileStruct;
 		(void) partCount;
 		(void) partTotal;
 		(void) partLength;
+		(void) firstDataChunk;
 	}
 
 	/// Called while the handler is active by FileListTransfer

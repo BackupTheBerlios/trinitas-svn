@@ -43,13 +43,15 @@ typedef RakNetTime RemoteSystemTimeType;
 
 /// Holds a user message, and related information
 /// Don't use a constructor or destructor, due to the memory pool I am using
-struct InternalPacket : public RakNet::RakMemoryOverride//<InternalPacket>
+struct InternalPacket//<InternalPacket>
 {
 	///True if this is an acknowledgment packet
 	//bool isAcknowledgement;
 	
-	///A unique numerical identifier given to this user message
+	/// A unique numerical identifier given to this user message. Used to identify messages on the network
 	MessageNumberType messageNumber;
+	/// Identifies the order in which this number was sent. Used locally
+	MessageNumberType messageInternalOrder;
 	/// Has this message number been assigned yet?  We don't assign until the message is actually sent.
 	/// This fixes a bug where pre-determining message numbers and then sending a message on a different channel creates a huge gap.
 	/// This causes performance problems and causes those messages to timeout.
@@ -83,6 +85,8 @@ struct InternalPacket : public RakNet::RakMemoryOverride//<InternalPacket>
 	BitSize_t dataBitLength;
 	///Buffer is a pointer to the actual data, assuming this packet has data at all
 	unsigned char *data;
+	// How many attempts we made at sending this message
+	unsigned char timesSent;
 };
 
 #endif

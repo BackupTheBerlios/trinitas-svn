@@ -1,3 +1,6 @@
+#ifndef __RAKNET_DEFINES_H
+#define __RAKNET_DEFINES_H
+
 /// Define __GET_TIME_64BIT to have RakNetTime use a 64, rather than 32 bit value.  A 32 bit value will overflow after about 5 weeks.
 /// However, this doubles the bandwidth use for sending times, so don't do it unless you have a reason to.
 /// Disabled by default.
@@ -27,7 +30,8 @@
 #define USE_WAIT_FOR_MULTIPLE_EVENTS
 
 /// Uncomment to use RakMemoryOverride for custom memory tracking
-// #define _USE_RAK_MEMORY_OVERRIDE
+/// See RakMemoryOverride.h. 
+#define _USE_RAK_MEMORY_OVERRIDE
 
 /// If defined, RakNet will automatically try to determine available bandwidth and buffer accordingly (recommended)
 /// If commented out, you will probably not be able to send large files and will get increased packetloss. However, responsiveness for the first 10 seconds or so will be improved.
@@ -38,3 +42,22 @@
 /// Note that OpenSSL carries its own license restrictions that you should be aware of. If you don't agree, don't enable this define
 /// This also requires that you enable header search paths to DependentExtensions\openssl-0.9.8g
 /// #define OPEN_SSL_CLIENT_SUPPORT
+
+/// Threshold at which to do a malloc / free rather than pushing data onto a fixed stack for the bitstream class
+/// Arbitrary size, just picking something likely to be larger than most packets
+#define BITSTREAM_STACK_ALLOCATION_SIZE 1024
+
+// Redefine if you want to disable or change the target for debug RAKNET_DEBUG_PRINTF
+#define RAKNET_DEBUG_PRINTF printf
+
+// 16 * 4 * 8 = 512 bit. Used for InitializeSecurity()
+#define RAKNET_RSA_FACTOR_LIMBS 16
+
+// Enable to support peer to peer with NetworkIDs. Disable to save memory if doing client/server only
+#define NETWORK_ID_SUPPORTS_PEER_TO_PEER
+
+// O(1) instead of O(log2n) but takes more memory if less than 1/3 of the mappings are used.
+// Only supported if NETWORK_ID_SUPPORTS_PEER_TO_PEER is commented out
+// #define NETWORK_ID_USE_PTR_TABLE
+
+#endif

@@ -41,7 +41,10 @@ namespace RakNet
 /// Maximum amount of data that can be passed on the stack in a function call
 #define ARPC_MAX_STACK_SIZE 65536
 
+#if defined (_WIN32)
 /// Easier way to get a pointer to a function member of a C++ class
+/// \note Recommended you use ARPC_REGISTER_CPP_FUNCTION0 to ARPC_REGISTER_CPP_FUNCTION9 (below)
+/// \note ARPC_REGISTER_CPP_FUNCTION is not Linux compatible, and cannot validate the number of parameters is correctly passed.
 /// \param[in] autoRPCInstance A pointer to an instance of AutoRPC
 /// \param[in] _IDENTIFIER_ C string identifier to use on the remote system to call the function
 /// \param[in] _RETURN_ Return value of the function
@@ -52,15 +55,77 @@ namespace RakNet
 { \
 union \
 { \
-	_RETURN_ (__cdecl _CLASS_::*__memberFunctionPtr)_PARAMS_; \
+	_RETURN_ (AUTO_RPC_CALLSPEC _CLASS_::*__memberFunctionPtr)_PARAMS_; \
 	void* __voidFunc; \
 }; \
 	__memberFunctionPtr=&_CLASS_::_FUNCTION_; \
-	(autoRPCInstance)->RegisterFunction(_IDENTIFIER_, __voidFunc, true); \
+	(autoRPCInstance)->RegisterFunction(_IDENTIFIER_, __voidFunc, true, -1); \
 }
+
+/// \internal Used by ARPC_REGISTER_CPP_FUNCTION0 to ARPC_REGISTER_CPP_FUNCTION9
+#define ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS_, _PARAM_COUNT_) \
+	{ \
+	union \
+	{ \
+	_RETURN_ (AUTO_RPC_CALLSPEC _CLASS_::*__memberFunctionPtr)_PARAMS_; \
+	void* __voidFunc; \
+}; \
+	__memberFunctionPtr=&_CLASS_::_FUNCTION_; \
+	(autoRPCInstance)->RegisterFunction(_IDENTIFIER_, __voidFunc, true, _PARAM_COUNT_); \
+}
+
+/// Same as ARPC_REGISTER_CPP_FUNCTION, but specifies how many parameters the function has
+#define ARPC_REGISTER_CPP_FUNCTION0(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_) (autoRPCInstance)->RegisterFunction(_IDENTIFIER_, __voidFunc, true, 0);
+#define ARPC_REGISTER_CPP_FUNCTION1(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_) ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance,_IDENTIFIER_,_RETURN_,_CLASS_,_FUNCTION_,(_PARAMS1_), 0)
+#define ARPC_REGISTER_CPP_FUNCTION2(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_) ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance,_IDENTIFIER_,_RETURN_,_CLASS_,_FUNCTION_,(_PARAMS1_,_PARAMS2_), 1)
+#define ARPC_REGISTER_CPP_FUNCTION3(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_) ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance,_IDENTIFIER_,_RETURN_,_CLASS_,_FUNCTION_,(_PARAMS1_,_PARAMS2_,_PARAMS3_), 2)
+#define ARPC_REGISTER_CPP_FUNCTION4(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_) ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance,_IDENTIFIER_,_RETURN_,_CLASS_,_FUNCTION_,(_PARAMS1_,_PARAMS2_,_PARAMS3_,_PARAMS4_), 3)
+#define ARPC_REGISTER_CPP_FUNCTION5(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_) ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance,_IDENTIFIER_,_RETURN_,_CLASS_,_FUNCTION_,(_PARAMS1_,_PARAMS2_,_PARAMS3_,_PARAMS4_,_PARAMS5_), 4)
+#define ARPC_REGISTER_CPP_FUNCTION6(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_) ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance,_IDENTIFIER_,_RETURN_,_CLASS_,_FUNCTION_,(_PARAMS1_,_PARAMS2_,_PARAMS3_,_PARAMS4_,_PARAMS5_,_PARAMS6_), 5)
+#define ARPC_REGISTER_CPP_FUNCTION7(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_, _PARAMS7_) ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance,_IDENTIFIER_,_RETURN_,_CLASS_,_FUNCTION_,(_PARAMS1_,_PARAMS2_,_PARAMS3_,_PARAMS4_,_PARAMS5_,_PARAMS6_,_PARAMS7_), 6)
+#define ARPC_REGISTER_CPP_FUNCTION8(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_, _PARAMS7_, _PARAMS8_) ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance,_IDENTIFIER_,_RETURN_,_CLASS_,_FUNCTION_,(_PARAMS1_,_PARAMS2_,_PARAMS3_,_PARAMS4_,_PARAMS5_,_PARAMS6_,_PARAMS7_,_PARAMS8_), 7)
+#define ARPC_REGISTER_CPP_FUNCTION9(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_, _PARAMS7_, _PARAMS8_, _PARAMS9_) ARPC_REGISTER_CPP_FUNCTIONX(autoRPCInstance,_IDENTIFIER_,_RETURN_,_CLASS_,_FUNCTION_,(_PARAMS1_,_PARAMS2_,_PARAMS3_,_PARAMS4_,_PARAMS5_,_PARAMS6_,_PARAMS7_,_PARAMS8_,_PARAMS9_), 8)
+
+#else
+
+#define ARPC_REGISTER_CPP_FUNCTION0(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*)) &_CLASS_::_FUNCTION_, true, 0 );
+
+#define ARPC_REGISTER_CPP_FUNCTION1(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*, _PARAMS1_ )) &_CLASS_::_FUNCTION_, true, 0 );
+
+#define ARPC_REGISTER_CPP_FUNCTION2(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*, _PARAMS1_, _PARAMS2_ )) &_CLASS_::_FUNCTION_, true, 1 );
+
+#define ARPC_REGISTER_CPP_FUNCTION3(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*, _PARAMS1_, _PARAMS2_, _PARAMS3_ )) &_CLASS_::_FUNCTION_, true, 2 );
+
+#define ARPC_REGISTER_CPP_FUNCTION4(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_ )) &_CLASS_::_FUNCTION_, true, 3 );
+
+#define ARPC_REGISTER_CPP_FUNCTION5(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_ )) &_CLASS_::_FUNCTION_, true, 4 );
+
+#define ARPC_REGISTER_CPP_FUNCTION6(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_ )) &_CLASS_::_FUNCTION_, true, 5 );
+
+#define ARPC_REGISTER_CPP_FUNCTION7(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_, _PARAMS7_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_, _PARAMS7_ )) &_CLASS_::_FUNCTION_, true, 6 );
+
+#define ARPC_REGISTER_CPP_FUNCTION8(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_, _PARAMS7_, _PARAMS8_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_, _PARAMS7_, _PARAMS8_ )) &_CLASS_::_FUNCTION_, true, 7 );
+
+#define ARPC_REGISTER_CPP_FUNCTION9(autoRPCInstance, _IDENTIFIER_, _RETURN_, _CLASS_, _FUNCTION_, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_, _PARAMS7_, _PARAMS8_, _PARAMS9_) \
+	(autoRPCInstance)->RegisterFunction((_IDENTIFIER_), (void*)(_RETURN_ (*) (_CLASS_*, _PARAMS1_, _PARAMS2_, _PARAMS3_, _PARAMS4_, _PARAMS5_, _PARAMS6_, _PARAMS7_, _PARAMS8_, _PARAMS9_ )) &_CLASS_::_FUNCTION_, true, 8 );
+
+#endif
 
 /// Error codes returned by a remote system as to why an RPC function call cannot execute
 /// Follows packet ID ID_RPC_REMOTE_ERROR
+/// Name of the function will be appended, if available. Read as follows:
+/// char outputBuff[256];
+/// stringCompressor->DecodeString(outputBuff,256,&RakNet::BitStream(p->data+sizeof(MessageID)+1,p->length-sizeof(MessageID)-1,false),0);
+/// printf("Function: %s\n", outputBuff);
 enum RPCErrorCodes
 {
 	/// AutoRPC::SetNetworkIDManager() was not called, and it must be called to call a C++ object member
@@ -91,6 +156,9 @@ enum RPCErrorCodes
 
 	/// Internal error, formatting error with how the stack was serialized
 	RPC_ERROR_STACK_DESERIALIZATION_FAILED,
+
+	/// The \a parameterCount parameter passed to RegisterFunction() on this system does not match the \a parameterCount parameter passed to SendCall() on the remote system.
+	RPC_ERROR_INCORRECT_NUMBER_OF_PARAMETERS,
 };
 
 /// The AutoRPC plugin allows you to call remote functions as if they were local functions, using the standard function call syntax
@@ -118,8 +186,9 @@ public:
 	/// \param[in] uniqueIdentifier String identifying the function. Recommended that this is the name of the function
 	/// \param[in] functionPtr Pointer to the function. For C, just pass the name of the function. For C++, use ARPC_REGISTER_CPP_FUNCTION
 	/// \param[in] isObjectMember false if a C function. True if a member function of an object (C++)
+	/// \param[in] parameterCount Optional parameter to tell the system how many parameters this function has. If specified, and the wrong number of parameters are called by the remote system, the call is rejected. -1 indicates undefined
 	/// \return True on success, false on uniqueIdentifier already used
-	bool RegisterFunction(const char *uniqueIdentifier, void *functionPtr, bool isObjectMember);
+	bool RegisterFunction(const char *uniqueIdentifier, void *functionPtr, bool isObjectMember, char parameterCount=-1);
 
 	/// Unregisters a function pointer to be callable given an identifier for the pointer
 	/// \note This is not safe to call while connected
@@ -127,7 +196,7 @@ public:
 	/// \param[in] isObjectMember false if a C function. True if a member function of an object (C++)
 	/// \return True on success, false on function was not previously or is not currently registered.
 	bool UnregisterFunction(const char *uniqueIdentifier, bool isObjectMember);
-	
+
 	/// Send or stop sending a timestamp with all following calls to Call()
 	/// Use GetLastSenderTimestamp() to read the timestamp.
 	/// \param[in] timeStamp Non-zero to pass this timestamp using the ID_TIMESTAMP system. 0 to clear passing a timestamp.
@@ -186,202 +255,320 @@ public:
 	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
 	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
 	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
 	bool Call(const char *uniqueIdentifier){
 		char stack[ARPC_MAX_STACK_SIZE];
-		char *stackPtr = (char*) stack;
-		SerializeHeader(stackPtr, 0);
-		return SendCall(uniqueIdentifier, stack, (unsigned int)(stackPtr-stack));
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 0);
 	}
 
 	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
 	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
 	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
 	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
-	/// \param[in] es1 Endian swap parameter 1..x if necessary. Requires __BITSTREAM_NATIVE_END is undefined in RakNetDefines.h
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
 	template <class P1>
-	bool Call(const char *uniqueIdentifier, P1 p1,
-		bool es1=true)	{
+	bool Call(const char *uniqueIdentifier, P1 p1)	{
 		char stack[ARPC_MAX_STACK_SIZE];
-		char *stackPtr = (char*) stack;
-		SerializeHeader(stackPtr, 1);
-		PushHeader(stackPtr, p1, es1);
-		Push( stackPtr, p1 );
-		return SendCall(uniqueIdentifier, stack, (unsigned int)(stackPtr-stack));
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, true);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 1);
 	}
 
-	
 	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
 	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
 	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
 	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
-	/// \param[in] es1 Endian swap parameter 1..x if necessary. Requires __BITSTREAM_NATIVE_END is undefined in RakNetDefines.h
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
 	template <class P1, class P2>
-	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2,
-		bool es1=true, bool es2=true )	{
+	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2)	{
 			char stack[ARPC_MAX_STACK_SIZE];
-			char *stackPtr = (char*) stack;
-			SerializeHeader(stackPtr, 2);
-			PushHeader(stackPtr, p1, es1);
-			PushHeader(stackPtr, p2, es2);
-			Push( stackPtr, p1 );
-			Push( stackPtr, p2 );
-			return SendCall(uniqueIdentifier, stack, (unsigned int)(stackPtr-stack));
+			unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, true, true);
+			return SendCall(uniqueIdentifier, stack, bytesOnStack, 2);
 	}
 
 	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
 	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
 	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
 	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
-	/// \param[in] es1 Endian swap parameter 1..x if necessary. Requires __BITSTREAM_NATIVE_END is undefined in RakNetDefines.h
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
 	template <class P1, class P2, class P3>
-	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3,
-		bool es1=true, bool es2=true, bool es3=true )	{
+	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3 )	{
 			char stack[ARPC_MAX_STACK_SIZE];
-			char *stackPtr = (char*) stack;
-			SerializeHeader(stackPtr, 3);
-			PushHeader(stackPtr, p1, es1);
-			PushHeader(stackPtr, p2, es2);
-			PushHeader(stackPtr, p3, es3);
-			Push( stackPtr, p1 );
-			Push( stackPtr, p2 );
-			Push( stackPtr, p3 );
-			return SendCall(uniqueIdentifier, stack, (unsigned int)(stackPtr-stack));
+			unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, true, true, true);
+			return SendCall(uniqueIdentifier, stack, bytesOnStack, 3);
 	}
 
 	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
 	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
 	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
 	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
-	/// \param[in] es1 Endian swap parameter 1..x if necessary. Requires __BITSTREAM_NATIVE_END is undefined in RakNetDefines.h
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
 	template <class P1, class P2, class P3, class P4>
-	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4,
-		bool es1=true, bool es2=true, bool es3=true, bool es4=true )	{
+	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4 )	{
 			char stack[ARPC_MAX_STACK_SIZE];
-			char *stackPtr = (char*) stack;
-			SerializeHeader(stackPtr, 4);
-			PushHeader(stackPtr, p1, es1);
-			PushHeader(stackPtr, p2, es2);
-			PushHeader(stackPtr, p3, es3);
-			PushHeader(stackPtr, p4, es4);
-			Push( stackPtr, p1 );
-			Push( stackPtr, p2 );
-			Push( stackPtr, p3 );
-			Push( stackPtr, p4 );
-			return SendCall(uniqueIdentifier, stack, (unsigned int)(stackPtr-stack));
+			unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, true, true, true, true);
+			return SendCall(uniqueIdentifier, stack, bytesOnStack, 4);
 	}
 
 	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
 	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
 	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
 	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
-	/// \param[in] es1 Endian swap parameter 1..x if necessary. Requires __BITSTREAM_NATIVE_END is undefined in RakNetDefines.h
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
 	template <class P1, class P2, class P3, class P4, class P5>
-	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5,
-		bool es1=true, bool es2=true, bool es3=true, bool es4=true, bool es5=true )	{
+	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 )	{
 			char stack[ARPC_MAX_STACK_SIZE];
-			char *stackPtr = (char*) stack;
-			SerializeHeader(stackPtr, 5);
-			PushHeader(stackPtr, p1, es1);
-			PushHeader(stackPtr, p2, es2);
-			PushHeader(stackPtr, p3, es3);
-			PushHeader(stackPtr, p4, es4);
-			PushHeader(stackPtr, p5, es5);
-			Push( stackPtr, p1 );
-			Push( stackPtr, p2 );
-			Push( stackPtr, p3 );
-			Push( stackPtr, p4 );
-			Push( stackPtr, p5 );
-			return SendCall(uniqueIdentifier, stack, (unsigned int)(stackPtr-stack));
+			unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, p5, true, true, true, true, true);
+			return SendCall(uniqueIdentifier, stack, bytesOnStack, 5);
 	}
 
 	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
 	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
 	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
 	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
-	/// \param[in] es1 Endian swap parameter 1..x if necessary. Requires __BITSTREAM_NATIVE_END is undefined in RakNetDefines.h
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
 	template <class P1, class P2, class P3, class P4, class P5, class P6>
-	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6,
-		bool es1=true, bool es2=true, bool es3=true, bool es4=true, bool es5=true, bool es6=true )	{
+	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 )	{
 			char stack[ARPC_MAX_STACK_SIZE];
-			char *stackPtr = (char*) stack;
-			SerializeHeader(stackPtr, 6);
-			PushHeader(stackPtr, p1, es1);
-			PushHeader(stackPtr, p2, es2);
-			PushHeader(stackPtr, p3, es3);
-			PushHeader(stackPtr, p4, es4);
-			PushHeader(stackPtr, p5, es5);
-			PushHeader(stackPtr, p6, es6);
-			Push( stackPtr, p1 );
-			Push( stackPtr, p2 );
-			Push( stackPtr, p3 );
-			Push( stackPtr, p4 );
-			Push( stackPtr, p5 );
-			Push( stackPtr, p6 );
-			return SendCall(uniqueIdentifier, stack, (unsigned int)(stackPtr-stack));
+			unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, p5, p6, true, true, true, true, true, true);
+			return SendCall(uniqueIdentifier, stack, bytesOnStack, 6);
 	}
 
 	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
 	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
 	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
 	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
-	/// \param[in] es1 Endian swap parameter 1..x if necessary. Requires __BITSTREAM_NATIVE_END is undefined in RakNetDefines.h
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
 	template <class P1, class P2, class P3, class P4, class P5, class P6, class P7>
-	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7,
-		bool es1=true, bool es2=true, bool es3=true, bool es4=true, bool es5=true, bool es6=true, bool es7=true )	{
+	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 )	{
 			char stack[ARPC_MAX_STACK_SIZE];
-			char *stackPtr = (char*) stack;
-			SerializeHeader(stackPtr, 7);
-			PushHeader(stackPtr, p1, es1);
-			PushHeader(stackPtr, p2, es2);
-			PushHeader(stackPtr, p3, es3);
-			PushHeader(stackPtr, p4, es4);
-			PushHeader(stackPtr, p5, es5);
-			PushHeader(stackPtr, p6, es6);
-			PushHeader(stackPtr, p7, es7);
-			Push( stackPtr, p1 );
-			Push( stackPtr, p2 );
-			Push( stackPtr, p3 );
-			Push( stackPtr, p4 );
-			Push( stackPtr, p5 );
-			Push( stackPtr, p6 );
-			Push( stackPtr, p7 );
-			return SendCall(uniqueIdentifier, stack, (unsigned int)(stackPtr-stack));
+			unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, p5, p6, p7, true, true, true, true, true, true, true);
+			return SendCall(uniqueIdentifier, stack, bytesOnStack, 7);
 	}
 
 	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
 	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
 	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
 	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
-	/// \param[in] es1 Endian swap parameter 1..x if necessary. Requires __BITSTREAM_NATIVE_END is undefined in RakNetDefines.h
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
 	template <class P1, class P2, class P3, class P4, class P5, class P6, class P7, class P8>
-	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8,
-		bool es1=true, bool es2=true, bool es3=true, bool es4=true, bool es5=true, bool es6=true, bool es7=true, bool es8=true ) {
+	bool Call(const char *uniqueIdentifier, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 ) {
 			char stack[ARPC_MAX_STACK_SIZE];
-			char *stackPtr = (char*) stack;
-			SerializeHeader(stackPtr, 8);
-			PushHeader(stackPtr, p1, es1);
-			PushHeader(stackPtr, p2, es2);
-			PushHeader(stackPtr, p3, es3);
-			PushHeader(stackPtr, p4, es4);
-			PushHeader(stackPtr, p5, es5);
-			PushHeader(stackPtr, p6, es6);
-			PushHeader(stackPtr, p7, es7);
-			PushHeader(stackPtr, p8, es8);
-			Push( stackPtr, p1 );
-			Push( stackPtr, p2 );
-			Push( stackPtr, p3 );
-			Push( stackPtr, p4 );
-			Push( stackPtr, p5 );
-			Push( stackPtr, p6 );
-			Push( stackPtr, p7 );
-			Push( stackPtr, p8 );
-			return SendCall(uniqueIdentifier, stack, (unsigned int)(stackPtr-stack));
+			unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, p5, p6, p7, p8, true, true, true, true, true, true, true, true);
+			return SendCall(uniqueIdentifier, stack, bytesOnStack, 8);
 	}
+
+	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
+	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
+	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
+	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
+	/// \param[in] timeStamp See SetTimestamp()
+	/// \param[in] priority See SetSendParams()
+	/// \param[in] reliability See SetSendParams()
+	/// \param[in] orderingChannel See SetSendParams()
+	/// \param[in] systemAddress See SetRecipientAddress()
+	/// \param[in] broadcast See SetRecipientAddress()
+	/// \param[in] networkID See SetRecipientObject()
+	bool CallExplicit(const char *uniqueIdentifier, RakNetTime timeStamp, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, NetworkID networkID){
+		SetTimestamp(timeStamp);
+		SetSendParams(priority, reliability, orderingChannel);
+		SetRecipientAddress(systemAddress, broadcast);
+		SetRecipientObject(networkID);		
+		char stack[ARPC_MAX_STACK_SIZE];
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 0);
+	}
+
+	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
+	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
+	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
+	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
+	/// \param[in] timeStamp See SetTimestamp()
+	/// \param[in] priority See SetSendParams()
+	/// \param[in] reliability See SetSendParams()
+	/// \param[in] orderingChannel See SetSendParams()
+	/// \param[in] systemAddress See SetRecipientAddress()
+	/// \param[in] broadcast See SetRecipientAddress()
+	/// \param[in] networkID See SetRecipientObject()
+	template <class P1>
+	bool CallExplicit(const char *uniqueIdentifier, RakNetTime timeStamp, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, NetworkID networkID, P1 p1)	{
+		SetTimestamp(timeStamp);
+		SetSendParams(priority, reliability, orderingChannel);
+		SetRecipientAddress(systemAddress, broadcast);
+		SetRecipientObject(networkID);
+		char stack[ARPC_MAX_STACK_SIZE];
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, true);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 1);
+	}
+
+	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
+	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
+	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
+	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
+	/// \param[in] timeStamp See SetTimestamp()
+	/// \param[in] priority See SetSendParams()
+	/// \param[in] reliability See SetSendParams()
+	/// \param[in] orderingChannel See SetSendParams()
+	/// \param[in] systemAddress See SetRecipientAddress()
+	/// \param[in] broadcast See SetRecipientAddress()
+	/// \param[in] networkID See SetRecipientObject()
+	template <class P1, class P2>
+	bool CallExplicit(const char *uniqueIdentifier, RakNetTime timeStamp, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, NetworkID networkID, P1 p1, P2 p2)	{
+		SetTimestamp(timeStamp);
+		SetSendParams(priority, reliability, orderingChannel);
+		SetRecipientAddress(systemAddress, broadcast);
+		SetRecipientObject(networkID);
+		char stack[ARPC_MAX_STACK_SIZE];
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, true, true);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 2);
+	}
+
+	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
+	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
+	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
+	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
+	/// \param[in] timeStamp See SetTimestamp()
+	/// \param[in] priority See SetSendParams()
+	/// \param[in] reliability See SetSendParams()
+	/// \param[in] orderingChannel See SetSendParams()
+	/// \param[in] systemAddress See SetRecipientAddress()
+	/// \param[in] broadcast See SetRecipientAddress()
+	/// \param[in] networkID See SetRecipientObject()
+	template <class P1, class P2, class P3>
+	bool CallExplicit(const char *uniqueIdentifier, RakNetTime timeStamp, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, NetworkID networkID, P1 p1, P2 p2, P3 p3 )	{
+		SetTimestamp(timeStamp);
+		SetSendParams(priority, reliability, orderingChannel);
+		SetRecipientAddress(systemAddress, broadcast);
+		SetRecipientObject(networkID);
+		char stack[ARPC_MAX_STACK_SIZE];
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, true, true, true);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 3);
+	}
+
+	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
+	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
+	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
+	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
+	/// \param[in] timeStamp See SetTimestamp()
+	/// \param[in] priority See SetSendParams()
+	/// \param[in] reliability See SetSendParams()
+	/// \param[in] orderingChannel See SetSendParams()
+	/// \param[in] systemAddress See SetRecipientAddress()
+	/// \param[in] broadcast See SetRecipientAddress()
+	/// \param[in] networkID See SetRecipientObject()
+	template <class P1, class P2, class P3, class P4>
+	bool CallExplicit(const char *uniqueIdentifier, RakNetTime timeStamp, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, NetworkID networkID, P1 p1, P2 p2, P3 p3, P4 p4 )	{
+		SetTimestamp(timeStamp);
+		SetSendParams(priority, reliability, orderingChannel);
+		SetRecipientAddress(systemAddress, broadcast);
+		SetRecipientObject(networkID);
+		char stack[ARPC_MAX_STACK_SIZE];
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, true, true, true, true);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 4);
+	}
+
+	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
+	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
+	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
+	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
+	/// \param[in] timeStamp See SetTimestamp()
+	/// \param[in] priority See SetSendParams()
+	/// \param[in] reliability See SetSendParams()
+	/// \param[in] orderingChannel See SetSendParams()
+	/// \param[in] systemAddress See SetRecipientAddress()
+	/// \param[in] broadcast See SetRecipientAddress()
+	/// \param[in] networkID See SetRecipientObject()
+	template <class P1, class P2, class P3, class P4, class P5>
+	bool CallExplicit(const char *uniqueIdentifier, RakNetTime timeStamp, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, NetworkID networkID, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5 )	{
+		SetTimestamp(timeStamp);
+		SetSendParams(priority, reliability, orderingChannel);
+		SetRecipientAddress(systemAddress, broadcast);
+		SetRecipientObject(networkID);
+		char stack[ARPC_MAX_STACK_SIZE];
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, p5, true, true, true, true, true);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 5);
+	}
+
+	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
+	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
+	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
+	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
+	/// \param[in] timeStamp See SetTimestamp()
+	/// \param[in] priority See SetSendParams()
+	/// \param[in] reliability See SetSendParams()
+	/// \param[in] orderingChannel See SetSendParams()
+	/// \param[in] systemAddress See SetRecipientAddress()
+	/// \param[in] broadcast See SetRecipientAddress()
+	/// \param[in] networkID See SetRecipientObject()
+	template <class P1, class P2, class P3, class P4, class P5, class P6>
+	bool CallExplicit(const char *uniqueIdentifier, RakNetTime timeStamp, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, NetworkID networkID, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6 )	{
+		SetTimestamp(timeStamp);
+		SetSendParams(priority, reliability, orderingChannel);
+		SetRecipientAddress(systemAddress, broadcast);
+		SetRecipientObject(networkID);
+		char stack[ARPC_MAX_STACK_SIZE];
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, p5, p6, true, true, true, true, true, true);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 6);
+	}
+
+	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
+	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
+	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
+	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
+	/// \param[in] timeStamp See SetTimestamp()
+	/// \param[in] priority See SetSendParams()
+	/// \param[in] reliability See SetSendParams()
+	/// \param[in] orderingChannel See SetSendParams()
+	/// \param[in] systemAddress See SetRecipientAddress()
+	/// \param[in] broadcast See SetRecipientAddress()
+	/// \param[in] networkID See SetRecipientObject()
+	template <class P1, class P2, class P3, class P4, class P5, class P6, class P7>
+	bool CallExplicit(const char *uniqueIdentifier, RakNetTime timeStamp, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, NetworkID networkID, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7 )	{
+		SetTimestamp(timeStamp);
+		SetSendParams(priority, reliability, orderingChannel);
+		SetRecipientAddress(systemAddress, broadcast);
+		SetRecipientObject(networkID);
+		char stack[ARPC_MAX_STACK_SIZE];
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, p5, p6, p7, true, true, true, true, true, true, true);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 7);
+	}
+
+	/// Calls a remote function, using whatever was last passed to SetTimestamp(), SetSendParams(), SetRecipientAddress(), and SetRecipientObject()
+	/// Passed parameter(s), if any, are passed via memcpy and pushed on the stack for the remote function
+	/// \note This ONLY works with variables that are passable via memcpy! If you need more flexibility, use SetOutgoingExtraData() and GetIncomingExtraData()
+	/// \note The this pointer, for this instance of AutoRPC, is pushed as the last parameter on the stack. See AutoRPCSample.ccp for an example of this
+	/// \param[in] uniqueIdentifier parameter of the same name passed to RegisterFunction() on the remote system
+	/// \param[in] timeStamp See SetTimestamp()
+	/// \param[in] priority See SetSendParams()
+	/// \param[in] reliability See SetSendParams()
+	/// \param[in] orderingChannel See SetSendParams()
+	/// \param[in] systemAddress See SetRecipientAddress()
+	/// \param[in] broadcast See SetRecipientAddress()
+	/// \param[in] networkID See SetRecipientObject()
+	template <class P1, class P2, class P3, class P4, class P5, class P6, class P7, class P8>
+	bool CallExplicit(const char *uniqueIdentifier, RakNetTime timeStamp, PacketPriority priority, PacketReliability reliability, char orderingChannel, SystemAddress systemAddress, bool broadcast, NetworkID networkID, P1 p1, P2 p2, P3 p3, P4 p4, P5 p5, P6 p6, P7 p7, P8 p8 ) {
+		SetTimestamp(timeStamp);
+		SetSendParams(priority, reliability, orderingChannel);
+		SetRecipientAddress(systemAddress, broadcast);
+		SetRecipientObject(networkID);
+		char stack[ARPC_MAX_STACK_SIZE];
+		unsigned int bytesOnStack = GenRPC::BuildStack(stack, p1, p2, p3, p4, p5, p6, p7, p8, true, true, true, true, true, true, true, true);
+		return SendCall(uniqueIdentifier, stack, bytesOnStack, 8);
+	}
+
 
 	// If you need more than 8 parameters, just add it here...
 
 	// ---------------------------- ALL INTERNAL AFTER HERE ----------------------------
-	
+
 	/// \internal
 	/// Identifies an RPC function, by string identifier and if it is a C or C++ function
 	struct RPCIdentifier
@@ -396,6 +583,7 @@ public:
 	{
 		RPCIdentifier identifier;
 		void *functionPtr;
+		char parameterCount;
 	};
 
 	/// \internal
@@ -410,20 +598,8 @@ public:
 	static int RemoteRPCFunctionComp( const RPCIdentifier &key, const RemoteRPCFunction &data );
 
 	/// \internal
-	/// Writes number of parameters to push on the stack
-	static void SerializeHeader(char *&out, unsigned int numParams);
-
-	/// \internal
-	/// Writes size of each paramter to push on the stack, and endian swaps if necessary
-	static void SerializeParamHeader(char *out, unsigned int paramLength, unsigned int *writeOffset, bool IsReal, bool endianSwap);
-
-	/// \internal
-	/// Writes each paramter on the stack with memcpy
-	static void SerializeParamData(char *out, void *paramData, unsigned int paramLength, unsigned int *writeOffset, bool endianSwap);
-
-	/// \internal
 	/// Sends the RPC call, with a given serialized stack
-	bool SendCall(const char *uniqueIdentifier, const char *stack, unsigned int bytesOnStack);
+	bool SendCall(const char *uniqueIdentifier, const char *stack, unsigned int bytesOnStack, char parameterCount);
 
 protected:
 
@@ -434,135 +610,16 @@ protected:
 	virtual PluginReceiveResult OnReceive(RakPeerInterface *peer, Packet *packet);
 	virtual void OnAutoRPCCall(SystemAddress systemAddress, unsigned char *data, unsigned int lengthInBytes);
 	virtual void OnRPCRemoteIndex(SystemAddress systemAddress, unsigned char *data, unsigned int lengthInBytes);
+	virtual void OnRPCUnknownRemoteIndex(SystemAddress systemAddress, unsigned char *data, unsigned int lengthInBytes, RakNetTime timestamp);
 	virtual void OnCloseConnection(RakPeerInterface *peer, SystemAddress systemAddress);
 	virtual void OnShutdown(RakPeerInterface *peer);
 
 	void Clear(void);
 
-	void SendError(SystemAddress target, unsigned char errorCode);
+	void SendError(SystemAddress target, unsigned char errorCode, const char *functionName);
 	unsigned GetLocalFunctionIndex(RPCIdentifier identifier);
 	bool GetRemoteFunctionIndex(SystemAddress systemAddress, RPCIdentifier identifier, unsigned int *outerIndex, unsigned int *innerIndex);
 
-
-	bool IsReal( double )      { return 1; }
-	bool IsReal( float )       { return 1; }
-	bool IsReal( long double ) { return 1; }
-
-	template <class item>
-	bool IsReal(item) { return 0; }
-
-	template <class item>
-	bool IsPtr( item* )        { return 1; }
-
-	template <class item>
-	bool IsPtr( item )         { return 0; }
-
-	bool IsRakString( const RakNet::RakString rakString )         { return 1; }
-
-	template <class item>
-	bool IsRakString( item )         { return 0; }
-
-	template <class item>
-	void Push( char*& p, item const i ) {
-		memcpy( (void*)p, (void*)&i, sizeof( i ) );
-		p += sizeof( i );
-	}
-	template <class item>
-	void Push( char*& p, item*const i ) {
-		memcpy( (void*)p, (void*)i, sizeof( *i ) );
-		p += sizeof( *i );
-	}
-
-	template <class item>
-	void Push( char*& p, item const*const i ) {
-		memcpy( (void*)p, (void*)i, sizeof( *i ) );
-		p += sizeof( *i );
-	}
-
-	void Push( char*& p, const RakString i ) {
-		size_t len = i.GetLength();
-		memcpy( (void*)p, i.C_String(), len );
-		p += len;
-	}
-
-	template <class item>
-	size_t D_size( item const ) { return sizeof( item ); }
-
-	template <class item>
-	size_t D_size( item const*const ) { return sizeof( item ); }
-
-	template <class item>
-	size_t D_size( item*const ) { return sizeof( item ); }
-
-	size_t D_size( const RakString item ) { return item.GetLength(); }
-
-	template <class item>
-	void PushHeader( char*& p, item const i, int endianSwap ) {
-		unsigned int   s = (unsigned int) D_size( i );
-		unsigned char  f =
-			( IsReal( i ) << AutoRPC::REAL_PARAM_SC )
-			|
-			( IsPtr( i ) << AutoRPC::REF_PARAM_SC  )
-			|
-			( IsRakString( i ) << AutoRPC::RAKSTRING_PARAM_SC  )
-			|
-			( endianSwap << AutoRPC::ENDIAN_SWAP_SC  )
-			;
-		Push( p, s );
-		Push( p, f );
-	}
-
-	enum {
-		// always useful to define "shift count" (SC) or "Bit index" for bit parameters
-		REAL_PARAM_SC = 0,    REAL_PARAM  = 1 << REAL_PARAM_SC,
-		ENDIAN_SWAP_SC = 1,   DO_ENDIAN_SWAP = 1 << ENDIAN_SWAP_SC,
-		REF_PARAM_SC  = 2,    REF_PARAM   = 1 << REF_PARAM_SC,
-		RAKSTRING_PARAM_SC  = 3,   RAKSTRING_PARAM   = 1 << RAKSTRING_PARAM_SC,
-	};
-
-	// THIS STRUCTURE LAYOUT IS HARDCODED INTO THE ASSEMBLY.  Unfortunately, that appears to be the
-	// only way to do it.
-	struct CallParams {
-#if AUTO_RPC_ABI
-#if AUTO_RPC_FLOAT_REG_PARAMS
-		// on most platforms, just a bool telling us whether we need any floats.
-		unsigned       numRealParams;
-
-#if AUTO_RPC_CREATE_FLOAT_MAP
-		//
-		// bitmask: bit(n) set indicate parameter n is a float, not an int.
-		//
-		unsigned       realMap;
-#endif
-
-		// N.B. these may not have type HardwareReal - they're not promoted or converted.
-#if AUTO_RPC_ALLOC_SEPARATE_FLOATS
-		HardwareReal   realParams[ AUTO_RPC_FLOAT_REG_PARAMS ];
-#endif
-
-#endif // AUTO_RPC_FLOAT_REG_PARAMS
-
-		unsigned       numIntParams;
-#if !AUTO_RPC_ALLOC_SEPARATE_FLOATS && AUTO_RPC_FLOAT_REG_PARAMS && AUTO_RPC_CREATE_FLOAT_MAP
-		union {
-			HardwareReal realParams[ AUTO_RPC_FLOAT_REG_PARAMS ];
-#endif
-			NaturalWord  intParams[ ( AUTO_RPC_MAX_PARAMS > AUTO_RPC_INT_REG_PARAMS ? AUTO_RPC_MAX_PARAMS : AUTO_RPC_INT_REG_PARAMS ) + AUTO_RPC_STACK_PADDING ];
-
-#if !AUTO_RPC_ALLOC_SEPARATE_FLOATS && AUTO_RPC_FLOAT_REG_PARAMS && AUTO_RPC_CREATE_FLOAT_MAP
-		};
-#endif
-
-		char      refParams[ AUTO_RPC_MAX_PARAMS * AUTO_RPC_REF_ALIGN ];
-#endif // AUTO_RPC_ABI
-	};
-
-	static bool DeserializeParametersAndBuildCall(
-		CallParams &call,
-		char *in, unsigned int inLength,
-		void *lastParam, void *thisPtr);
-
-	static bool CallWithStack( AutoRPC::CallParams& call, void *functionPtr );
 
 	DataStructures::List<LocalRPCFunction> localFunctions;
 	DataStructures::Map<SystemAddress, DataStructures::OrderedList<RPCIdentifier, RemoteRPCFunction, AutoRPC::RemoteRPCFunctionComp> *> remoteFunctions;

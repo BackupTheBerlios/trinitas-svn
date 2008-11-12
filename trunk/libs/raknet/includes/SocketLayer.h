@@ -20,17 +20,16 @@
 #define __SOCKET_LAYER_H
 
 #include "RakMemoryOverride.h"
-#ifdef _XBOX360
-#include "Console1Includes.h"
-#elif defined(_PS3)
-#include "Console2Includes.h"
+#if defined(_XBOX) || defined(X360)
+#include "XBOX360Includes.h"
+#elif defined(_PS3) || defined(__PS3__)
+#include "PS3Includes.h"
 typedef int SOCKET;
+#elif defined(_XBOX) || defined(X360)
 #elif defined(_WIN32)
 // IP_DONTFRAGMENT is different between winsock 1 and winsock 2.  Therefore, Winsock2.h must be linked againt Ws2_32.lib
 // winsock.h must be linked against WSock32.lib.  If these two are mixed up the flag won't work correctly
 #include <winsock2.h>
-#include <ws2tcpip.h>
-//#include "RakMemoryOverride.h"
 #else
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -47,7 +46,7 @@ typedef int SOCKET;
 class RakPeer;
 
 // A platform independent implementation of Berkeley sockets, with settings used by RakNet
-class SocketLayer : public RakNet::RakMemoryOverride
+class SocketLayer
 {
 
 public:
@@ -72,13 +71,18 @@ public:
 	/// \return A new socket used for communication.
 	SOCKET Connect( SOCKET writeSocket, unsigned int binaryAddress, unsigned short port );
 	
-	// Creates a bound socket to listen for incoming connections on the specified port
+	/// Creates a bound socket to listen for incoming connections on the specified port
 	/// \param[in] port the port number 
 	/// \param[in] blockingSocket 
 	/// \return A new socket used for accepting clients 
 	SOCKET CreateBoundSocket( unsigned short port, bool blockingSocket, const char *forceHostAddress );
 
-	#if !defined(_XBOX360)
+	/// Returns if this specified port is in use, for UDP
+	/// \param[in] port the port number 
+	/// \return If this port is already in use
+	static bool IsPortInUse(unsigned short port);
+
+	#if !defined(_XBOX) && !defined(X360)
 	const char* DomainNameToIP( const char *domainName );
 	#endif
 	
@@ -101,7 +105,7 @@ public:
 	/// \return Returns true if you successfully read data, false on error.
 	int RecvFrom( const SOCKET s, RakPeer *rakPeer, int *errorCode, unsigned connectionSocketIndex );
 	
-#if !defined(_XBOX360)
+#if !defined(_XBOX) && !defined(_X360)
 	/// Retrieve all local IP address in a string format.
 	/// \param[in] s The socket whose port we are referring to
 	/// \param[in] ipList An array of ip address in dotted notation.
@@ -115,7 +119,7 @@ public:
 	/// \param[in] ip The address of the remote host in dotted notation.
 	/// \param[in] port The port number to send to.
 	/// \return 0 on success, nonzero on failure.
-	int SendTo( SOCKET s, const char *data, int length, char ip[ 16 ], unsigned short port );
+	int SendTo( SOCKET s, const char *data, int length, const char ip[ 16 ], unsigned short port );
 
 	/// Call sendto (UDP obviously)
 	/// It won't reach the recipient, except on a LAN
@@ -127,7 +131,7 @@ public:
 	/// \param[in] port The port number to send to.
 	/// \param[in] ttl Max hops of datagram
 	/// \return 0 on success, nonzero on failure.
-	int SendToTTL( SOCKET s, const char *data, int length, char ip[ 16 ], unsigned short port, int ttl );
+	int SendToTTL( SOCKET s, const char *data, int length, const char ip[ 16 ], unsigned short port, int ttl );
 
 	/// Call sendto (UDP obviously)
 	/// \param[in] s the socket
@@ -145,13 +149,9 @@ public:
 
 private:
 
-	static bool socketLayerStarted;
-
-#ifdef _WIN32
-	static WSADATA winsockInfo;
-#endif
 
 	static SocketLayer I;
+	void SetSocketOptions( SOCKET listenSocket);
 };
 
 #endif

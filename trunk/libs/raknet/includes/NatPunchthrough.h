@@ -64,6 +64,15 @@ public:
 /// 5. At time picked in (4), S attempts to connect to R.  R sends offline ping to S.
 /// 6. If R disconnects before or at step 4, tell this to S via ID_NAT_TARGET_CONNECTION_LOST
 ///
+/// Rebinding instances of RakPeer:
+/// If after connecting two instances of RakPeer, you want to use the now open ports on the router with another instance of RakPeer, follow these steps
+/// A. Connect the two systems by NAT punchthrough. Store the IP address of the system you connected to. You can get this with SystemAddress::ToString(false)
+/// B. Once you get ID_CONNECTION_REQUEST_ACCEPTED or ID_NEW_INCOMING_CONNECTION, call RakPeer::Shutdown(0). This will stop RakNet without telling the other system.
+/// C. Wait about double the ping time to make sure the other system had the opportunity to call RakPeer::Shutdown(0).
+/// D. Recreate on the receiver the instance of RakPeer, in the new application. If you originally used port 1234, call Startup() again with that port. If you used port 0, you will need to know what port the socket was bound on. Use GetInternalID(UNASSIGNED_SYSTEM_ADDRESS).port anytime after calling Startup()
+/// E. Recreate on the sender the instance of RakPeer in the new application, using the same port as originally used in the last instance of RakPeer on the sender.
+/// F. Connect the sender to the receiver, using the port returned by NatPunchthrough::GetLastPortUsedToConnect()
+///
 /// \note Timing is important with this plugin.  You need to call RakPeer::Receive frequently.
 /// \ingroup NAT_PUNCHTHROUGH_GROUP
 class RAK_DLL_EXPORT NatPunchthrough : public PluginInterface
@@ -108,6 +117,12 @@ public:
 
 	/// Sets the log output to print messages to
 	void SetLogger(NatPunchthroughLogger *l);
+
+	/// Returns the last port we tried to connect on.
+	/// If at some point we get ID_CONNECTION_REQUEST_ACCEPTED, the remote router should be open on this port,
+	/// and should forward messages send on this port to the remotely bound port.
+	/// Returns 0 if none.
+	unsigned short GetLastPortUsedToConnect(void) const;
 
 	/// \internal For plugin handling
 	virtual void OnAttach(RakPeerInterface *peer);
@@ -160,15 +175,19 @@ protected:
 	void OnConnectAtTime(RakPeerInterface *peer, Packet *packet);
 	void OnSendOfflineMessageAtTime(RakPeerInterface *peer, Packet *packet);
 	void RemoveRequestByFacilitator(SystemAddress systemAddress);
-	void LogOut(char *l);
+	void LogOut(const char *l);
 	PluginReceiveResult OnConnectionAttemptFailed(Packet *packet);
+	void RemoveFromConnectionRequestList(SystemAddress systemAddress);
 	PluginReceiveResult OnNewIncomingConnection(Packet *packet);
-	PluginReceiveResult OnConnectionRequestAccepted(Packet *packet);
 
 	bool allowFacilitation;
 	RakPeerInterface *rakPeer;
 	DataStructures::List<ConnectionRequest*> connectionRequestList;
 	NatPunchthroughLogger *log;
+
+	// This is updated every time Connect() is called. You need to know it if you want to reconnect to that system without
+	// Running NAT punchthrough again
+	unsigned short lastPortUsedToConnect;
 };
 
 #endif
