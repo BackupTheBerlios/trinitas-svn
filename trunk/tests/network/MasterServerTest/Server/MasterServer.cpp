@@ -43,12 +43,6 @@ MasterServer::MasterServer(){
     bool allowRemoteQuery   = true;
     //Allow remote row removal
     bool allowRemoteRemove  = true;
-    //remote table query password - empty for none
-    char queryPassword[_SIMPLE_DATABASE_PASSWORD_LENGTH]    = "";
-    //remote update password - empty for none
-    char updatePassword[_SIMPLE_DATABASE_PASSWORD_LENGTH]   = "";
-    //remote table query password - empty for none
-    char removePassword[_SIMPLE_DATABASE_PASSWORD_LENGTH]   = "";
     //Only allow one row per uploading IP?
     bool oneRowPerSystemAddress = true;
     //Only allow updates on rows created by that system?
@@ -59,11 +53,14 @@ MasterServer::MasterServer(){
     bool removeRowOnDisconnect  = true;
     //Autogenerate row ids?
     bool autogenerateRowIDs     = true;
-	table=databaseServer.AddTable("TrinitasServer", allowRemoteUpdate, allowRemoteQuery, allowRemoteRemove, queryPassword, updatePassword, removePassword, oneRowPerSystemAddress, onlyUpdateOwnRows, removeRowOnPingFailure, removeRowOnDisconnect, autogenerateRowIDs);
+	table=databaseServer.AddTable((char *)tableName, allowRemoteUpdate, allowRemoteQuery, allowRemoteRemove, (char *)tablePassword, (char *)tablePassword, (char *)tablePassword, oneRowPerSystemAddress, onlyUpdateOwnRows, removeRowOnPingFailure, removeRowOnDisconnect, autogenerateRowIDs);
     printf("AddTable\n");
-
 	if (table){
-
+        table->AddColumn("Name",DataStructures::Table::STRING);
+        table->AddColumn("Description",DataStructures::Table::STRING);
+        table->AddColumn("NeedPassword",DataStructures::Table::NUMERIC);
+        table->AddColumn("JoindedPlayer",DataStructures::Table::NUMERIC);
+        table->AddColumn("MaxsPlayer",DataStructures::Table::NUMERIC);
     }
     else
      /**@todo real error handling*/
@@ -240,10 +237,10 @@ bool  MasterServer::Iskeypressed( unsigned timeout_ms ){
     pls[ 0 ].events = POLLIN | POLLPRI;
     return poll( pls, 1, timeout_ms ) > 0;
 }
+#endif
 
 int main(){
     MasterServer    *masterServer = new MasterServer();
     masterServer->Run();
     delete masterServer;
 }
-#endif

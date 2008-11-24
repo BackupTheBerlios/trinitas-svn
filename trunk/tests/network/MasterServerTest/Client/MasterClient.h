@@ -6,7 +6,6 @@
 #ifndef MASTER_CLIENT_H
 #define MASTER_CLIENT_H
 
-#include "LightweightDatabaseServer.h"
 #include "LightweightDatabaseClient.h"
 #include "TableSerializer.h"
 #include "BitStream.h"
@@ -18,23 +17,35 @@
 #include "RakSleep.h"
 #include "MessageIdentifiers.h"
 
-/// \ingroup MasterServer
-/// \brief implements the master client
-class MasterClient : public MasterCommon
-{
+#include "../MasterGlobals.h"
+
+/// @ingroup MasterServer
+/// @brief implements the master client wich would be in the "real game" the server
+
+
+class MasterClient {
 public:
 	MasterClient();
 	~MasterClient();
-    Run();
+    void    Run();
 
 protected:
-    QuerryTable();
-    UpdateTable();
+    /**reads the config file*/
+    bool    ReadConfig();
+    void    QuerryTable();
+    void    UpdateTable();
 
 
 private:
-    RakPeerInterface *rakPeer;
-	LightweightDatabaseClient databaseClient;
+    RakPeerInterface            *rakPeer;
+	LightweightDatabaseClient   databaseClient;
+	bool                        running;
+	char*                       serverName;
+    char*                       description;
+    bool                        needPassword;
+    int                         joindPlayers;
+    int                         maxPlayers;
+
 };
 
 #endif

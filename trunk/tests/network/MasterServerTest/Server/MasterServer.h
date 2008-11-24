@@ -14,6 +14,8 @@
 #include "RakSleep.h"
 #include "MessageIdentifiers.h"
 
+#include "../MasterGlobals.h"
+
 #ifdef WIN32
 #include "Kbhit.h"
 #else
@@ -40,6 +42,8 @@ protected:
         we check for keystrokes and process them
     */
     void BasicConsole();
+    void CreateMyTable();
+
 #ifndef WIN32
 	bool Initialize();
 	void Finalize();
