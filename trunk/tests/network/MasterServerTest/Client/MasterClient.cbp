@@ -42,9 +42,10 @@
 					<Add option="-W" />
 					<Add option="-Wall" />
 					<Add option="-g" />
+					<Add directory="../../../../libs/raknet/includes" />
 				</Compiler>
 				<Linker>
-					<Add library="../../../../libs/raknet/MacOSX/libraknet_x86.a" />
+					<Add library="../../../../libs/raknet/MacOSX/rakneti386.a" />
 				</Linker>
 			</Target>
 			<Target title="Release_MacOSX">

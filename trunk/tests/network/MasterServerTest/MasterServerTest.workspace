@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="MasterServerTest">
-		<Project filename="Client/MasterClient.cbp" />
-		<Project filename="Server/MasterServer.cbp" active="1" />
+		<Project filename="Client/MasterClient.cbp" active="1" />
+		<Project filename="Server/MasterServer.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>
