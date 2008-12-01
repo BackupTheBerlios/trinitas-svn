@@ -8,6 +8,6 @@
 
 static const char* tableName        = "TrinitasMainServerTable";
 static const char* tablePassword    = "";
-static const char* serverURL        = "paradoxon.servegame.com";
+static const char* serverURL        = "127.0.0.1";
 
 #endif

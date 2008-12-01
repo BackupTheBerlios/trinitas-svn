@@ -106,6 +106,9 @@ void MasterServer::Run(){
 				printf("ID_DATABASE_UNKNOWN_TABLE\n");
 			else if (p->data[0]==ID_DATABASE_INCORRECT_PASSWORD)
 				printf("ID_DATABASE_INCORRECT_PASSWORD\n");
+			else if (p->data[0]==ID_DATABASE_UPDATE_ROW)
+                printf("ID_DATABASE_UPDATE_ROW\n");
+
 			else if (p->data[0]==ID_DATABASE_QUERY_REPLY)
 			{
 				char str[256];
@@ -144,12 +147,14 @@ void MasterServer::Run(){
 				}
 				else
 					printf("Deserialization of table failed.\n");
-                rakPeer->DeallocatePacket(p);
-                p=rakPeer->Receive();
 			}
-			BasicConsole();
+            rakPeer->DeallocatePacket(p);
+            p=rakPeer->Receive();
+            RakSleep(150);
+
+			//BasicConsole();
 		}
-        RakSleep(30);
+        RakSleep(150);
 	}
 
 }

@@ -34,7 +34,7 @@ protected:
     bool    ReadConfig();
     void    QuerryTable();
     void    UpdateTable();
-
+    void    PrintTable(Packet *p);
 
 private:
     RakPeerInterface            *rakPeer;
