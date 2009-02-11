@@ -1,6 +1,11 @@
-#ifndef LUA_OBJ
-#define LUA_OBJ
-#include "stdafx.h"
+
+
+
+#ifndef LUA_OBJ_H
+#define LUA_OBJ_H
+#include "lua_engine.h"
+
+
 
 class lua_obj
 {
@@ -11,4 +16,8 @@ public:
    const char* GetTypeName(const char* sShort);
    int GetTypeId();
 };
+
+
+
 #endif
+

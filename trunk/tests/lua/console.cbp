@@ -7,9 +7,10 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="default">
-				<Option output="console.exe" prefix_auto="0" extension_auto="0" />
-				<Option type="1" />
+				<Option output="console.dll" prefix_auto="0" extension_auto="0" />
+				<Option type="3" />
 				<Option compiler="gcc" />
+				<Option createStaticLib="1" />
 				<Option projectResourceIncludeDirsRelation="1" />
 			</Target>
 		</Build>
@@ -19,15 +20,16 @@
 		<Compiler>
 			<Add directory="includes" />
 			<Add directory="lua-5.1.3\src" />
+			<Add directory="..\pluginTest" />
 		</Compiler>
 		<Linker>
 			<Add directory="src" />
 			<Add directory="lua-5.1.3\src" />
+			<Add directory="..\pluginTest" />
 		</Linker>
 		<Unit filename="includes\lua_engine.h" />
 		<Unit filename="includes\lua_event.h" />
 		<Unit filename="includes\lua_obj.h" />
-		<Unit filename="includes\singletons.h" />
 		<Unit filename="includes\stdafx.h" />
 		<Unit filename="lua-5.1.3\src\lapi.c">
 			<Option compilerVar="CC" />
@@ -130,6 +132,7 @@
 		</Unit>
 		<Unit filename="src\lua_event.cpp" />
 		<Unit filename="src\lua_obj.cpp" />
+		<Unit filename="..\pluginTest\TrinitasPlugin.h" />
 		<Extensions>
 			<AutoVersioning>
 				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />

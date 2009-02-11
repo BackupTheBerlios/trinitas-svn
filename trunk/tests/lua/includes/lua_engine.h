@@ -1,17 +1,25 @@
-#ifndef LUAENGINE
-#define LUAENGINE
+
+
+#ifndef LUA_ENGINE_H
+#define LUA_ENGINE_H
 #include <iostream>
 #include <list.h>
-#include "singletons.h"
+
 #include "stdafx.h"
 #include "lua_obj.h"
 #include "lua_event.h"
-#define g_lState lua_engine::Get()->m_lState
-#define g_lEngine lua_engine::Get()
+#include "TrinitasPlugin.h"
+#define g_lState lua_engine::m_lEngine->m_lState
+#define g_lEngine lua_engine::m_lEngine
 
-class lua_engine : public TSingleton<lua_engine>
+
+class lua_engine
 {
 public:
+   lua_engine();
+   ~lua_engine();
+
+   static lua_engine* m_lEngine;
    lua_State* m_lState;
    list<lua_obj*> m_listlo;
    list<lua_obj*>::iterator m_listlo_i;
@@ -24,6 +32,7 @@ public:
    void RegisterFunction(const char* sFunction, lua_CFunction fn);
    void SetPanicFunction(lua_CFunction panicf);
    lua_obj* lua_engine::RegisterObject();
+   static int lib_RegisterObject(lua_State* L);
 
    void CallLuaMethod(const char* sLuaClass, const char* sMethod, char* format, ... );
    lua_obj* CreateCharacter(const char* sRace,const char* sLanguage);
@@ -38,6 +47,15 @@ public:
    const char*    getobjectstring(lua_obj* loObj, const char* sVar);
    void           getluavar(const char* sVar);
 
+   void pushuserdata(void* ud);
+   int pushvarg(char* format, va_list* varg);
+   void pushobject(lua_obj* loObj);
+   va_list* tovarg(char* format, ...);
+   int checkstack();
+
+   void showvlist();
+
+
    // Language functions
    void GetLanguage(const char* sShort);
    void AddWords(const char* sVar, const char* sWords, const char* sShort);
@@ -45,22 +63,41 @@ public:
 
    // Event functions
    void CheckEvents();
-   void StartEvent_UseWith(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget, int difTime);
+   lua_event* lua_engine::StartEvent(int difTime);
+   //void StartEvent_UseWith(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget, int difTime);
 
 
-   void Start();
-   void Release();
    void ParseFile(const char* sFile);
+
+   struct Debug
+   {
+   };
+
+
+
 };
 
-void lua_pushuserdata(lua_State* L, void* ud);
-int checkmystack(lua_State* L);
-int lib_RegisterObject(lua_State* L);
-int lua_pushvarg(lua_State*L, char* format, va_list* varg);
-void lua_pushobject(lua_State* L, lua_obj* loObj);
-va_list* tovarg(char* format, ...);
 
-void showvlist(list<lua_event*> m_listlev);
+
+class lua_plugin : public TrinitasPlugin
+{
+public:
+   lua_plugin();
+
+   char* GetName();
+   static lua_plugin* Get();
+
+   void* Do();
+   void Close();
+   void Test();
+
+
+private:
+   static lua_plugin* m_lPlugin;
+   static lua_engine* m_lEngine;
+};
+
+
 
 
 #endif

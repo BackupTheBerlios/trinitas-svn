@@ -1,27 +1,25 @@
 #include "includes/stdafx.h"
 #include "includes/lua_engine.h"
 
-
-int main()
+extern "C" __declspec(dllexport) void* getPlugin(void)
 {
+   return (void*) new lua_plugin;
+}
 
-   lua_engine* luaEngine;
-   luaEngine = new lua_engine();
-   luaEngine->Start();
-   luaEngine->ParseFile("scripts/base_common.lua");
+void lua_plugin::Test()
+{
+   m_lEngine->ParseFile("scripts/base_common.lua");
 
-   lua_obj* david = luaEngine->CreateCharacter("human","de");
+   lua_obj* david = m_lEngine->CreateCharacter("human","de");
    lua_obj* lpoInventar[32];
-   lpoInventar[0] = luaEngine->CreateItem("Hatchet");
-   lpoInventar[1] = luaEngine->CreateItem("Tree");
+   lpoInventar[0] = m_lEngine->CreateItem("Hatchet");
+   lpoInventar[1] = m_lEngine->CreateItem("Tree");
    printf("Start Event...\n");
-   luaEngine->StartEvent_UseWith(david, lpoInventar[0],lpoInventar[1],500);
+   lua_event::usewith::Init(david, lpoInventar[0],lpoInventar[1],1500);
 
    while(strcmp(lpoInventar[1]->GetTypeName("de"),"extrem gefällter Baum")!=0)
    {
-      luaEngine->CheckEvents();
+      m_lEngine->CheckEvents();
    }
    printf("Ready\n");
-   luaEngine->Release();
-   return 1;
 }

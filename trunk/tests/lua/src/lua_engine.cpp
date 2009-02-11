@@ -1,18 +1,53 @@
 #include "lua_engine.h"
 
-// Starts and initializes the engine
-void lua_engine::Start()
+lua_engine* lua_plugin::m_lEngine = NULL;
+lua_plugin* lua_plugin::m_lPlugin = NULL;
+
+
+lua_plugin::lua_plugin()
 {
+   mID = (int)123;
+   m_lPlugin = this;
+}
+char* lua_plugin::GetName()
+{
+   return "Lua Plugin v1.0";
+}
+inline lua_plugin* lua_plugin::Get()
+{
+   return m_lPlugin;
+}
+void* lua_plugin::Do()
+{
+   m_lEngine = new lua_engine;
+   return (void*) m_lEngine;
+}
+void lua_plugin::Close()
+{
+   delete(m_lEngine);
+   m_lEngine = NULL;
+}
+
+
+
+
+
+lua_engine* lua_engine::m_lEngine = NULL;
+
+
+// Starts and initializes the engine
+lua_engine::lua_engine()
+{
+   m_lEngine = this;
    m_lState=lua_open();
    luaL_openlibs(m_lState);
-   lua_register(m_lState, "RegisterObject", lib_RegisterObject);
-   lua_register(m_lState, "Check", checkmystack);
-   lua_register(m_lState, "StartEventUsewith", start_lua_event_usewith);
-   m_pSingleton = this;
+   lua_register(m_lState, "RegisterObject", lua_engine::lib_RegisterObject);
+//   lua_register(m_lState, "Check", lua_engine::checkstack);
+   lua_register(m_lState, "StartEventUsewith", lua_event::usewith::lib_Init);
 }
 
 // Stops the engine and releases the memory
-void lua_engine::Release()
+lua_engine::~lua_engine()
 {
    lua_close(m_lState);
    m_lState = NULL;
@@ -63,7 +98,7 @@ void lua_engine::CallLuaMethod(const char* sLuaClass, const char* sMethod, char*
    lua_remove(m_lState,-3);
    va_list argptr;
    va_start( argptr, format );
-   int n = lua_pushvarg(m_lState, format, &argptr);
+   int n = pushvarg(format, &argptr);
    va_end( argptr);
    lua_call(m_lState, n+1, LUA_MULTRET);
 
@@ -86,7 +121,7 @@ lua_obj* lua_engine::CreateItem(const char* sType)
 // Calls the Lua function with two objects
 void lua_engine::Use(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget)
 {
-   lua_pushobject(m_lState, pSource);
+   pushobject(pSource);
    lua_getfield(m_lState, -1, "type");
    lua_getfield(m_lState, -1, "usewith");
    lua_remove(m_lState,-2);
@@ -98,15 +133,23 @@ void lua_engine::Use(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget)
       lua_pop(m_lState,2);
       return;
    }
-   lua_pushobject(m_lState, pUser);
+   pushobject(pUser);
    lua_pushvalue(m_lState, -3);
    lua_remove(m_lState, -4);
-   lua_pushobject(m_lState, pTarget);
+   pushobject(pTarget);
    lua_call(m_lState,3,0);
+}
+
+lua_event* lua_engine::StartEvent(int difTime)
+{
+   lua_event* newEvent = new lua_event;
+   newEvent->m_Time = difTime;
+   newEvent->m_timeStamp = clock();
+   return newEvent;
 }
 const char* lua_engine::getobjectstring(lua_obj* loObj, const char* sVar)
 {
-   lua_pushobject(m_lState, loObj);
+   pushobject(loObj);
    getluavar(sVar);
    return lua_tostring(m_lState, -1);
 }
@@ -138,7 +181,7 @@ void lua_engine::getluavar(const char* sVar)
 
 int lua_engine::getobjectnumber(lua_obj* loObj, const char* sVar)
 {
-   lua_pushobject(m_lState, loObj);
+   pushobject(loObj);
    getluavar(sVar);
    int i = (int)lua_tonumber(m_lState, -1);
    lua_remove(m_lState, -1);
@@ -148,7 +191,7 @@ int lua_engine::getobjectnumber(lua_obj* loObj, const char* sVar)
 
 int lua_engine::getobjectboolean(lua_obj* loObj, const char* sVar)
 {
-   lua_pushobject(m_lState, loObj);
+   pushobject(loObj);
    getluavar(sVar);
    return lua_toboolean(m_lState, -1);
 }
@@ -156,7 +199,7 @@ int lua_engine::getobjectboolean(lua_obj* loObj, const char* sVar)
 
 void* lua_engine::getobjectpointer(lua_obj* loObj, const char* sVar)
 {
-   lua_pushobject(m_lState, loObj);
+   pushobject(loObj);
    getluavar(sVar);
    return (void*)lua_topointer(m_lState, -1);
 }
@@ -199,55 +242,32 @@ void lua_engine::CheckEvents()
       lua_event* myEvent = *m_listlev_i;
       if(difftime(m_curTime,myEvent->m_timeStamp)>=myEvent->m_Time)
       {
-         execute_lua_event(m_lState, myEvent);
+         myEvent->Execute();
          m_listlev.erase(m_listlev_i);
          CheckEvents();
          return;
       }
    }
 }
-void lua_engine::StartEvent_UseWith(lua_obj* pUser, lua_obj* pSource, lua_obj* pTarget, int difTime)
-{
-   lua_event* newEvent = new lua_event;
-   lua_pushlightuserdata(m_lState, &newEvent->m_timeStamp);
-   lua_pushobject(m_lState, pSource);
-   lua_getfield(m_lState, -1, "type");
-   lua_getfield(m_lState, -1, "usewith");
-   lua_remove(m_lState,-2);
-   lua_pushnumber(m_lState, pTarget->GetTypeId());
-   lua_gettable(m_lState, -2);
-   lua_remove(m_lState,-2);
-   lua_remove(m_lState,-2);
-   lua_settable(m_lState, LUA_REGISTRYINDEX);
-   lua_event_usewith* EventData = new lua_event_usewith;
-   EventData->pUser = pUser;
-   EventData->pSource = pSource;
-   EventData->pTarget = pTarget;
-   newEvent->type = lua_event_usewith::type;
-   newEvent->m_pData = EventData;
-   newEvent->m_Time = difTime;
-   newEvent->m_timeStamp = clock();
-   m_listlev.push_back(newEvent);
-}
 
-int lib_RegisterObject(lua_State* L)
+int lua_engine::lib_RegisterObject(lua_State* L)
 {
-   lua_engine::Get()->RegisterObject();
+   g_lEngine->RegisterObject();
    return 0;
 }
-void lua_pushobject(lua_State* L, lua_obj* loObj)
+void lua_engine::pushobject(lua_obj* loObj)
 {
-   lua_pushlightuserdata(L, &loObj->key);
-   lua_gettable(L, LUA_REGISTRYINDEX);
+   lua_pushlightuserdata(m_lState, &loObj->key);
+   lua_gettable(m_lState, LUA_REGISTRYINDEX);
 }
 
-va_list* tovarg(char* format, ...)
+va_list* lua_engine::tovarg(char* format, ...)
 {
    va_list* argptr = new va_list;
    va_start(*argptr, format );
    return argptr;
 }
-int lua_pushvarg(lua_State*L, char* format,va_list* argptr)
+int lua_engine::pushvarg(char* format,va_list* argptr)
 {
    int n = 0;
    while( *format != '\0' )
@@ -257,22 +277,22 @@ int lua_pushvarg(lua_State*L, char* format,va_list* argptr)
       {
          case 'd':
          case 'i': // number or integer
-            lua_pushnumber(L, va_arg(*argptr, int) );
+            lua_pushnumber(m_lState, va_arg(*argptr, int) );
             break;
          case 'b':  //boolean
-            lua_pushboolean(L, va_arg(*argptr, int) );
+            lua_pushboolean(m_lState, va_arg(*argptr, int) );
             break;
          case 'c':  //character
-            lua_pushboolean(L, va_arg(*argptr, int) );
+            lua_pushboolean(m_lState, va_arg(*argptr, int) );
             break;
          case 's':
-            lua_pushstring(L, va_arg(*argptr, char*));
+            lua_pushstring(m_lState, va_arg(*argptr, char*));
             break;
          case 'O':
-            lua_pushobject(L, va_arg(*argptr, lua_obj*));
+            pushobject(va_arg(*argptr, lua_obj*));
             break;
          default:
-            lua_pushlightuserdata(L, va_arg(*argptr, void*) );
+            lua_pushlightuserdata(m_lState, va_arg(*argptr, void*) );
             break;
       }
       *format++;
@@ -281,29 +301,29 @@ int lua_pushvarg(lua_State*L, char* format,va_list* argptr)
 }
 
 
-int checkmystack(lua_State* L)
+int lua_engine::checkstack()
 {
    int i;
-   int top = lua_gettop(L);
+   int top = lua_gettop(m_lState);
    printf("-----------\n");
    for (i = 1; i<=top; i++) {
-      int t = lua_type(L, i);
+      int t = lua_type(m_lState, i);
       printf("#%d [#%d]   ",i, - (top - i + 1));
       switch(t) {
          case LUA_TSTRING:
-            printf("String: '%s'", lua_tostring(L, i));
+            printf("String: '%s'", lua_tostring(m_lState, i));
             break;
          case LUA_TBOOLEAN:
-            printf("Bool: %s",lua_toboolean(L, i) ? "true" : "false");
+            printf("Bool: %s",lua_toboolean(m_lState, i) ? "true" : "false");
             break;
          case LUA_TNUMBER:
-            printf("Number: %g",lua_tonumber(L, i));
+            printf("Number: %g",lua_tonumber(m_lState, i));
             break;
          default:
-            printf("Unknown <%s>",lua_typename(L, t));
+            printf("Unknown <%s>",lua_typename(m_lState, t));
             break;
       }
-      printf(" [%d]\n", lua_topointer(L, i));
+      printf(" [%d]\n", lua_topointer(m_lState, i));
    }
    return 0;
 }
