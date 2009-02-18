@@ -1,0 +1,2213 @@
+# depslib dependency file v1.0
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\src\lua_engine.cpp
+	"lua_engine.h"
+
+1203272457 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\lua_engine.h
+	<iostream>
+	<list.h>
+	"singletons.h"
+	"stdafx.h"
+	"lua_obj.h"
+	"lua_event.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\singletons.h
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\stdafx.h
+	<lua.h>
+	<lualib.h>
+	<lauxlib.h>
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lualib.h
+	"lua.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\lua_obj.h
+	"stdafx.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\lua_event.h
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lauxlib.c
+	<ctype.h>
+	<errno.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lbaselib.c
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lcode.c
+	<stdlib.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"ltable.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lcode.h
+	"llex.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llex.h
+	"lobject.h"
+	"lzio.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lobject.h
+	<stdarg.h>
+	"llimits.h"
+	"lua.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llimits.h
+	<limits.h>
+	<stddef.h>
+	"lua.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lzio.h
+	"lua.h"
+	"lmem.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmem.h
+	<stddef.h>
+	"llimits.h"
+	"lua.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lopcodes.h
+	"llimits.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lparser.h
+	"llimits.h"
+	"lobject.h"
+	"lzio.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldebug.h
+	"lstate.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstate.h
+	"lua.h"
+	"lobject.h"
+	"ltm.h"
+	"lzio.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltm.h
+	"lobject.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldo.h
+	"lobject.h"
+	"lstate.h"
+	"lzio.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lgc.h
+	"lobject.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltable.h
+	"lobject.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldblib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldebug.c
+	<stdarg.h>
+	<stddef.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lapi.h
+	"lobject.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lfunc.h
+	"lobject.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstring.h
+	"lgc.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lvm.h
+	"ldo.h"
+	"lobject.h"
+	"ltm.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldo.c
+	<setjmp.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+	"lzio.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lundump.h
+	"lobject.h"
+	"lzio.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldump.c
+	<stddef.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lundump.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lfunc.c
+	<stddef.h>
+	"lua.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lgc.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\linit.c
+	"lua.h"
+	"lualib.h"
+	"lauxlib.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\liolib.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llex.c
+	<ctype.h>
+	<locale.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"llex.h"
+	"lobject.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"lzio.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmathlib.c
+	<stdlib.h>
+	<math.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmem.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\loadlib.c
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+	<dlfcn.h>
+	<windows.h>
+	<mach-o/dyld.h>
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lobject.c
+	<ctype.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"lvm.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lopcodes.c
+	"lopcodes.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\loslib.c
+	<errno.h>
+	<locale.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lparser.c
+	<string.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstate.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstring.c
+	<string.h>
+	"lua.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstrlib.c
+	<ctype.h>
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltable.c
+	<math.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"ltable.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltablib.c
+	<stddef.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltm.c
+	<string.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lundump.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstring.h"
+	"lundump.h"
+	"lzio.h"
+
+1203272336 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lvm.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lzio.c
+	<string.h>
+	"lua.h"
+	"llimits.h"
+	"lmem.h"
+	"lstate.h"
+	"lzio.h"
+
+1203273027 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\main.cpp
+	<string>
+	<time.h>
+	"includes/stdafx.h"
+	"includes/lua_engine.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lapi.c
+	<assert.h>
+	<math.h>
+	<stdarg.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+
+1203272337 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\src\lua_obj.cpp
+	"lua_engine.h"
+
+1203273019 e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\src\lua_event.cpp
+	"lua_engine.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\src\lua_engine.cpp
+	"lua_engine.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lauxlib.c
+	<ctype.h>
+	<errno.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lbaselib.c
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lcode.c
+	<stdlib.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"ltable.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldblib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldebug.c
+	<stdarg.h>
+	<stddef.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldo.c
+	<setjmp.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+	"lzio.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldump.c
+	<stddef.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lundump.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lfunc.c
+	<stddef.h>
+	"lua.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lgc.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\linit.c
+	"lua.h"
+	"lualib.h"
+	"lauxlib.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\liolib.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llex.c
+	<ctype.h>
+	<locale.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"llex.h"
+	"lobject.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"lzio.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmathlib.c
+	<stdlib.h>
+	<math.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmem.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\loadlib.c
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+	<dlfcn.h>
+	<windows.h>
+	<mach-o/dyld.h>
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lobject.c
+	<ctype.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"lvm.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lopcodes.c
+	"lopcodes.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\loslib.c
+	<errno.h>
+	<locale.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lparser.c
+	<string.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstate.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstring.c
+	<string.h>
+	"lua.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstrlib.c
+	<ctype.h>
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltable.c
+	<math.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"ltable.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltablib.c
+	<stddef.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltm.c
+	<string.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lundump.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstring.h"
+	"lundump.h"
+	"lzio.h"
+
+1203272336 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lvm.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lzio.c
+	<string.h>
+	"lua.h"
+	"llimits.h"
+	"lmem.h"
+	"lstate.h"
+	"lzio.h"
+
+1203273027 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\main.cpp
+	<string>
+	<time.h>
+	"includes/stdafx.h"
+	"includes/lua_engine.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lapi.c
+	<assert.h>
+	<math.h>
+	<stdarg.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+
+1203272337 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\src\lua_obj.cpp
+	"lua_engine.h"
+
+1203273079 source:e:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\src\lua_event.cpp
+	"lua_engine.h"
+
+1203519388 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\src\lua_engine.cpp
+	"lua_engine.h"
+
+1203517851 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\lua_engine.h
+	<iostream>
+	<list.h>
+	"singletons.h"
+	"stdafx.h"
+	"lua_obj.h"
+	"lua_event.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\singletons.h
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\stdafx.h
+	<lua.h>
+	<lualib.h>
+	<lauxlib.h>
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1203275936 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lualib.h
+	"lua.h"
+
+1203275936 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\lua_obj.h
+	"stdafx.h"
+
+1203449969 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\includes\lua_event.h
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lauxlib.c
+	<ctype.h>
+	<errno.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lbaselib.c
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lcode.c
+	<stdlib.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"ltable.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lcode.h
+	"llex.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llex.h
+	"lobject.h"
+	"lzio.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lobject.h
+	<stdarg.h>
+	"llimits.h"
+	"lua.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llimits.h
+	<limits.h>
+	<stddef.h>
+	"lua.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lzio.h
+	"lua.h"
+	"lmem.h"
+
+1203275936 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmem.h
+	<stddef.h>
+	"llimits.h"
+	"lua.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lopcodes.h
+	"llimits.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lparser.h
+	"llimits.h"
+	"lobject.h"
+	"lzio.h"
+
+1203275936 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldebug.h
+	"lstate.h"
+
+1203275936 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstate.h
+	"lua.h"
+	"lobject.h"
+	"ltm.h"
+	"lzio.h"
+
+1203275936 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltm.h
+	"lobject.h"
+
+1203275936 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldo.h
+	"lobject.h"
+	"lstate.h"
+	"lzio.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lgc.h
+	"lobject.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltable.h
+	"lobject.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldblib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldebug.c
+	<stdarg.h>
+	<stddef.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lapi.h
+	"lobject.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lfunc.h
+	"lobject.h"
+
+1203275937 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstring.h
+	"lgc.h"
+	"lobject.h"
+	"lstate.h"
+
+1203275936 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lvm.h
+	"ldo.h"
+	"lobject.h"
+	"ltm.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldo.c
+	<setjmp.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+	"lzio.h"
+
+1203275936 c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lundump.h
+	"lobject.h"
+	"lzio.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldump.c
+	<stddef.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lundump.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lfunc.c
+	<stddef.h>
+	"lua.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lgc.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\linit.c
+	"lua.h"
+	"lualib.h"
+	"lauxlib.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\liolib.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llex.c
+	<ctype.h>
+	<locale.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"llex.h"
+	"lobject.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"lzio.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmathlib.c
+	<stdlib.h>
+	<math.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmem.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\loadlib.c
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+	<dlfcn.h>
+	<windows.h>
+	<mach-o/dyld.h>
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lobject.c
+	<ctype.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"lvm.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lopcodes.c
+	"lopcodes.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\loslib.c
+	<errno.h>
+	<locale.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lparser.c
+	<string.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstate.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstring.c
+	<string.h>
+	"lua.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstrlib.c
+	<ctype.h>
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltable.c
+	<math.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"ltable.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltablib.c
+	<stddef.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltm.c
+	<string.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lundump.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstring.h"
+	"lundump.h"
+	"lzio.h"
+
+1203275936 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lvm.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lzio.c
+	<string.h>
+	"lua.h"
+	"llimits.h"
+	"lmem.h"
+	"lstate.h"
+	"lzio.h"
+
+1203544981 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\main.cpp
+	"includes/stdafx.h"
+	"includes/lua_engine.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lapi.c
+	<assert.h>
+	<math.h>
+	<stdarg.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+
+1203519366 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\src\lua_event.cpp
+	"lua_engine.h"
+
+1203275937 source:c:\dokumente und einstellungen\david\eigene dateien\entwicklung\projekte\trinitas\tests\lua\src\lua_obj.cpp
+	"lua_engine.h"
+
+1234604143 source:c:\entwicklung\projekte\trinitas\tests\lua\src\lua_engine.cpp
+	"lua_engine.h"
+
+1234635045 c:\entwicklung\projekte\trinitas\tests\lua\includes\lua_engine.h
+	<iostream>
+	<list.h>
+	<windows.h>
+	<lua.h>
+	<lualib.h>
+	<lauxlib.h>
+	"lua_obj.h"
+	"lua_event.h"
+	"TrinitasPlugin.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\includes\singletons.h
+
+1234599117 c:\entwicklung\projekte\trinitas\tests\lua\includes\stdafx.h
+	<iostream>
+	<list.h>
+	<lua.h>
+	<lualib.h>
+	<lauxlib.h>
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lualib.h
+	"lua.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1234599327 c:\entwicklung\projekte\trinitas\tests\lua\includes\lua_obj.h
+	"lua_engine.h"
+
+1234599313 c:\entwicklung\projekte\trinitas\tests\lua\includes\lua_event.h
+	"lua_engine.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lauxlib.c
+	<ctype.h>
+	<errno.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lbaselib.c
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lcode.c
+	<stdlib.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"ltable.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lcode.h
+	"llex.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llex.h
+	"lobject.h"
+	"lzio.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lobject.h
+	<stdarg.h>
+	"llimits.h"
+	"lua.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llimits.h
+	<limits.h>
+	<stddef.h>
+	"lua.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lzio.h
+	"lua.h"
+	"lmem.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmem.h
+	<stddef.h>
+	"llimits.h"
+	"lua.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lopcodes.h
+	"llimits.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lparser.h
+	"llimits.h"
+	"lobject.h"
+	"lzio.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldebug.h
+	"lstate.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstate.h
+	"lua.h"
+	"lobject.h"
+	"ltm.h"
+	"lzio.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltm.h
+	"lobject.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldo.h
+	"lobject.h"
+	"lstate.h"
+	"lzio.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lgc.h
+	"lobject.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltable.h
+	"lobject.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldblib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldebug.c
+	<stdarg.h>
+	<stddef.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lapi.h
+	"lobject.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lfunc.h
+	"lobject.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstring.h
+	"lgc.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lvm.h
+	"ldo.h"
+	"lobject.h"
+	"ltm.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldo.c
+	<setjmp.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+	"lzio.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lundump.h
+	"lobject.h"
+	"lzio.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ldump.c
+	<stddef.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lundump.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lfunc.c
+	<stddef.h>
+	"lua.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lgc.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\linit.c
+	"lua.h"
+	"lualib.h"
+	"lauxlib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\liolib.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\llex.c
+	<ctype.h>
+	<locale.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"llex.h"
+	"lobject.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"lzio.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmathlib.c
+	<stdlib.h>
+	<math.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lmem.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\loadlib.c
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+	<dlfcn.h>
+	<windows.h>
+	<mach-o/dyld.h>
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lobject.c
+	<ctype.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"lvm.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lopcodes.c
+	"lopcodes.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\loslib.c
+	<errno.h>
+	<locale.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lparser.c
+	<string.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstate.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstring.c
+	<string.h>
+	"lua.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lstrlib.c
+	<ctype.h>
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltable.c
+	<math.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"ltable.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltablib.c
+	<stddef.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\ltm.c
+	<string.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lundump.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstring.h"
+	"lundump.h"
+	"lzio.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lvm.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lzio.c
+	<string.h>
+	"lua.h"
+	"llimits.h"
+	"lmem.h"
+	"lstate.h"
+	"lzio.h"
+
+1234604112 source:c:\entwicklung\projekte\trinitas\tests\lua\main.cpp
+	"lua_engine.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua-5.1.3\src\lapi.c
+	<assert.h>
+	<math.h>
+	<stdarg.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+
+1234599246 source:c:\entwicklung\projekte\trinitas\tests\lua\src\lua_event.cpp
+	"lua_engine.h"
+
+1234599288 source:c:\entwicklung\projekte\trinitas\tests\lua\src\lua_obj.cpp
+	"lua_engine.h"
+
+1203272381 source:c:\entwicklung\projekte\trinitas\tests\plugintest\pluginloader.cpp
+	<dlfcn.h>
+	<dirent.h>
+	<Windows.h>
+	<iostream>
+	<string>
+	"PluginLoader.h"
+	"TrinitasPlugin.h"
+
+1234199113 c:\entwicklung\projekte\trinitas\tests\plugintest\pluginloader.h
+	<vector.h>
+	"TrinitasPlugin.h"
+
+1234548607 c:\entwicklung\projekte\trinitas\tests\plugintest\trinitasplugin.h
+
+1234200926 source:c:\entwicklung\projekte\trinitas\tests\plugintest\main.cpp
+	<iostream>
+	"PluginLoader.h"
+	"TrinitasPlugin.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lua.h
+	<stdarg.h>
+	<stddef.h>
+	"luaconf.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\luaconf.h
+	<limits.h>
+	<stddef.h>
+	<unistd.h>
+	<io.h>
+	<stdio.h>
+	<stdio.h>
+	<readline/readline.h>
+	<readline/history.h>
+	<assert.h>
+	<math.h>
+	<unistd.h>
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lualib.h
+	"lua.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lauxlib.h
+	<stddef.h>
+	<stdio.h>
+	"lua.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lauxlib.c
+	<ctype.h>
+	<errno.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lbaselib.c
+	<ctype.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lcode.c
+	<stdlib.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"ltable.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lcode.h
+	"llex.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\llex.h
+	"lobject.h"
+	"lzio.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lobject.h
+	<stdarg.h>
+	"llimits.h"
+	"lua.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\llimits.h
+	<limits.h>
+	<stddef.h>
+	"lua.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lzio.h
+	"lua.h"
+	"lmem.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lmem.h
+	<stddef.h>
+	"llimits.h"
+	"lua.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lopcodes.h
+	"llimits.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lparser.h
+	"llimits.h"
+	"lobject.h"
+	"lzio.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ldebug.h
+	"lstate.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lstate.h
+	"lua.h"
+	"lobject.h"
+	"ltm.h"
+	"lzio.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ltm.h
+	"lobject.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ldo.h
+	"lobject.h"
+	"lstate.h"
+	"lzio.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lgc.h
+	"lobject.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ltable.h
+	"lobject.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ldblib.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ldebug.c
+	<stdarg.h>
+	<stddef.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lapi.h
+	"lobject.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lfunc.h
+	"lobject.h"
+
+1203272337 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lstring.h
+	"lgc.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lvm.h
+	"ldo.h"
+	"lobject.h"
+	"ltm.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ldo.c
+	<setjmp.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+	"lzio.h"
+
+1203272336 c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lundump.h
+	"lobject.h"
+	"lzio.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ldump.c
+	<stddef.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lundump.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lfunc.c
+	<stddef.h>
+	"lua.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lgc.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\linit.c
+	"lua.h"
+	"lualib.h"
+	"lauxlib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\liolib.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\llex.c
+	<ctype.h>
+	<locale.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"llex.h"
+	"lobject.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"lzio.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lmathlib.c
+	<stdlib.h>
+	<math.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lmem.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\loadlib.c
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+	<dlfcn.h>
+	<windows.h>
+	<mach-o/dyld.h>
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lobject.c
+	<ctype.h>
+	<stdarg.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldo.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"lvm.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lopcodes.c
+	"lopcodes.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\loslib.c
+	<errno.h>
+	<locale.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lparser.c
+	<string.h>
+	"lua.h"
+	"lcode.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"llex.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lparser.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lstate.c
+	<stddef.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"llex.h"
+	"lmem.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lstring.c
+	<string.h>
+	"lua.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lstrlib.c
+	<ctype.h>
+	<stddef.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ltable.c
+	<math.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"ltable.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ltablib.c
+	<stddef.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\ltm.c
+	<string.h>
+	"lua.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+
+1234368761 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lua.c
+	<signal.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"lualib.h"
+
+1234368775 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\luac.c
+	<errno.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"lauxlib.h"
+	"ldo.h"
+	"lfunc.h"
+	"lmem.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstring.h"
+	"lundump.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lundump.c
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstring.h"
+	"lundump.h"
+	"lzio.h"
+
+1203272336 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lvm.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"lua.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lvm.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lzio.c
+	<string.h>
+	"lua.h"
+	"llimits.h"
+	"lmem.h"
+	"lstate.h"
+	"lzio.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\print.c
+	<ctype.h>
+	<stdio.h>
+	"ldebug.h"
+	"lobject.h"
+	"lopcodes.h"
+	"lundump.h"
+
+1203272337 source:c:\entwicklung\projekte\trinitas\tests\lua\lua\src\lapi.c
+	<assert.h>
+	<math.h>
+	<stdarg.h>
+	<string.h>
+	"lua.h"
+	"lapi.h"
+	"ldebug.h"
+	"ldo.h"
+	"lfunc.h"
+	"lgc.h"
+	"lmem.h"
+	"lobject.h"
+	"lstate.h"
+	"lstring.h"
+	"ltable.h"
+	"ltm.h"
+	"lundump.h"
+	"lvm.h"
+

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<BrowseTracker_layout_file>
+	<ActiveTarget name="All" />
+	<File name="includes\lua_engine.h" open="1" top="0" tabpos="2">
+		<Cursor position="353" topLine="6" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="includes\lua_event.h" open="1" top="0" tabpos="3">
+		<Cursor position="332" topLine="0" />
+	</File>
+	<File name="includes\lua_obj.h" open="1" top="0" tabpos="16">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="includes\singletons.h" open="1" top="0" tabpos="17">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="includes\stdafx.h" open="1" top="0" tabpos="15">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="534" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="scripts\base_character.lua" open="1" top="0" tabpos="13">
+		<Cursor position="0" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="scripts\base_common.lua" open="1" top="0" tabpos="10">
+		<Cursor position="32" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="scripts\base_event.lua" open="1" top="0" tabpos="9">
+		<Cursor position="243" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="scripts\base_item.lua" open="1" top="0" tabpos="11">
+		<Cursor position="0" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="scripts\base_itemtype.lua" open="1" top="1" tabpos="12">
+		<Cursor position="0" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="scripts\base_language.lua" open="1" top="0" tabpos="7">
+		<Cursor position="614" topLine="0" />
+	</File>
+	<File name="scripts\base_objects.lua" open="1" top="0" tabpos="14">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="scripts\hatchet.lua" open="1" top="0" tabpos="8">
+		<Cursor position="1211" topLine="10" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="src\lua_engine.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="5234" topLine="0" />
+		<BrowseMarks positions="" />
+		<Book_Marks positions="" />
+	</File>
+	<File name="src\lua_event.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="607" topLine="0" />
+	</File>
+</BrowseTracker_layout_file>

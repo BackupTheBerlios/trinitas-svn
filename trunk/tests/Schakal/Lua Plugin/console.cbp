@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Lua Plugin v1.0" />
+		<Option pch_mode="0" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="default">
+				<Option output="luaplugin.dll" prefix_auto="0" extension_auto="0" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createStaticLib="1" />
+				<Option projectResourceIncludeDirsRelation="1" />
+			</Target>
+		</Build>
+		<VirtualTargets>
+			<Add alias="All" targets="default;" />
+		</VirtualTargets>
+		<Compiler>
+			<Add directory="includes" />
+			<Add directory="lua\src" />
+			<Add directory="..\pluginTest" />
+		</Compiler>
+		<Linker>
+			<Add directory="src" />
+			<Add directory="lua\src" />
+			<Add directory="..\pluginTest" />
+		</Linker>
+		<Unit filename="includes\lua_engine.h" />
+		<Unit filename="includes\lua_event.h" />
+		<Unit filename="includes\lua_obj.h" />
+		<Unit filename="lua\src\lapi.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lauxlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lbaselib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lcode.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\ldblib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\ldebug.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\ldo.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\ldump.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lfunc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lgc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\linit.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\liolib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\llex.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lmathlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lmem.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\loadlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lobject.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lopcodes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\loslib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lparser.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lstate.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lstring.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lstrlib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\ltable.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\ltablib.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\ltm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lundump.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lvm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\lzio.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="lua\src\print.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main.cpp" />
+		<Unit filename="src\lua_engine.cpp" />
+		<Unit filename="src\lua_event.cpp" />
+		<Unit filename="src\lua_obj.cpp" />
+		<Unit filename="..\pluginTest\TrinitasPlugin.h" />
+		<Extensions>
+			<AutoVersioning>
+				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />
+				<Settings autoincrement="1" date_declarations="1" do_auto_increment="0" ask_to_increment="0" language="C++" svn="0" svn_directory="" header_path="version.h" />
+				<Changes_Log show_changes_editor="0" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
+			</AutoVersioning>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
